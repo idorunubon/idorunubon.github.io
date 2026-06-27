@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Do Run — รวมงานวิ่งทั่วไทยและทั่วโลก</title>
+<meta name="description" content="แหล่งรวมงานวิ่งทั่วไทยและทั่วโลก อัปเดตงานถนน เทรล Virtual Run พร้อมข่าวและเทรนด์วงการวิ่ง โดยทีมแอดมิน I Do Run">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700;800&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#F25C2A;
+    --orange-dark:#d44a1c;
+    --navy:#16335B;
+    --navy-deep:#0e2440;
+    --cream:#FFF7F2;
+    --ink:#1d2733;
+    --muted:#5b6776;
+    --line:#e9e1d8;
+    --green:#1f9d55;
+    --shadow:0 8px 28px rgba(22,51,91,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Prompt','Noto Sans Thai',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+
+  /* NAV */
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(255,247,242,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;color:var(--navy);letter-spacing:-.3px}
+  .logo .mark{width:38px;height:38px;border-radius:11px;background:var(--orange);display:grid;place-items:center;color:#fff;font-size:1.2rem;box-shadow:0 4px 12px rgba(242,92,42,.4)}
+  .nav-links{display:flex;gap:26px;align-items:center;font-weight:500}
+  .nav-links a{color:var(--navy);opacity:.85;font-size:.96rem}
+  .nav-links a:hover{opacity:1;color:var(--orange)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;font-weight:600;padding:10px 18px;border-radius:30px;font-size:.95rem;border:none;cursor:pointer;transition:.15s}
+  .btn:hover{background:var(--orange-dark);transform:translateY(-1px)}
+  .btn.ghost{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+  .btn.ghost:hover{background:var(--navy);color:#fff}
+  @media(max-width:760px){.nav-links a:not(.btn){display:none}}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);color:#fff;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;background:radial-gradient(circle,rgba(242,92,42,.55),transparent 70%);border-radius:50%}
+  .hero-in{position:relative;z-index:2;padding:70px 0 80px;max-width:680px}
+  .hero .kicker{display:inline-block;background:rgba(242,92,42,.2);color:#ffd9c7;border:1px solid rgba(242,92,42,.5);padding:5px 14px;border-radius:20px;font-size:.82rem;font-weight:600;margin-bottom:18px}
+  .hero h1{font-size:2.9rem;line-height:1.18;font-weight:800;letter-spacing:-.5px;margin-bottom:16px}
+  .hero h1 span{color:var(--orange)}
+  .hero p{font-size:1.12rem;opacity:.88;margin-bottom:28px;max-width:560px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .stats{display:flex;gap:34px;margin-top:40px;flex-wrap:wrap}
+  .stat .n{font-size:1.8rem;font-weight:800;color:var(--orange)}
+  .stat .l{font-size:.85rem;opacity:.8}
+  @media(max-width:600px){.hero h1{font-size:2.1rem}}
+
+  /* SECTIONS */
+  section{padding:62px 0}
+  .sec-head{margin-bottom:28px}
+  .sec-head .eyebrow{color:var(--orange);font-weight:700;font-size:.9rem;letter-spacing:.5px;text-transform:uppercase}
+  .sec-head h2{font-size:1.9rem;font-weight:800;color:var(--navy);letter-spacing:-.4px;margin-top:4px}
+  .sec-head p{color:var(--muted);margin-top:6px;max-width:640px}
+
+  /* FILTER BAR */
+  .toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{padding:8px 16px;border-radius:22px;border:1.5px solid var(--line);background:#fff;font-weight:500;font-size:.9rem;cursor:pointer;color:var(--navy);transition:.15s}
+  .chip:hover{border-color:var(--orange)}
+  .chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .search{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:8px 16px}
+  .search input{border:none;outline:none;flex:1;font-family:inherit;font-size:.92rem;background:transparent}
+
+  /* EVENT GRID */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;transition:.15s}
+  .card:hover{transform:translateY(-3px);border-color:var(--orange)}
+  .card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .date-pill{flex-shrink:0;text-align:center;background:var(--cream);border:1px solid var(--line);border-radius:11px;padding:7px 11px;line-height:1.05;min-width:60px}
+  .date-pill .d{font-size:1.35rem;font-weight:800;color:var(--orange)}
+  .date-pill .m{font-size:.72rem;color:var(--muted);font-weight:600}
+  .date-pill .y{font-size:.66rem;color:var(--muted)}
+  .card h3{font-size:1.04rem;font-weight:600;color:var(--navy);line-height:1.35}
+  .meta{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+  .tag{font-size:.76rem;font-weight:600;padding:3px 10px;border-radius:14px}
+  .tag.loc{background:#eef3fb;color:var(--navy)}
+  .tag.road{background:#fdeee7;color:var(--orange-dark)}
+  .tag.trail{background:#e8f5ec;color:var(--green)}
+  .tag.virtual{background:#f0ecfb;color:#6b46c1}
+  .tag.intl{background:#fff4d6;color:#9a6b00}
+  .reg{display:inline-flex;align-items:center;gap:5px;font-size:.82rem;font-weight:600}
+  .reg.open{color:var(--green)}
+  .reg.closed{color:var(--muted)}
+  .reg .dot{width:8px;height:8px;border-radius:50%;background:currentColor}
+  .card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:4px;padding-top:10px;border-top:1px dashed var(--line)}
+  .card .foot a{color:var(--orange);font-weight:600;font-size:.9rem}
+  .empty{text-align:center;color:var(--muted);padding:40px;grid-column:1/-1}
+
+  /* ADMIN NOTE */
+  .adminnote{background:#fff;border-left:4px solid var(--orange);border-radius:0 12px 12px 0;padding:14px 18px;margin-top:24px;box-shadow:var(--shadow);font-size:.95rem;color:var(--muted)}
+  .adminnote b{color:var(--navy)}
+
+  /* BLOG */
+  .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+  .post{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:.15s}
+  .post:hover{transform:translateY(-3px)}
+  .post .ph{height:130px;background:linear-gradient(135deg,var(--orange),#ffb38a);display:grid;place-items:center;color:#fff;font-weight:700;font-size:1.05rem;text-align:center;padding:0 16px}
+  .post:nth-child(2) .ph{background:linear-gradient(135deg,var(--navy),#3a5a8a)}
+  .post:nth-child(3) .ph{background:linear-gradient(135deg,#6b46c1,#a37fe0)}
+  .post .body{padding:16px 18px}
+  .post .cat{font-size:.78rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.4px}
+  .post h3{font-size:1.08rem;font-weight:600;color:var(--navy);margin:6px 0 8px}
+  .post p{color:var(--muted);font-size:.92rem}
+
+  /* ABOUT */
+  .about{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr}}
+  .about h2{font-size:1.9rem;color:var(--navy);font-weight:800;margin-bottom:14px}
+  .about p{color:var(--muted);margin-bottom:14px}
+  .values{display:flex;flex-direction:column;gap:14px;margin-top:10px}
+  .val{display:flex;gap:12px;align-items:flex-start}
+  .val .ic{width:40px;height:40px;border-radius:11px;background:var(--cream);display:grid;place-items:center;font-size:1.2rem;flex-shrink:0}
+  .val b{color:var(--navy)}
+  .val span{color:var(--muted);font-size:.92rem}
+  .fbcard{background:linear-gradient(135deg,var(--navy),var(--navy-deep));border-radius:18px;padding:30px;color:#fff;text-align:center}
+  .fbcard .av{width:74px;height:74px;border-radius:18px;background:var(--orange);display:grid;place-items:center;font-size:2rem;margin:0 auto 14px;box-shadow:0 6px 18px rgba(242,92,42,.5)}
+  .fbcard h3{font-size:1.3rem;font-weight:800}
+  .fbcard .handle{opacity:.8;font-size:.9rem;margin-bottom:16px}
+
+  /* CTA */
+  .cta{background:var(--orange);color:#fff;text-align:center;border-radius:22px;padding:48px 24px;margin:40px auto}
+  .cta h2{font-size:2rem;font-weight:800;margin-bottom:10px}
+  .cta p{opacity:.92;margin-bottom:22px;max-width:520px;margin-left:auto;margin-right:auto}
+  .cta .btn{background:#fff;color:var(--orange-dark)}
+  .cta .btn:hover{background:var(--navy);color:#fff}
+
+  /* FOOTER */
+  footer{background:var(--navy-deep);color:#cdd6e3;padding:46px 0 28px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;margin-bottom:28px}
+  @media(max-width:600px){.foot-grid{grid-template-columns:1fr}}
+  footer h4{color:#fff;font-size:1rem;margin-bottom:12px}
+  footer a{display:block;opacity:.78;font-size:.92rem;padding:4px 0}
+  footer a:hover{opacity:1;color:var(--orange)}
+  .foot-logo{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:8px}
+  .foot-bot{border-top:1px solid rgba(255,255,255,.12);padding-top:18px;font-size:.85rem;opacity:.6;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .disclaim{font-size:.84rem;opacity:.7;margin-top:6px;max-width:560px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="logo"><span class="mark">▶</span> I Do Run</a>
+    <nav class="nav-links">
+      <a href="#thai">งานวิ่งไทย</a>
+      <a href="#world">งานต่างประเทศ</a>
+      <a href="#blog">ข่าว/บล็อก</a>
+      <a href="#about">เกี่ยวกับเรา</a>
+      <a class="btn" href="https://facebook.com/ido.run.ubon" target="_blank" rel="noopener">เข้าเพจ Facebook</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top" style="padding:0">
+  <div class="wrap hero-in">
+    <span class="kicker">รวมงานวิ่งทั่วไทย + ทั่วโลก แบบเป็นกลาง</span>
+    <h1>หางาน<span>วิ่ง</span>ที่ใช่ <br>จบในที่เดียว</h1>
+    <p>แอดมินรวบรวมงานวิ่งถนน เทรล และ Virtual Run จากทั่วประเทศและต่างแดน อัปเดตทุกสัปดาห์ พร้อมความเห็นแบบสมดุล ไม่อวยงานใดงานหนึ่ง เพื่อนนักวิ่งเลือกเองได้เต็มที่</p>
+    <div class="hero-cta">
+      <a class="btn" href="#thai">ดูงานวิ่งใกล้ ๆ นี้</a>
+      <a class="btn ghost" style="color:#fff;border-color:#fff" href="https://facebook.com/ido.run.ubon" target="_blank" rel="noopener">ติดตามเพจ</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n" id="stat-total">—</div><div class="l">งานที่กำลังจะมาถึง</div></div>
+      <div class="stat"><div class="n" id="stat-open">—</div><div class="l">เปิดรับสมัครอยู่</div></div>
+      <div class="stat"><div class="n">2</div><div class="l">โพสต์ใหม่ทุกสัปดาห์</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- THAI EVENTS -->
+<section id="thai">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">งานวิ่งในไทย</div>
+      <h2>งานวิ่งไทยที่กำลังจะมาถึง</h2>
+      <p>ข้อมูลจาก thai.run คัดเฉพาะงานที่ยังไม่จัด เรียงวันใกล้สุดขึ้นก่อน กรองตามประเภทได้เลย</p>
+    </div>
+    <div class="toolbar">
+      <div class="chips" id="chips-thai">
+        <button class="chip on" data-f="all">ทั้งหมด</button>
+        <button class="chip" data-f="road">ถนน</button>
+        <button class="chip" data-f="trail">เทรล</button>
+        <button class="chip" data-f="virtual">Virtual</button>
+      </div>
+      <div class="search">
+        <span>🔎</span>
+        <input id="search-thai" type="text" placeholder="ค้นชื่องาน หรือ จังหวัด...">
+      </div>
+    </div>
+    <div class="grid" id="grid-thai"></div>
+    <div class="adminnote">
+      <b>ความเห็นแอดมิน:</b> ลิสต์นี้ดึงสด ๆ สัปดาห์ไหนเทรลเยอะ ลิสต์ก็เทรลเยอะตามจริง ก่อนสมัครเช็กระยะ จุดสตาร์ท และค่าสมัครหน้างานจริงทุกครั้ง บางงานเปิดหลายรุ่นราคา แอดมินยุบให้เหลืองานเดียวเพื่อให้อ่านง่าย
+    </div>
+  </div>
+</section>
+
+<!-- WORLD EVENTS -->
+<section id="world" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">งานต่างประเทศ / ทัวร์วิ่ง</div>
+      <h2>วิ่งไกลถึงต่างแดน</h2>
+      <p>งานระดับโลกและทัวร์วิ่งที่คนไทยไปกันเยอะ เผื่อเพื่อนนักวิ่งวางแผนล่วงหน้า</p>
+    </div>
+    <div class="grid" id="grid-world"></div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">ข่าว / เทรนด์ / บล็อก</div>
+      <h2>อ่านก่อนออกวิ่ง</h2>
+      <p>สรุปข่าว เทรนด์ และเกร็ดความรู้แบบลูกทุ่ง อ่านง่าย ใช้ได้จริง (ตัวอย่างคอนเทนต์)</p>
+    </div>
+    <div class="blog-grid">
+      <article class="post">
+        <div class="ph">เตรียมตัวมือใหม่ ก่อนลงงานแรก</div>
+        <div class="body">
+          <div class="cat">มือใหม่</div>
+          <h3>ลงงานวิ่งครั้งแรก เตรียมอะไรบ้าง</h3>
+          <p>ตั้งแต่เลือกระยะให้เหมาะกับร่างกาย ซ้อมยังไงไม่ให้เจ็บ จนถึงของที่ต้องเตรียมในวันแข่ง</p>
+        </div>
+      </article>
+      <article class="post">
+        <div class="ph">World Marathon Majors คืออะไร</div>
+        <div class="body">
+          <div class="cat">งานระดับโลก</div>
+          <h3>6 สนามเมเจอร์ที่นักวิ่งใฝ่ฝัน</h3>
+          <p>Tokyo, Boston, London, Berlin, Chicago, New York สมัครยังไง ต้องทำเวลาเท่าไหร่ถึงมีสิทธิ์</p>
+        </div>
+      </article>
+      <article class="post">
+        <div class="ph">ถนน vs เทรล เลือกแบบไหนดี</div>
+        <div class="body">
+          <div class="cat">เทรนด์</div>
+          <h3>วิ่งถนนกับวิ่งเทรล ต่างกันยังไง</h3>
+          <p>ชั่งใจระหว่างสองสาย ทั้งอุปกรณ์ ความเสี่ยงบาดเจ็บ และสนามที่เหมาะกับแต่ละคน</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="eyebrow" style="color:var(--orange);font-weight:700">เกี่ยวกับเรา</div>
+      <h2>I Do Run — เพื่อนนักวิ่งที่เป็นกลาง</h2>
+      <p>เราเริ่มจากเพจจัดงานวิ่งที่อุบลฯ วันนี้เติบโตเป็นแหล่งรวมข้อมูลงานวิ่งทั่วไทยและทั่วโลก ยึดหลักง่าย ๆ คือรวมหลายงานแบบเป็นกลาง บอกทั้งข้อดีและจุดที่ต้องชั่งใจ ให้เพื่อนนักวิ่งตัดสินใจเองได้</p>
+      <div class="values">
+        <div class="val"><div class="ic">⚖️</div><div><b>เป็นกลาง</b><br><span>ไม่เชียร์งานเดียว รวมหลายงานให้เปรียบเทียบ</span></div></div>
+        <div class="val"><div class="ic">🔄</div><div><b>อัปเดตสด</b><br><span>ดึงข้อมูลจริงทุกสัปดาห์ ไม่ใช่ลิสต์ค้างปี</span></div></div>
+        <div class="val"><div class="ic">🤝</div><div><b>เป็นกันเอง</b><br><span>ภาษาลูกทุ่ง อ่านง่าย ไม่วิชาการ</span></div></div>
+      </div>
+    </div>
+    <div class="fbcard">
+      <div class="av">▶</div>
+      <h3>I Do Run</h3>
+      <div class="handle">facebook.com/ido.run.ubon</div>
+      <a class="btn" style="background:#fff;color:var(--orange-dark)" href="https://facebook.com/ido.run.ubon" target="_blank" rel="noopener">กดถูกใจเพจ →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="wrap">
+  <div class="cta">
+    <h2>ไม่อยากพลาดงานวิ่งดี ๆ?</h2>
+    <p>กดติดตามเพจ I Do Run ไว้ แอดมินคัดงานเด็ดมาให้ 2 โพสต์ทุกสัปดาห์ ทั้งงานไทยและงานโลก</p>
+    <a class="btn" href="https://facebook.com/ido.run.ubon" target="_blank" rel="noopener">ติดตามเพจ Facebook</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">▶ I Do Run</div>
+        <p style="opacity:.78;font-size:.92rem">แหล่งรวมงานวิ่งทั่วไทยและทั่วโลก อัปเดตทุกสัปดาห์ โดยทีมแอดมิน I Do Run ฐานอุบลฯ/อีสาน</p>
+        <p class="disclaim">หมายเหตุ: ข้อมูลงานเป็นการรวบรวมจากแหล่งสาธารณะ (thai.run ฯลฯ) โปรดตรวจสอบรายละเอียด วันจัด และค่าสมัครกับผู้จัดงานโดยตรงก่อนสมัครทุกครั้ง</p>
+      </div>
+      <div>
+        <h4>เมนู</h4>
+        <a href="#thai">งานวิ่งไทย</a>
+        <a href="#world">งานต่างประเทศ</a>
+        <a href="#blog">ข่าว/บล็อก</a>
+        <a href="#about">เกี่ยวกับเรา</a>
+      </div>
+      <div>
+        <h4>ติดตามเรา</h4>
+        <a href="https://facebook.com/ido.run.ubon" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://race.thai.run/" target="_blank" rel="noopener">ที่มาข้อมูล: thai.run</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 I Do Run. เว็บตัวอย่าง (prototype)</span>
+      <span>ทำด้วยใจ เพื่อเพื่อนนักวิ่ง</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== ข้อมูลงาน (snapshot จาก thai.run 27 มิ.ย. 2026) =====
+// type: road | trail | virtual ; reg=เปิดรับสมัคร
+const EVENTS = [
+  // ---- ไทย ----
+  {n:"LPN LIVABLE RUN : Start Your Pace Series 1",prov:"กรุงเทพฯ",type:"road",reg:true,iso:"2026-06-27T22:30:00Z",slug:"lpnlivablerun1",intl:false},
+  {n:"Koh Chang Ultra-Trail & Camping Run 2026",prov:"ตราด",type:"trail",reg:true,iso:"2026-07-10T17:00:00Z",slug:"kohchang-ultratrailcampingrun2026",intl:false},
+  {n:"The ICONIC Run Fest 2026 – Run Ubon",prov:"อุบลราชธานี",type:"road",reg:true,iso:"2026-07-11T17:00:00Z",slug:"theiconicrunfest2026runubon",intl:false},
+  {n:"JOG&JOY KILO RUN 2026",prov:"กรุงเทพฯ",type:"road",reg:true,iso:"2026-07-11T17:00:00Z",slug:"kilorun2026",intl:false},
+  {n:"ALL member Milk Run Presented By 7-Eleven",prov:"กรุงเทพฯ",type:"road",reg:true,iso:"2026-07-12T08:42:00Z",slug:"milkrunpresentedby7eleven",intl:false},
+  {n:"DOAE Virtual Run #4 2026",prov:"ทั่วประเทศ",type:"virtual",reg:true,iso:"2026-07-14T17:00:00Z",slug:"doaevirtualrun2026",intl:false},
+  {n:"Ultraman Hero Run 2026",prov:"ทั่วประเทศ",type:"road",reg:true,iso:"2026-07-18T20:00:00Z",slug:"ultramanherorunthailand",intl:false},
+  {n:"Bangkok Post International Mini Marathon 2026 : Run For Nurses",prov:"กรุงเทพฯ",type:"road",reg:true,iso:"2026-07-18T21:00:00Z",slug:"bangkokpost2026",intl:false},
+  {n:"Muang Ngoa Cross Country 2026",prov:"สุราษฎร์ธานี",type:"trail",reg:true,iso:"2026-07-18T21:00:00Z",slug:"muangngoacrosscountry2026",intl:false},
+  {n:"แลเล วิ่งเพลิน เดินหรอย @ทะเลน้อย",prov:"พัทลุง",type:"road",reg:true,iso:"2026-07-25T21:00:00Z",slug:"lae-laythalenoirun",intl:false},
+  {n:"Thailand Earth Trail Series 2026 @Cha-om, Saraburi",prov:"สระบุรี",type:"trail",reg:true,iso:"2026-07-25T17:00:00Z",slug:"tets-sri2026",intl:false},
+  {n:"POMPOMPURIN 30th Aerobic Dance & Run",prov:"นครปฐม",type:"road",reg:true,iso:"2026-08-01T17:00:00Z",slug:"pompompurin30th",intl:false},
+  {n:"TGS Charity Run 2026",prov:"กรุงเทพฯ",type:"road",reg:true,iso:"2026-08-08T21:00:00Z",slug:"tgscharityrun",intl:false},
+  {n:"12 สิงหา ฮาล์ฟมาราธอน กรุงเทพฯ 2026 ครั้งที่ 31",prov:"กรุงเทพฯ",type:"road",reg:true,iso:"2026-08-11T17:00:00Z",slug:"12aughalfmarathon2026",intl:false},
+  {n:"เส้นทางวีรชน อยุธยา ฮาล์ฟ มาราธอน 2026",prov:"อยุธยา",type:"road",reg:true,iso:"2026-08-15T17:00:00Z",slug:"almrun2026",intl:false},
+  {n:"Aokhanom Trail 2026",prov:"นครศรีธรรมราช",type:"trail",reg:true,iso:"2026-08-15T17:00:00Z",slug:"aokhanomtrail2026",intl:false},
+  {n:"Phuket Trail / ภูเก็ตเทรล 2026",prov:"ภูเก็ต",type:"trail",reg:true,iso:"2026-09-11T17:00:00Z",slug:"phukettrail2026",intl:false},
+  {n:"Black Coffee Run 2026",prov:"กรุงเทพฯ",type:"road",reg:true,iso:"2026-09-12T21:00:00Z",slug:"blackcoffeerun2026",intl:false},
+  {n:"Mountain Breeze 2026 - Nakhon Nayok",prov:"นครนายก",type:"trail",reg:true,iso:"2026-09-26T17:00:00Z",slug:"mpuntainbreeze2026",intl:false},
+  {n:"Chaiyaphum Marathon - The First Marathon",prov:"ชัยภูมิ",type:"road",reg:true,iso:"2026-10-10T17:00:00Z",slug:"chaiyaphummarathon1st",intl:false},
+  {n:"แม่เมาะฮาล์ฟมาราธอน 2026",prov:"ลำปาง",type:"road",reg:true,iso:"2026-10-24T17:00:00Z",slug:"maemohhalfmarathon2026",intl:false},
+  {n:"Thep Sadet Trail 2026",prov:"เชียงใหม่",type:"trail",reg:true,iso:"2026-10-29T21:00:00Z",slug:"thepsadettrail2026",intl:false},
+  {n:"สมุยเทรล 2026",prov:"สุราษฎร์ธานี",type:"trail",reg:true,iso:"2026-11-06T17:00:00Z",slug:"samuitrail2026",intl:false},
+  {n:"Lampang Mysstic Trail 2026",prov:"ลำปาง",type:"trail",reg:true,iso:"2026-11-12T17:00:00Z",slug:"lampangmysstictrail2026",intl:false},
+  {n:"Bangsaen42 Chonburi Marathon 2026",prov:"ชลบุรี",type:"road",reg:true,iso:"2026-11-14T17:00:00Z",slug:"bs42-lateprice-2026",intl:false},
+  {n:"OCEAN LIFE Run With Love 2026 @Ocean Marina",prov:"ชลบุรี",type:"road",reg:true,iso:"2026-11-21T17:00:00Z",slug:"oceanliferunwithlove2026",intl:false},
+  {n:"Chiang Dao 100 Ultra Trail 2026",prov:"เชียงใหม่",type:"trail",reg:true,iso:"2026-12-18T17:00:00Z",slug:"chiangdao100ultratrail2026",intl:false},
+  // ---- ต่างประเทศ / ทัวร์วิ่ง ----
+  {n:"Luang Prabang Trail 2026",prov:"หลวงพระบาง · ลาว",type:"trail",reg:true,iso:"2026-10-09T21:00:00Z",slug:"luangprabangtrail2026",intl:true},
+  {n:"Niigata City Marathon 2026",prov:"นีงาตะ · ญี่ปุ่น",type:"road",reg:true,iso:"2026-10-10T17:00:00Z",slug:"niigata2026",intl:true},
+  {n:"ทัวร์วิ่งจีน ตงอิ๋งมาราธอน 2026",prov:"ตงอิ๋ง · จีน",type:"road",reg:true,iso:"2026-10-15T17:00:00Z",slug:"dongyingmarathon2026",intl:true},
+  {n:"Pakse Half Marathon 2026",prov:"ปากเซ · ลาว",type:"road",reg:true,iso:"2026-11-07T21:00:00Z",slug:"pakse26",intl:true},
+  {n:"Kobe Marathon 2026",prov:"โกเบ · ญี่ปุ่น",type:"road",reg:true,iso:"2026-11-15T02:00:00Z",slug:"kobemarathon2026",intl:true},
+  {n:"พาเพื่อนวิ่ง ROAD TO MT.FUJI Marathon 2026",prov:"ฟูจิ · ญี่ปุ่น",type:"road",reg:true,iso:"2026-12-12T02:00:00Z",slug:"tourroadtofuji2026",intl:true},
+  {n:"IJM Allianz Duo Highway Challenge 2026",prov:"สลังงอร์ · มาเลเซีย",type:"road",reg:true,iso:"2026-08-01T18:00:00Z",slug:"dhc2026",intl:true},
+  {n:"Cultural Night Run 2026",prov:"ปีนัง · มาเลเซีย",type:"road",reg:true,iso:"2026-08-08T12:00:00Z",slug:"culturalnightrun",intl:true}
+];
+
+const TH_MONTH=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+const TYPE_LABEL={road:"ถนน",trail:"เทรล",virtual:"Virtual"};
+
+function localDate(iso){
+  // แปลงเป็นเวลาไทย (UTC+7)
+  const d=new Date(iso);
+  return new Date(d.getTime()+7*3600*1000);
+}
+function fmtPill(iso){
+  const d=localDate(iso);
+  return {d:d.getUTCDate(),m:TH_MONTH[d.getUTCMonth()],y:d.getUTCFullYear()};
+}
+function cardHTML(e){
+  const p=fmtPill(e.iso);
+  const typeTag=`<span class="tag ${e.type}">${TYPE_LABEL[e.type]}</span>`;
+  const intlTag=e.intl?`<span class="tag intl">ต่างประเทศ</span>`:"";
+  const reg=e.reg?`<span class="reg open"><span class="dot"></span>เปิดรับสมัคร</span>`:`<span class="reg closed"><span class="dot"></span>ปิด/รอประกาศ</span>`;
+  const link=`https://race.thai.run/event/${e.slug}`;
+  return `<div class="card" data-type="${e.type}" data-text="${(e.n+' '+e.prov).toLowerCase()}">
+    <div class="top">
+      <div>
+        <h3>${e.n}</h3>
+      </div>
+      <div class="date-pill"><div class="d">${p.d}</div><div class="m">${p.m}</div><div class="y">${p.y}</div></div>
+    </div>
+    <div class="meta"><span class="tag loc">${e.prov}</span>${typeTag}${intlTag}</div>
+    <div class="foot">${reg}<a href="${link}" target="_blank" rel="noopener">ดูรายละเอียด →</a></div>
+  </div>`;
+}
+
+const now=new Date();
+const upcoming=EVENTS.filter(e=>localDate(e.iso)>=new Date(now.getTime()-24*3600*1000))
+                     .sort((a,b)=>new Date(a.iso)-new Date(b.iso));
+const thai=upcoming.filter(e=>!e.intl);
+const world=upcoming.filter(e=>e.intl);
+
+document.getElementById('stat-total').textContent=upcoming.length;
+document.getElementById('stat-open').textContent=upcoming.filter(e=>e.reg).length;
+
+function render(){
+  const f=document.querySelector('#chips-thai .chip.on').dataset.f;
+  const q=document.getElementById('search-thai').value.trim().toLowerCase();
+  const list=thai.filter(e=>(f==='all'||e.type===f)&&(q===''||(e.n+' '+e.prov).toLowerCase().includes(q)));
+  const g=document.getElementById('grid-thai');
+  g.innerHTML=list.length?list.map(cardHTML).join(''):'<div class="empty">ไม่พบงานที่ตรงเงื่อนไข ลองเปลี่ยนตัวกรองดูนะ</div>';
+}
+document.getElementById('grid-world').innerHTML=world.map(cardHTML).join('');
+
+document.querySelectorAll('#chips-thai .chip').forEach(c=>c.addEventListener('click',()=>{
+  document.querySelector('#chips-thai .chip.on').classList.remove('on');
+  c.classList.add('on');render();
+}));
+document.getElementById('search-thai').addEventListener('input',render);
+render();
+</script>
+</body>
+</html>
