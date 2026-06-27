@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>I Do Run — รวมงานวิ่งทั่วไทย 2026-2027</title>
-<meta name="description" content="แหล่งรวมงานวิ่งทั่วไทยกว่า 160 งาน ทั้งถนน เทรล อัลตรา คัดและจัดเรียงโดยทีมแอดมิน I Do Run อัปเดตทุกสัปดาห์">
+<meta name="description" content="แหล่งรวมงานวิ่งทั่วไทย ทั้งถนน เทรล อัลตรา อัปเดตอัตโนมัติทุกสัปดาห์ คัดโดยทีมแอดมิน I Do Run">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700;800&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--orange:#F25C2A;--orange-dark:#d44a1c;--navy:#16335B;--navy-deep:#0e2440;--cream:#FFF7F2;--ink:#1d2733;--muted:#5b6776;--line:#e9e1d8;--green:#1f9d55;--purple:#6b46c1;--shadow:0 8px 28px rgba(22,51,91,.10)}
+  :root{--orange:#F25C2A;--orange-dark:#d44a1c;--navy:#16335B;--navy-deep:#0e2440;--cream:#FFF7F2;--ink:#1d2733;--muted:#5b6776;--line:#e9e1d8;--green:#1f9d55;--purple:#6b46c1;--blue:#2563c9;--shadow:0 8px 28px rgba(22,51,91,.10)}
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{font-family:'Prompt','Noto Sans Thai',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -37,6 +37,7 @@
   .stats{display:flex;gap:34px;margin-top:38px;flex-wrap:wrap}
   .stat .n{font-size:1.8rem;font-weight:800;color:var(--orange)}
   .stat .l{font-size:.85rem;opacity:.8}
+  .updated{margin-top:20px;font-size:.82rem;opacity:.7}
   @media(max-width:600px){.hero h1{font-size:2rem}}
   section{padding:58px 0}
   .sec-head{margin-bottom:24px}
@@ -67,9 +68,14 @@
   .tag.road{background:#fdeee7;color:var(--orange-dark)}
   .tag.trail{background:#e8f5ec;color:var(--green)}
   .tag.ultra{background:#f0ecfb;color:var(--purple)}
+  .tag.virtual{background:#e7f0fd;color:var(--blue)}
   .tag.multi{background:#fff4d6;color:#9a6b00}
-  .card .foot{display:flex;justify-content:flex-end;align-items:center;margin-top:2px;padding-top:9px;border-top:1px dashed var(--line)}
+  .reg{display:inline-flex;align-items:center;gap:5px;font-size:.8rem;font-weight:600}
+  .reg.open{color:var(--green)}.reg.closed{color:var(--muted)}
+  .reg .dot{width:8px;height:8px;border-radius:50%;background:currentColor}
+  .card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:2px;padding-top:9px;border-top:1px dashed var(--line)}
   .card .foot a{color:var(--orange);font-weight:600;font-size:.88rem}
+  .card .foot .nolink{color:var(--muted);font-weight:400}
   .empty{text-align:center;color:var(--muted);padding:40px;grid-column:1/-1}
   .adminnote{background:#fff;border-left:4px solid var(--orange);border-radius:0 12px 12px 0;padding:14px 18px;margin-top:22px;box-shadow:var(--shadow);font-size:.94rem;color:var(--muted)}
   .adminnote b{color:var(--navy)}
@@ -91,8 +97,7 @@
   .values{display:flex;flex-direction:column;gap:14px;margin-top:10px}
   .val{display:flex;gap:12px;align-items:flex-start}
   .val .ic{width:40px;height:40px;border-radius:11px;background:var(--cream);display:grid;place-items:center;font-size:1.2rem;flex-shrink:0}
-  .val b{color:var(--navy)}
-  .val span{color:var(--muted);font-size:.92rem}
+  .val b{color:var(--navy)}.val span{color:var(--muted);font-size:.92rem}
   .fbcard{background:linear-gradient(135deg,var(--navy),var(--navy-deep));border-radius:18px;padding:30px;color:#fff;text-align:center}
   .fbcard .av{width:74px;height:74px;border-radius:18px;background:var(--orange);display:grid;place-items:center;font-size:2rem;margin:0 auto 14px;box-shadow:0 6px 18px rgba(242,92,42,.5)}
   .fbcard h3{font-size:1.3rem;font-weight:800}
@@ -124,9 +129,9 @@
   </nav>
 </div></header>
 <section class="hero" id="top" style="padding:0"><div class="wrap hero-in">
-  <span class="kicker">รวมงานวิ่งทั่วไทย ปี 2026-2027</span>
+  <span class="kicker">รวมงานวิ่งทั่วไทย · อัปเดตอัตโนมัติทุกสัปดาห์</span>
   <h1>หางาน<span>วิ่ง</span>ที่ใช่ <br>จบในที่เดียว</h1>
-  <p>แอดมินคัดงานวิ่งทั่วประเทศมารวมไว้ให้ ทั้งถนน เทรล และอัลตรา จัดเรียงตามวัน กรองง่าย หางานที่ใช่ได้ในไม่กี่คลิก พร้อมความเห็นแบบสมดุล ไม่อวยงานใดงานหนึ่ง</p>
+  <p>แอดมินคัดงานวิ่งทั่วประเทศมารวมไว้ให้ ทั้งถนน เทรล และอัลตรา จัดเรียงตามวัน กรองง่าย พร้อมความเห็นแบบสมดุล ไม่อวยงานใดงานหนึ่ง</p>
   <div class="hero-cta">
     <a class="btn" href="#events">ดูงานวิ่งทั้งหมด</a>
     <a class="btn ghost" href="https://www.facebook.com/ido.run.ubon/" target="_blank" rel="noopener">ติดตามเพจ</a>
@@ -134,14 +139,15 @@
   <div class="stats">
     <div class="stat"><div class="n" id="stat-total">—</div><div class="l">งานที่กำลังจะมาถึง</div></div>
     <div class="stat"><div class="n" id="stat-trail">—</div><div class="l">งานเทรล + อัลตรา</div></div>
-    <div class="stat"><div class="n">2</div><div class="l">โพสต์ใหม่ทุกสัปดาห์</div></div>
+    <div class="stat"><div class="n" id="stat-open">—</div><div class="l">เปิดรับสมัครอยู่</div></div>
   </div>
+  <div class="updated" id="updated"></div>
 </div></section>
 <section id="events"><div class="wrap">
   <div class="sec-head">
     <div class="eyebrow">ปฏิทินงานวิ่ง</div>
     <h2>งานวิ่งไทยที่กำลังจะมาถึง</h2>
-    <p>คัดจากปฏิทินงานวิ่งทั่วประเทศ คัดเฉพาะงานที่ยังไม่จัด เรียงวันใกล้สุดขึ้นก่อน กรองตามประเภทหรือเดือนได้เลย</p>
+    <p>รวมจากฐานข้อมูลวิ่งไหนดี + ดึงสดจาก thai.run อัตโนมัติทุกสัปดาห์ คัดเฉพาะงานที่ยังไม่จัด เรียงวันใกล้สุดก่อน</p>
   </div>
   <div class="toolbar">
     <div class="chips" id="chips">
@@ -149,13 +155,14 @@
       <button class="chip" data-f="road">ถนน</button>
       <button class="chip" data-f="trail">เทรล</button>
       <button class="chip" data-f="ultra">อัลตรา</button>
+      <button class="chip" data-f="virtual">Virtual</button>
     </div>
     <select class="mon" id="mon"></select>
     <div class="search"><span>🔎</span><input id="q" type="text" placeholder="ค้นชื่องาน หรือ จังหวัด..."></div>
   </div>
-  <div class="count" id="count"></div>
+  <div class="count" id="count">กำลังโหลดข้อมูล...</div>
   <div class="grid" id="grid"></div>
-  <div class="adminnote"><b>ความเห็นแอดมิน:</b> ลิสต์นี้คัดมาให้ครบทั้งงานเล็กงานใหญ่ งานมาตรฐานอย่างบุรีรัมย์ บางแสน อยุธยา เขาค้อ มีหมด ก่อนสมัครเช็กระยะ จุดสตาร์ท และค่าสมัครหน้างานจริงทุกครั้ง บางงานวัน/เวลาอาจปรับ ปุ่ม "ค้นหา/สมัคร" จะพาไปหาข้อมูลล่าสุดของแต่ละงาน</div>
+  <div class="adminnote"><b>ความเห็นแอดมิน:</b> งานที่มีปุ่ม "ดูรายละเอียด" คือดึงสดจาก thai.run มีสถานะรับสมัครจริง ส่วนงานอื่นเป็นฐานที่แอดมินคัดไว้ กดปุ่ม "ค้นหา" เพื่อหาข้อมูลล่าสุด ก่อนสมัครเช็กระยะ จุดสตาร์ท และค่าสมัครหน้างานจริงทุกครั้ง</div>
 </div></section>
 <section id="blog"><div class="wrap">
   <div class="sec-head">
@@ -176,7 +183,7 @@
     <p>เราเริ่มจากเพจจัดงานวิ่งที่อุบลฯ วันนี้เติบโตเป็นแหล่งรวมข้อมูลงานวิ่งทั่วไทย ยึดหลักง่าย ๆ คือรวมหลายงานแบบเป็นกลาง บอกทั้งข้อดีและจุดที่ต้องชั่งใจ ให้เพื่อนนักวิ่งตัดสินใจเองได้</p>
     <div class="values">
       <div class="val"><div class="ic">⚖️</div><div><b>เป็นกลาง</b><br><span>ไม่เชียร์งานเดียว รวมหลายงานให้เปรียบเทียบ</span></div></div>
-      <div class="val"><div class="ic">📅</div><div><b>ครบ</b><br><span>คัดงานทั่วประเทศกว่า 160 งาน จัดเรียงตามวัน</span></div></div>
+      <div class="val"><div class="ic">🔄</div><div><b>อัปเดตเอง</b><br><span>ดึง thai.run มาผสมฐานข้อมูลอัตโนมัติทุกสัปดาห์</span></div></div>
       <div class="val"><div class="ic">🤝</div><div><b>เป็นกันเอง</b><br><span>ภาษาลูกทุ่ง อ่านง่าย ไม่วิชาการ</span></div></div>
     </div>
   </div>
@@ -194,41 +201,38 @@
   <div class="foot-grid">
     <div>
       <div class="foot-logo">▶ I Do Run</div>
-      <p style="opacity:.78;font-size:.92rem">แหล่งรวมงานวิ่งทั่วไทย อัปเดตทุกสัปดาห์ โดยทีมแอดมิน I Do Run ฐานอุบลฯ/อีสาน</p>
+      <p style="opacity:.78;font-size:.92rem">แหล่งรวมงานวิ่งทั่วไทย อัปเดตอัตโนมัติทุกสัปดาห์ โดยทีมแอดมิน I Do Run ฐานอุบลฯ/อีสาน</p>
       <p class="disclaim">หมายเหตุ: ข้อมูลงานเป็นการรวบรวมเพื่ออำนวยความสะดวก โปรดตรวจสอบวันจัด ระยะ และค่าสมัครกับผู้จัดงานโดยตรงก่อนสมัครทุกครั้ง</p>
     </div>
     <div><h4>เมนู</h4><a href="#events">งานวิ่ง</a><a href="#blog">ข่าว/บล็อก</a><a href="#about">เกี่ยวกับเรา</a></div>
-    <div><h4>ติดตามเรา</h4><a href="https://www.facebook.com/ido.run.ubon/" target="_blank" rel="noopener">Facebook</a></div>
+    <div><h4>ติดตามเรา</h4><a href="https://www.facebook.com/ido.run.ubon/" target="_blank" rel="noopener">Facebook</a><a href="https://race.thai.run/" target="_blank" rel="noopener">ที่มาข้อมูล: thai.run</a></div>
   </div>
   <div class="foot-bot"><span>© 2026 I Do Run. เว็บตัวอย่าง (prototype)</span><span>ทำด้วยใจ เพื่อเพื่อนนักวิ่ง</span></div>
 </div></footer>
 <script>
-const EVENTS=[{"n":"Kapong21 PhangNga Half Marathon 2026","place":"พังงา กะปง","type":"road","d":4,"mo":6,"y":2026,"multi":true},{"n":"KanKaenKoon Mini Marathon 2026","place":"ขอนแก่น","type":"road","d":4,"mo":6,"y":2026,"multi":false},{"n":"Bangkok Double Bridge Half Marathon for Red Cross 2026","place":"กรุงเทพมหานคร","type":"road","d":5,"mo":6,"y":2026,"multi":false},{"n":"DON BOSCO MINI MARATHON ครั้งที่ 18/2026","place":"สวนหลวง ร.๙ กรุงเทพมหานคร","type":"road","d":5,"mo":6,"y":2026,"multi":false},{"n":"B- QUIK BANGSAEN CIRCUIT RUN 2026","place":"ริมหาดบางแสน ชลบุรี","type":"road","d":5,"mo":6,"y":2026,"multi":false},{"n":"U-TAPAO RUN 2026","place":"สนามบินอู่ตะเภา ระยอง","type":"road","d":5,"mo":6,"y":2026,"multi":false},{"n":"World Kidney Day 2026","place":"สวนลุมพินี กรุงเทพมหานคร","type":"road","d":5,"mo":6,"y":2026,"multi":false},{"n":"Phrae Ultra 100 the 5th: Keep Going 2026","place":"แพร่","type":"ultra","d":10,"mo":6,"y":2026,"multi":true},{"n":"Rimpha X Trail 2026 # 4th","place":"มทส. สีคิ้ว นครราชสีมา","type":"trail","d":11,"mo":6,"y":2026,"multi":false},{"n":"RUN FOR THE KING วิ่งวันกีฬาแห่งชาติ 2026","place":"หาดใหญ่ สงขลา","type":"road","d":11,"mo":6,"y":2026,"multi":false},{"n":"Amazing Uttaradit Marathon 2026","place":"อุตรดิตถ์","type":"road","d":12,"mo":6,"y":2026,"multi":false},{"n":"TMS2026 - PRO 3 RACE 2026","place":"Rayong Green Valley ระยอง","type":"road","d":12,"mo":6,"y":2026,"multi":false},{"n":"GPO Run for 60th Anniversary 2026","place":"องค์การเภสัชกรรม กรุงเทพมหานคร","type":"road","d":12,"mo":6,"y":2026,"multi":false},{"n":"WATTANAWIROT POWER RUN 2026","place":"มศว ประสานมิตร กรุงเทพมหานคร","type":"road","d":12,"mo":6,"y":2026,"multi":false},{"n":"RATSADA RUNNING 2026","place":"เกาะสิเหร่ ภูเก็ต","type":"road","d":12,"mo":6,"y":2026,"multi":false},{"n":"PHUKHRANG TRAIL 2026","place":"ภูเรือ เลย","type":"trail","d":19,"mo":6,"y":2026,"multi":false},{"n":"Thakham Trail 2026 : ท่าข้ามเทรล 2026","place":"หาดใหญ่ สงขลา","type":"trail","d":19,"mo":6,"y":2026,"multi":false},{"n":"Andaman Trail Krabi 2026","place":"เขาพนมเบญจา กระบี่","type":"trail","d":19,"mo":6,"y":2026,"multi":false},{"n":"Doi Tung Mini Marathon 2026","place":"ดอยตุง เชียงราย","type":"road","d":19,"mo":6,"y":2026,"multi":false},{"n":"หัวหิน ปิดเมือง ฮาล์ฟ 2026","place":"ปราณบุรี ประจวบคีรีขันธ์","type":"road","d":19,"mo":6,"y":2026,"multi":false},{"n":"Khlong Luang Phaeng Mini-Marathon 2026","place":"ฉะเชิงเทรา","type":"road","d":19,"mo":6,"y":2026,"multi":false},{"n":"Calci-Go Active 10K RUN 2026","place":"หนองประจักษ์ อุดรธานี","type":"road","d":19,"mo":6,"y":2026,"multi":false},{"n":"WUTTICHAI Minimarathon 2/2026","place":"สมุทรสาคร","type":"road","d":19,"mo":6,"y":2026,"multi":false},{"n":"Bangkok Post International Mini Marathon 2026","place":"สวนหลวง ร.๙ กรุงเทพมหานคร","type":"road","d":19,"mo":6,"y":2026,"multi":false},{"n":"หกเลาะดอย ตามฮอยบุญ 2 ครูบา ครั้งที่ 3/2026","place":"ทุ่งเสลี่ยม สุโขทัย","type":"road","d":25,"mo":6,"y":2026,"multi":false},{"n":"SUKHOTHAI100 Ultra Marathon 2026","place":"ทุ่งเสลี่ยม สุโขทัย","type":"ultra","d":25,"mo":6,"y":2026,"multi":true},{"n":"WARRIX THAILAND EARTH TRAIL SERIES 2026 @CHA-OM SARABURI S4","place":"แก่งคอย สระบุรี","type":"trail","d":26,"mo":6,"y":2026,"multi":false},{"n":"Yala Marathon 2026","place":"ยะลา","type":"road","d":26,"mo":6,"y":2026,"multi":false},{"n":"บ้านมุงเทรล 2026 - Baan mung Trail 2026","place":"เนินมะปราง พิษณุโลก","type":"trail","d":26,"mo":6,"y":2026,"multi":false},{"n":"Nongbua Lamphu 21 Half Marathon 2026","place":"หนองบัวลำภู","type":"road","d":26,"mo":6,"y":2026,"multi":false},{"n":"วิ่งเทรล หนองคาย Nongkhai Trail Running 2026","place":"สังคม หนองคาย","type":"trail","d":26,"mo":6,"y":2026,"multi":false},{"n":"Nakhon Sawan Trail 2026","place":"เขาหลวง นครสวรรค์","type":"trail","d":26,"mo":6,"y":2026,"multi":false},{"n":"Sila21 2026 : Run & Heal","place":"ศิลา ขอนแก่น","type":"road","d":2,"mo":7,"y":2026,"multi":false},{"n":"พระพุทธบาทฮีโร่รัน 2026","place":"พระพุทธบาท สระบุรี","type":"road","d":2,"mo":7,"y":2026,"multi":false},{"n":"POMPOMPURIN 30th AEROBIC DANCE & RUN 2026","place":"มหิดล ศาลายา นครปฐม","type":"road","d":2,"mo":7,"y":2026,"multi":false},{"n":"Run To School 2026","place":"สวนหลวง ร.9 กรุงเทพมหานคร","type":"road","d":2,"mo":7,"y":2026,"multi":false},{"n":"KHON KAEN DINO TRAIL 2026","place":"ภูหัน-ภูระงำ ขอนแก่น","type":"trail","d":2,"mo":7,"y":2026,"multi":false},{"n":"Kmutnb Walk-Run 2026","place":"พระจอมเกล้าพระนครเหนือ กรุงเทพมหานคร","type":"road","d":9,"mo":7,"y":2026,"multi":false},{"n":"วิ่งขึ้นเขาตาจี๊ด ครอสคันทรี 2026","place":"พนมสารคาม ฉะเชิงเทรา","type":"trail","d":9,"mo":7,"y":2026,"multi":false},{"n":"UBON Sunrise TRAIL 2026","place":"ผาแต้ม โขงเจียม อุบลราชธานี","type":"trail","d":9,"mo":7,"y":2026,"multi":false},{"n":"TGS CHARITY RUN 2026","place":"ท่าน้ำนนท์ นนทบุรี","type":"road","d":9,"mo":7,"y":2026,"multi":false},{"n":"Songkhla Hospital Half Marathon 2026","place":"สงขลา","type":"road","d":9,"mo":7,"y":2026,"multi":false},{"n":"Funny Run 2026 วิ่งเพื่อน้อง","place":"ผักไห่ พระนครศรีอยุธยา","type":"road","d":9,"mo":7,"y":2026,"multi":false},{"n":"Speed 42/2026","place":"เกษตรศาสตร์ กำแพงแสน นครปฐม","type":"road","d":9,"mo":7,"y":2026,"multi":false},{"n":"12 AUG Half Marathon 2026 (ครั้งที่ 31)","place":"ศูนย์สิริกิติ์ กรุงเทพมหานคร","type":"road","d":12,"mo":7,"y":2026,"multi":false},{"n":"AEON Pawer RunGang 2026","place":"DAS HAUS BKK กรุงเทพมหานคร","type":"road","d":15,"mo":7,"y":2026,"multi":false},{"n":"Amico Trail Repeat Presented by AMMO 2026","place":"ลานกระบก","type":"trail","d":16,"mo":7,"y":2026,"multi":false},{"n":"ASICS META Time Trials Thailand 2026","place":"สะพานพระราม 8 กรุงเทพมหานคร","type":"road","d":16,"mo":7,"y":2026,"multi":false},{"n":"Avana Run 2026 Together We Run","place":"สวนหลวง ร.9 กรุงเทพมหานคร","type":"road","d":16,"mo":7,"y":2026,"multi":false},{"n":"อ่าวขนอมเทรล Aokhanom Trail 2026","place":"ขนอม นครศรีธรรมราช","type":"trail","d":16,"mo":7,"y":2026,"multi":false},{"n":"Bangkok Airways Sukhothai Half Marathon 2026","place":"สุโขทัย","type":"road","d":22,"mo":7,"y":2026,"multi":true},{"n":"Songkhla Marathon 2026 #27","place":"สงขลา","type":"road","d":22,"mo":7,"y":2026,"multi":true},{"n":"ผาหมีเทรล 2026","place":"ผาหมี เชียงราย","type":"trail","d":23,"mo":7,"y":2026,"multi":false},{"n":"Korest X Trail 2026","place":"เขาภูหลวง นครราชสีมา","type":"trail","d":23,"mo":7,"y":2026,"multi":false},{"n":"Darasamutr Mini Marathon 2026","place":"ศรีราชา ชลบุรี","type":"road","d":29,"mo":7,"y":2026,"multi":false},{"n":"DOI LANG BAN TRAIL 2026","place":"ลำพูน","type":"trail","d":30,"mo":7,"y":2026,"multi":false},{"n":"UTHAI TRAIL 2026","place":"บ้านไร่ อุทัยธานี","type":"trail","d":30,"mo":7,"y":2026,"multi":false},{"n":"TAK 10K THAILAND 2026","place":"ตาก","type":"road","d":30,"mo":7,"y":2026,"multi":false},{"n":"Bala Trail Running 2026","place":"สุคิริน นราธิวาส","type":"trail","d":30,"mo":7,"y":2026,"multi":false},{"n":"SIRA RUN 2026","place":"ร.พ.รามาธิบดี กรุงเทพมหานคร","type":"road","d":30,"mo":7,"y":2026,"multi":false},{"n":"Crazy Cat Run วิ่งเพื่อแมวจร 2026","place":"สวนหลวง ร.9 กรุงเทพมหานคร","type":"road","d":30,"mo":7,"y":2026,"multi":false},{"n":"Park Trail Hatyai EP.2 2026","place":"หาดใหญ่ สงขลา","type":"trail","d":30,"mo":7,"y":2026,"multi":false},{"n":"Khao Chi Chan Marathon 2026","place":"เขาชีจรรย์ สัตหีบ ชลบุรี","type":"road","d":5,"mo":8,"y":2026,"multi":true},{"n":"เดิน-วิ่ง วิศวฯ ม.อ. ครั้งที่10/2026","place":"ม.อ. หาดใหญ่ สงขลา","type":"road","d":6,"mo":8,"y":2026,"multi":false},{"n":"Single Run มันส์ซ่า 2026","place":"สวนหลวง ร.9 กรุงเทพมหานคร","type":"road","d":6,"mo":8,"y":2026,"multi":false},{"n":"Samwa Mini Marathon3/2026","place":"สามวา กรุงเทพมหานคร","type":"road","d":6,"mo":8,"y":2026,"multi":false},{"n":"วัดละหารไร่ ฮาล์ฟ มาราธอน 2026 ครั้งที่ 5","place":"ละหารไร่ ระยอง","type":"road","d":6,"mo":8,"y":2026,"multi":false},{"n":"KFC RUN 2026","place":"Stadium One กรุงเทพมหานคร","type":"road","d":6,"mo":8,"y":2026,"multi":false},{"n":"Maesot Eco Trail 2026","place":"แม่สอด ตาก","type":"trail","d":6,"mo":8,"y":2026,"multi":false},{"n":"SciKU Run Together 2026 ครั้งที่ 3","place":"เกษตรศาสตร์ กรุงเทพมหานคร","type":"road","d":6,"mo":8,"y":2026,"multi":false},{"n":"ขุนห้วยเลาหลวงเทรล 2026","place":"ขุนห้วยเลาหลวง","type":"trail","d":12,"mo":8,"y":2026,"multi":false},{"n":"SCENIC 1/2 MARATHON KRABI 2026","place":"หาดนพรัตน์ธารา กระบี่","type":"road","d":12,"mo":8,"y":2026,"multi":true},{"n":"เขากระโดงเทรล 2026","place":"เขากระโดง บุรีรัมย์","type":"trail","d":13,"mo":8,"y":2026,"multi":false},{"n":"บึงกาฬฮาล์ฟมาราธอน 2026 ครั้งที่ 3","place":"บึงกาฬ","type":"road","d":13,"mo":8,"y":2026,"multi":false},{"n":"วิ่งติดมันส์ รันพระนคร ครั้งที่ 2/2026","place":"สวนจตุจักร กรุงเทพมหานคร","type":"road","d":13,"mo":8,"y":2026,"multi":false},{"n":"Bangsaen10-2026","place":"บางแสน ชลบุรี","type":"road","d":13,"mo":8,"y":2026,"multi":false},{"n":"Hin Chang Si Super mini marathon 2026","place":"ขอนแก่น","type":"road","d":13,"mo":8,"y":2026,"multi":false},{"n":"BLACK COFFEE RUN 2026","place":"สวนหลวง ร.9 กรุงเทพมหานคร","type":"road","d":13,"mo":8,"y":2026,"multi":false},{"n":"Mahidol Run 2026","place":"เชียงใหม่","type":"road","d":13,"mo":8,"y":2026,"multi":false},{"n":"Muser100-2026","place":"ตาก","type":"ultra","d":18,"mo":8,"y":2026,"multi":true},{"n":"Nong Bualoi 100K Challenge 2026","place":"แพร่","type":"ultra","d":19,"mo":8,"y":2026,"multi":true},{"n":"เดิน - วิ่ง ม.หาดใหญ่ 2026","place":"ม.อ. หาดใหญ่ สงขลา","type":"road","d":20,"mo":8,"y":2026,"multi":false},{"n":"สะออน Run นครพนม ครั้งที่ 9/2026","place":"นครพนม","type":"road","d":20,"mo":8,"y":2026,"multi":false},{"n":"LOMA RUN On The Beach 2026 (ปีที่ 12)","place":"จอมเทียน พัทยา ชลบุรี","type":"road","d":20,"mo":8,"y":2026,"multi":false},{"n":"Bangkok Airways Chiang Mai Half Marathon 2026","place":"ราชพฤกษ์ เชียงใหม่","type":"road","d":26,"mo":8,"y":2026,"multi":true},{"n":"Bueng Boraphet Night Run 2026","place":"บึงบอระเพ็ด นครสวรรค์","type":"road","d":26,"mo":8,"y":2026,"multi":false},{"n":"KOH CHANG TRAIL 2026","place":"เกาะช้าง ตราด","type":"trail","d":27,"mo":8,"y":2026,"multi":false},{"n":"RRU Run to the Future 2026","place":"ราชนครินทร์ ฉะเชิงเทรา","type":"road","d":27,"mo":8,"y":2026,"multi":false},{"n":"Buriram Lawyer RUN 2026","place":"บุรีรัมย์","type":"road","d":27,"mo":8,"y":2026,"multi":false},{"n":"Muak Lek Cross Country 2026","place":"มวกเหล็ก สระบุรี","type":"trail","d":27,"mo":8,"y":2026,"multi":false},{"n":"SOP Minimarathon โรงเรียนพันธสัญญา 2026","place":"โรงเรียนพันธสัญญา","type":"road","d":3,"mo":9,"y":2026,"multi":false},{"n":"BRU Charity Run 2026","place":"ราชภัฏบุรีรัมย์ บุรีรัมย์","type":"road","d":3,"mo":9,"y":2026,"multi":false},{"n":"SPONSOR RUN BANGKOK 2026","place":"สะพานพระราม 8 กรุงเทพมหานคร","type":"road","d":4,"mo":9,"y":2026,"multi":false},{"n":"KALASIN MARATHON 2026","place":"กาฬสินธุ์","type":"road","d":4,"mo":9,"y":2026,"multi":false},{"n":"Angthong Marathon 2026","place":"มหาราช อ่างทอง","type":"road","d":4,"mo":9,"y":2026,"multi":false},{"n":"ACVRUN 2026: the Ultimate Line","place":"อัสสัมชัญ กรุงเทพมหานคร","type":"road","d":4,"mo":9,"y":2026,"multi":false},{"n":"ACVRUN 2026: The Ultimate Lines","place":"อัสสัมชัญ กรุงเทพมหานคร","type":"road","d":4,"mo":9,"y":2026,"multi":false},{"n":"HIN SAM WAN TRAIL 2026","place":"หินสามวาฬ ภูสิงห์ บึงกาฬ","type":"trail","d":4,"mo":9,"y":2026,"multi":false},{"n":"Chaiyaphum Marathon 2026","place":"ชัยภูมิ","type":"road","d":11,"mo":9,"y":2026,"multi":false},{"n":"SUKHOTHAI MARATHON CHAPTER 4 2026","place":"สุโขทัย","type":"road","d":11,"mo":9,"y":2026,"multi":false},{"n":"เครดิตยูเนี่ยนบ้านดุง ฮาล์ฟมาราธอน 2026","place":"อุดรธานี","type":"road","d":11,"mo":9,"y":2026,"multi":false},{"n":"Udonthani 100/2026","place":"หนองแสง อุดรธานี","type":"ultra","d":17,"mo":9,"y":2026,"multi":true},{"n":"Khun Dan Marathon 2026 Season 7","place":"เขื่อนขุนด่าน นครนายก","type":"road","d":18,"mo":9,"y":2026,"multi":false},{"n":"Pattana Triathlon Festival 2026","place":"ศรีราชา ชลบุรี","type":"road","d":18,"mo":9,"y":2026,"multi":false},{"n":"PINK PARK RUN 2026","place":"Stadium One กรุงเทพมหานคร","type":"road","d":18,"mo":9,"y":2026,"multi":false},{"n":"นายฮ้อยรัน สว่างแดนดิน 2026","place":"สว่างแดนดิน สกลนคร","type":"road","d":18,"mo":9,"y":2026,"multi":false},{"n":"Trail Runner Companion Thailand#5/2026","place":"สวนหลวง ร.9 กรุงเทพมหานคร","type":"trail","d":18,"mo":9,"y":2026,"multi":false},{"n":"Mae Moh Half Marathon 2026","place":"แม่เมาะ ลำปาง","type":"road","d":25,"mo":9,"y":2026,"multi":false},{"n":"TRAIL ON THE ROCK 2026 by Run Happy Series","place":"เทพสถิต ชัยภูมิ","type":"trail","d":25,"mo":9,"y":2026,"multi":false},{"n":"Nakhon Pathom Run 2026 ครั้งที่1","place":"องค์พระปฐมเจดีย์ นครปฐม","type":"road","d":25,"mo":9,"y":2026,"multi":false},{"n":"Zombie Escape Run 2026","place":"สวนหลวง ร.9 กรุงเทพมหานคร","type":"road","d":25,"mo":9,"y":2026,"multi":false},{"n":"Scenic Marathon Chiang Mai 2026","place":"ราชพฤกษ์ เชียงใหม่","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Walk Run Bike Fighting Stroke WRB12 ขอนแก่น 2026","place":"ขอนแก่น","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Walk Run Bike Fighting Stroke WRB12 ฉะเชิงเทรา 2026","place":"ฉะเชิงเทรา","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Walk Run Bike Fighting Stroke WRB12 กาฬสินธุ์ 2026","place":"สหัสขันธ์ กาฬสินธุ์","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Walk Run Bike Fighting Stroke WRB12 ชัยนาท 2026","place":"ชัยนาท","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Walk Run Bike Fighting Stroke WRB12 จันทบุรี 2026","place":"จันทบุรี","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Walk Run Bike Fighting Stroke WRB12 ชลบุรี 2026","place":"ชลบุรี","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Walk Run Bike Fighting Stroke WRB12 มหาสารคาม 2026","place":"มหาสารคาม","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Walk Run Bike Fighting Stroke WRB12 กำแพงเพชร 2026","place":"กำแพงเพชร","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Walk Run Bike Fighting Stroke WRB12 กรุงเทพมหานคร 2026","place":"ศิริราช กรุงเทพมหานคร","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Walk Run Bike Fighting Stroke WRB12 กาญจนบุรี 2026","place":"กาญจนบุรี","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Walk Run Bike Fighting Stroke WRB12 โคราช 2026","place":"นครราชสีมา","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Walk Run Bike Fighting Stroke WRB12 กระบี่ 2026","place":"กระบี่","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Walk Run Bike Fighting Stroke WRB12 ชัยภูมิ 2026","place":"ชัยภูมิ","type":"road","d":1,"mo":10,"y":2026,"multi":false},{"n":"Sangkhla Sunset Run 2026","place":"สังขละบุรี กาญจนบุรี","type":"road","d":7,"mo":10,"y":2026,"multi":false},{"n":"SAMUI TRAIL 2026","place":"เกาะสมุย สุราษฎร์ธานี","type":"trail","d":7,"mo":10,"y":2026,"multi":true},{"n":"(เลื่อน)Bangkok Marathon 2026 ครั้งที่37","place":"ถนนสนามไชย กรุงเทพมหานคร","type":"road","d":8,"mo":10,"y":2026,"multi":false},{"n":"Korat Marathon 2026","place":"ย่าโม นครราชสีมา","type":"road","d":8,"mo":10,"y":2026,"multi":false},{"n":"PEA Chiangmai Mini Marathon #14/2026","place":"ห้วยตึงเฒ่า แม่ริม เชียงใหม่","type":"road","d":8,"mo":10,"y":2026,"multi":false},{"n":"เดินวิ่ง เพื่อพุทธคยา ครั้งที่ 2/2026","place":"สมุทรสาคร","type":"road","d":8,"mo":10,"y":2026,"multi":false},{"n":"POCARI SWEAT TRAIL RUN THAILAND 2026","place":"เชียงใหม่","type":"trail","d":14,"mo":10,"y":2026,"multi":true},{"n":"เดิน-วิ่ง กรมบัญชีกลาง มินิมาราธอน 2026 ครั้งที่ 23","place":"แจ้งวัฒนะ กรุงเทพมหานคร","type":"road","d":15,"mo":10,"y":2026,"multi":false},{"n":"Run for Chil 2026","place":"เกษตรศาสตร์ ขอนแก่น","type":"road","d":15,"mo":10,"y":2026,"multi":false},{"n":"Ayutthaya Marathon 2026","place":"พระนครศรีอยุธยา","type":"road","d":22,"mo":10,"y":2026,"multi":false},{"n":"My Champion เพชรดำ 42.195 MARATHON #1/2026","place":"เขาค้อ เพชรบูรณ์","type":"road","d":22,"mo":10,"y":2026,"multi":false},{"n":"Ocean Life Run With Love 2026 @OCEAN MARINA","place":"Ocean Marina สัตหีบ ชลบุรี","type":"road","d":22,"mo":10,"y":2026,"multi":false},{"n":"Banglen Run For Life 2026","place":"บางเลน นครปฐม","type":"road","d":22,"mo":10,"y":2026,"multi":false},{"n":"AMAZING THAILAND MARATHON BANGKOK 2026 PRESENTED BY TOYOTA","place":"ท้องสนามหลวง กรุงเทพมหานคร","type":"road","d":28,"mo":10,"y":2026,"multi":true},{"n":"Lamphun Marathon 2026","place":"ลำพูน","type":"road","d":29,"mo":10,"y":2026,"multi":false},{"n":"2026 Garmin Run Marathon Series Thailand Half Marathon","place":"พระนครศรีอยุธยา","type":"road","d":6,"mo":11,"y":2026,"multi":false},{"n":"Scenic Marathon Nakhon Phanom 2026","place":"ริมโขง นครพนม","type":"road","d":12,"mo":11,"y":2026,"multi":true},{"n":"ADDA Run 2026","place":"Siam Premium Outlets กรุงเทพมหานคร","type":"road","d":13,"mo":11,"y":2026,"multi":false},{"n":"เพชรบุรีมาราธอน ครั้งที่5/2026","place":"หาดเจ้าสำราญ เพชรบุรี","type":"road","d":13,"mo":11,"y":2026,"multi":false},{"n":"โพธิ์ตาก มาราธอน ครั้งที่6/2026","place":"โพธิ์ตาก หนองคาย","type":"road","d":13,"mo":11,"y":2026,"multi":false},{"n":"CHIANG DAO 100 Ultra Trail 2026 Presented by DECATHLON","place":"เชียงดาว เชียงใหม่","type":"ultra","d":19,"mo":11,"y":2026,"multi":true},{"n":"Muang Thai-Chiang Mai Marathon 2026","place":"ท่าแพ เชียงใหม่","type":"road","d":20,"mo":11,"y":2026,"multi":false},{"n":"CORE X250 Ultra Trail 2026","place":"เชียงดาว เชียงใหม่","type":"ultra","d":23,"mo":11,"y":2026,"multi":true},{"n":"Gatorade BKK RUN 2026","place":"กรุงเทพมหานคร","type":"road","d":27,"mo":11,"y":2026,"multi":false},{"n":"Ultra Trail Chiang Mai 2027","place":"เมืองคอง เชียงใหม่","type":"ultra","d":8,"mo":0,"y":2027,"multi":true},{"n":"KhonKaen International Marathon 2027","place":"ขอนแก่น","type":"road","d":9,"mo":0,"y":2027,"multi":true},{"n":"Bangkok Marathon 2027 ครั้งที่ 37","place":"สนามไชย กรุงเทพมหานคร","type":"road","d":10,"mo":0,"y":2027,"multi":false},{"n":"Khao Eto Camp Trail 2027 ครั้งที่ 7","place":"เขาอีโต้ ปราจีนบุรี","type":"trail","d":10,"mo":0,"y":2027,"multi":false},{"n":"Brother Beat Cancer Run 2027","place":"สะพานพระราม8 กรุงเทพมหานคร","type":"road","d":17,"mo":0,"y":2027,"multi":false},{"n":"KHAIBOKWAN21 ค่ายบกหวานฮาล์ฟมาราธอน 3/2027","place":"หนองคาย","type":"road","d":17,"mo":0,"y":2027,"multi":false},{"n":"BURIRAM MARATHON 2027","place":"สนามช้าง บุรีรัมย์","type":"road","d":23,"mo":0,"y":2027,"multi":false},{"n":"PROMISE RUN THE DAM KHUN DAN 1/2 MARATHON 2027","place":"เขื่อนขุนด่าน นครนายก","type":"road","d":31,"mo":0,"y":2027,"multi":false},{"n":"เขาหัวช้าง มินิมาราธอน 2027","place":"ตะโหมด พัทลุง","type":"road","d":31,"mo":0,"y":2027,"multi":false},{"n":"NAKHON PHANOM 21/2027","place":"นครพนม","type":"road","d":7,"mo":1,"y":2027,"multi":false},{"n":"Nong PraJak Ultra100 ครั้งที่ 2/2027","place":"หนองประจักษ์ อุดรธานี","type":"ultra","d":13,"mo":1,"y":2027,"multi":true},{"n":"ถิ่นวีรชนมินิ-ฮาล์ฟมาราธอน ครั้งที่ 9/2570","place":"สิงห์บุรี","type":"road","d":14,"mo":1,"y":2027,"multi":false}];
 const TH=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
-const TYPE={road:"ถนน",trail:"เทรล",ultra:"อัลตรา"};
-const today=new Date();const t0=new Date(today.getFullYear(),today.getMonth(),today.getDate());
-const up=EVENTS.filter(e=>new Date(e.y,e.mo,e.d)>=new Date(t0.getTime()-24*3600*1000));
-document.getElementById('stat-total').textContent=up.length;
-document.getElementById('stat-trail').textContent=up.filter(e=>e.type!=='road').length;
-// month options
+const TYPE={road:"ถนน",trail:"เทรล",ultra:"อัลตรา",virtual:"Virtual"};
+let UP=[];
 const monsel=document.getElementById('mon');
-const monKeys=[...new Set(up.map(e=>e.y+'-'+e.mo))];
-monsel.innerHTML='<option value="all">ทุกเดือน</option>'+monKeys.map(k=>{const[y,m]=k.split('-');return '<option value="'+k+'">'+TH[m]+' '+y+'</option>';}).join('');
 function card(e){
-  const link='https://www.google.com/search?q='+encodeURIComponent(e.n+' วิ่ง สมัคร');
   const multi=e.multi?'<span class="tag multi">หลายวัน</span>':'';
-  return '<div class="card">'
-    +'<div class="top"><div><h3>'+e.n+'</h3></div>'
+  let reg='';
+  if(e.reg===true)reg='<span class="reg open"><span class="dot"></span>เปิดรับสมัคร</span>';
+  else if(e.reg===false)reg='<span class="reg closed"><span class="dot"></span>ปิด/รอประกาศ</span>';
+  else reg='<span></span>';
+  const link=e.link||('https://www.google.com/search?q='+encodeURIComponent(e.n+' วิ่ง สมัคร'));
+  const label=e.link?'ดูรายละเอียด →':'ค้นหา/สมัคร →';
+  return '<div class="card"><div class="top"><div><h3>'+e.n+'</h3></div>'
     +'<div class="date-pill"><div class="d">'+e.d+'</div><div class="m">'+TH[e.mo]+'</div><div class="y">'+e.y+'</div></div></div>'
     +(e.place?'<div class="place"><span>📍</span><span>'+e.place+'</span></div>':'')
-    +'<div class="meta"><span class="tag '+e.type+'">'+TYPE[e.type]+'</span>'+multi+'</div>'
-    +'<div class="foot"><a href="'+link+'" target="_blank" rel="noopener">ค้นหา/สมัคร →</a></div></div>';
+    +'<div class="meta"><span class="tag '+e.type+'">'+(TYPE[e.type]||e.type)+'</span>'+multi+'</div>'
+    +'<div class="foot">'+reg+'<a href="'+link+'" target="_blank" rel="noopener">'+label+'</a></div></div>';
 }
 function render(){
   const f=document.querySelector('#chips .chip.on').dataset.f;
   const mk=monsel.value;
   const q=document.getElementById('q').value.trim().toLowerCase();
-  const list=up.filter(e=>(f==='all'||e.type===f)&&(mk==='all'||(e.y+'-'+e.mo)===mk)&&(q===''||(e.n+' '+e.place).toLowerCase().includes(q)));
+  const list=UP.filter(e=>(f==='all'||e.type===f)&&(mk==='all'||(e.y+'-'+e.mo)===mk)&&(q===''||(e.n+' '+(e.place||'')).toLowerCase().includes(q)));
   document.getElementById('count').textContent='พบ '+list.length+' งาน';
   const g=document.getElementById('grid');
   g.innerHTML=list.length?list.map(card).join(''):'<div class="empty">ไม่พบงานที่ตรงเงื่อนไข ลองเปลี่ยนตัวกรองดูนะ</div>';
@@ -236,7 +240,17 @@ function render(){
 document.querySelectorAll('#chips .chip').forEach(c=>c.addEventListener('click',()=>{document.querySelector('#chips .chip.on').classList.remove('on');c.classList.add('on');render();}));
 monsel.addEventListener('change',render);
 document.getElementById('q').addEventListener('input',render);
-render();
+fetch('events.json?t='+Date.now()).then(r=>r.json()).then(data=>{
+  const today=new Date();const cut=new Date(today.getFullYear(),today.getMonth(),today.getDate()-1);
+  UP=(data.events||[]).filter(e=>new Date(e.y,e.mo,e.d)>=cut).sort((a,b)=>(a.y-b.y)||(a.mo-b.mo)||(a.d-b.d));
+  document.getElementById('stat-total').textContent=UP.length;
+  document.getElementById('stat-trail').textContent=UP.filter(e=>e.type==='trail'||e.type==='ultra').length;
+  document.getElementById('stat-open').textContent=UP.filter(e=>e.reg===true).length;
+  const monKeys=[...new Set(UP.map(e=>e.y+'-'+e.mo))];
+  monsel.innerHTML='<option value="all">ทุกเดือน</option>'+monKeys.map(k=>{const[y,m]=k.split('-');return '<option value="'+k+'">'+TH[m]+' '+y+'</option>';}).join('');
+  if(data.generatedAt){const d=new Date(data.generatedAt);document.getElementById('updated').textContent='อัปเดตข้อมูลล่าสุด: '+d.toLocaleDateString('th-TH',{day:'numeric',month:'long',year:'numeric',timeZone:'Asia/Bangkok'});}
+  render();
+}).catch(err=>{document.getElementById('count').textContent='โหลดข้อมูลไม่สำเร็จ กรุณารีเฟรชหน้าใหม่';});
 </script>
 </body>
 </html>
