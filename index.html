@@ -183,11 +183,7 @@
     <h2>อ่านก่อนออกวิ่ง</h2>
     <p>สรุปข่าว เทรนด์ และเกร็ดความรู้แบบลูกทุ่ง อ่านง่าย ใช้ได้จริง (ตัวอย่างคอนเทนต์)</p>
   </div>
-  <div class="blog-grid">
-    <article class="post"><div class="ph">เตรียมตัวมือใหม่ ก่อนลงงานแรก</div><div class="body"><div class="cat">มือใหม่</div><h3>ลงงานวิ่งครั้งแรก เตรียมอะไรบ้าง</h3><p>ตั้งแต่เลือกระยะให้เหมาะกับร่างกาย ซ้อมยังไงไม่ให้เจ็บ จนถึงของที่ต้องเตรียมในวันแข่ง</p></div></article>
-    <article class="post"><div class="ph">ถนน vs เทรล vs อัลตรา</div><div class="body"><div class="cat">เลือกสนาม</div><h3>สามสายนี้ต่างกันยังไง</h3><p>ชั่งใจทั้งอุปกรณ์ ความเสี่ยงบาดเจ็บ และความฟิตที่ต้องมี ก่อนเลือกลงงานแต่ละแบบ</p></div></article>
-    <article class="post"><div class="ph">งานมาตรฐานปลายปีที่ห้ามพลาด</div><div class="body"><div class="cat">งานเด่น</div><h3>ส่องงานใหญ่ช่วงไฮซีซั่น</h3><p>บางแสน บุรีรัมย์ อยุธยา และอีกหลายสนามดัง จัดคิวซ้อมให้ทันก่อนถึงวันจริง</p></div></article>
-  </div>
+  <div class="blog-grid" id="blog-grid"></div>
 </div></section>
 <section id="about" class="about"><div class="wrap about-grid">
   <div>
@@ -299,6 +295,14 @@ fetch('events.json?t='+Date.now()).then(r=>r.json()).then(data=>{
   if(data.generatedAt){const d=new Date(data.generatedAt);document.getElementById('updated').textContent='อัปเดตข้อมูลล่าสุด: '+d.toLocaleDateString('th-TH',{day:'numeric',month:'long',year:'numeric',timeZone:'Asia/Bangkok'});}
   render();
 }).catch(err=>{document.getElementById('count').textContent='โหลดข้อมูลไม่สำเร็จ กรุณารีเฟรชหน้าใหม่';});
+</script>
+<script>
+fetch("posts.json?t="+Date.now()).then(r=>r.json()).then(d=>{
+ const ACC={orange:"linear-gradient(135deg,#F25C2A,#ffb38a)",navy:"linear-gradient(135deg,#16335B,#3a5a8a)",purple:"linear-gradient(135deg,#6b46c1,#a37fe0)"};
+ const g=document.getElementById("blog-grid"); if(!g) return;
+ const posts=(d.posts||[]).slice(0,6);
+ g.innerHTML=posts.map(p=>"<a class=\"post\" style=\"display:block\" href=\""+p.file+"\"><div class=\"ph\" style=\"background:"+(ACC[p.accent]||ACC.orange)+"\">"+p.title+"</div><div class=\"body\"><div class=\"cat\">"+p.cat+"</div><h3>"+p.title+"</h3><p>"+p.excerpt+"</p></div></a>").join("");
+}).catch(function(){});
 </script>
 </body>
 </html>

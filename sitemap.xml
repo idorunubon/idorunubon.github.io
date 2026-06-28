@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://idorunubon.github.io/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://idorunubon.github.io/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://idorunubon.github.io/blog-first-race-prep.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://idorunubon.github.io/blog-road-trail-ultra.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://idorunubon.github.io/blog-choose-distance.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
