@@ -5,7 +5,7 @@
 
 const fs = require('fs');
 
-const THAIRUN_URL = 'https://api.race.thai.run/graphql?query=%7BlistEvents%28limit%3A200%2Csort%3ASTARTDATE_DESC%29%7Bslug%20name%7Bth%7D%20startDate%20isRegOpen%20provinces%7D%7D';
+const THAIRUN_URL = 'https://api.race.thai.run/graphql?query=%7BlistEvents%28limit%3A200%2Csort%3ASTARTDATE_DESC%29%7Bslug%20name%7Bth%7D%20startDate%20isRegOpen%20provinces%20races%7Bdistance%7D%7D%7D';
 
 // แปลงจังหวัด (อังกฤษ -> ไทย) เท่าที่พบบ่อย
 const PROV = {
@@ -52,6 +52,7 @@ async function fetchThaiRun(){
       const name = (e.name && e.name.th) || e.slug;
       const dt = thDate(e.startDate);
       const place = (e.provinces||[]).map(p=>PROV[p]||p).join(' ');
+      const dist = [...new Set((e.races||[]).map(r=>r.distance).filter(n=>typeof n==='number' && n>0))].sort((a,b)=>a-b);
       return {
         n: name.trim(),
         place: place || 'ต่างประเทศ/ทั่วไทย',
@@ -60,7 +61,8 @@ async function fetchThaiRun(){
         multi: false,
         reg: !!e.isRegOpen,
         link: 'https://race.thai.run/event/' + e.slug,
-        src: 'thai.run'
+        src: 'thai.run',
+        ...(dist.length ? { dist } : {})
       };
     });
   }catch(err){

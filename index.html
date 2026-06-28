@@ -79,6 +79,7 @@
   .tag.ultra{background:#f0ecfb;color:var(--purple)}
   .tag.virtual{background:#e7f0fd;color:var(--blue)}
   .tag.multi{background:#fff4d6;color:#9a6b00}
+  .tag.dist{background:#eef2ff;color:#3949ab}
   .reg{display:inline-flex;align-items:center;gap:5px;font-size:.8rem;font-weight:600}
   .reg.open{color:var(--green)}.reg.closed{color:var(--muted)}
   .reg .dot{width:8px;height:8px;border-radius:50%;background:currentColor}
@@ -168,6 +169,7 @@
       <button class="chip" data-f="clinic">คลินิก/เวิร์กช็อป</button>
     </div>
     <select class="mon" id="region"></select>
+    <select class="mon" id="dist"><option value="all">ทุกระยะ</option><option value="fun">Fun Run</option><option value="5k">5 กม.</option><option value="10k">10 กม.</option><option value="half">ฮาล์ฟ ~21 กม.</option><option value="full">ฟูล ~42 กม.</option><option value="ultra">อัลตรา 50 กม.+</option></select>
     <select class="mon" id="mon"></select>
     <div class="search"><span>🔎</span><input id="q" type="text" placeholder="ค้นชื่องาน หรือ จังหวัด..."></div>
   </div>
@@ -239,6 +241,9 @@ function isClinic(n){return /workshop|clinic|คลินิก|ปรับท�
 let UP=[];
 const monsel=document.getElementById('mon');
 const regsel=document.getElementById('region');
+const distsel=document.getElementById('dist');
+function inBucket(d,b){if(b==='fun')return d<4.5;if(b==='5k')return d>=4.5&&d<7.5;if(b==='10k')return d>=7.5&&d<15;if(b==='half')return d>=15&&d<30;if(b==='full')return d>=30&&d<50;if(b==='ultra')return d>=50;return true;}
+function distMatch(e,b){if(b==='all')return true;if(!e.dist||!e.dist.length)return false;return e.dist.some(d=>inBucket(d,b));}
 function card(e){
   const multi=e.multi?'<span class="tag multi">หลายวัน</span>':'';
   let reg='';
@@ -248,10 +253,11 @@ function card(e){
   const link=e.link||('https://www.google.com/search?q='+encodeURIComponent(e.n+' วิ่ง สมัคร'));
   const label=e.link?'ดูรายละเอียด →':'ค้นหา/สมัคร →';
   const clinicTag=e.isClinic?'<span class="tag multi">คลินิก/เวิร์กช็อป</span>':'';
+  const distTag=(e.dist&&e.dist.length)?'<span class="tag dist">'+e.dist.join('/')+' กม.</span>':'';
   return '<div class="card"><div class="top"><div><h3>'+e.n+'</h3></div>'
     +'<div class="date-pill"><div class="d">'+e.d+'</div><div class="m">'+TH[e.mo]+'</div><div class="y">'+e.y+'</div></div></div>'
     +(e.place?'<div class="place"><span>📍</span><span>'+e.place+'</span></div>':'')
-    +'<div class="meta"><span class="tag '+e.type+'">'+(TYPE[e.type]||e.type)+'</span>'+clinicTag+multi+'</div>'
+    +'<div class="meta"><span class="tag '+e.type+'">'+(TYPE[e.type]||e.type)+'</span>'+distTag+clinicTag+multi+'</div>'
     +'<div class="foot">'+reg+'<a href="'+link+'" target="_blank" rel="noopener">'+label+'</a></div></div>';
 }
 function render(){
@@ -265,6 +271,7 @@ function render(){
     if(rg!=='all'&&e.region!==rg)return false;
     if(mk!=='all'&&(e.y+'-'+e.mo)!==mk)return false;
     if(q&&!((e.n+' '+(e.place||'')).toLowerCase().includes(q)))return false;
+    if(!distMatch(e,distsel.value))return false;
     return true;
   });
   document.getElementById('count').textContent='พบ '+list.length+' งาน';
@@ -273,6 +280,7 @@ function render(){
 }
 document.querySelectorAll('#chips .chip').forEach(c=>c.addEventListener('click',()=>{document.querySelector('#chips .chip.on').classList.remove('on');c.classList.add('on');render();}));
 regsel.addEventListener('change',render);
+distsel.addEventListener('change',render);
 monsel.addEventListener('change',render);
 document.getElementById('q').addEventListener('input',render);
 fetch('events.json?t='+Date.now()).then(r=>r.json()).then(data=>{
