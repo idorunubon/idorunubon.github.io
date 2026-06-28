@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://idorunubon.github.io/sitemap.xml
