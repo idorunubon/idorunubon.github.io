@@ -156,16 +156,18 @@
   <div class="sec-head">
     <div class="eyebrow">ปฏิทินงานวิ่ง</div>
     <h2>งานวิ่งไทยที่กำลังจะมาถึง</h2>
-    <p>รวมจากฐานข้อมูลของเรา อัปเดตเองอัตโนมัติทุกสัปดาห์ คัดเฉพาะงานที่ยังไม่จัด เรียงวันใกล้สุดก่อน</p>
+    <p>รวมจากฐานข้อมูลของเรา อัปเดตเองอัตโนมัติทุกสัปดาห์ งานที่เปิดรับสมัครจะขึ้นก่อน กรองตามประเภท ภาค หรือเดือนได้</p>
   </div>
   <div class="toolbar">
     <div class="chips" id="chips">
-      <button class="chip on" data-f="all">ทั้งหมด</button>
+      <button class="chip on" data-f="all">งานแข่งทั้งหมด</button>
       <button class="chip" data-f="road">ถนน</button>
       <button class="chip" data-f="trail">เทรล</button>
       <button class="chip" data-f="ultra">อัลตรา</button>
       <button class="chip" data-f="virtual">Virtual</button>
+      <button class="chip" data-f="clinic">คลินิก/เวิร์กช็อป</button>
     </div>
+    <select class="mon" id="region"></select>
     <select class="mon" id="mon"></select>
     <div class="search"><span>🔎</span><input id="q" type="text" placeholder="ค้นชื่องาน หรือ จังหวัด..."></div>
   </div>
@@ -221,8 +223,22 @@
 <script>
 const TH=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
 const TYPE={road:"ถนน",trail:"เทรล",ultra:"อัลตรา",virtual:"Virtual"};
+const REGIONS=[
+ ["bkk","กรุงเทพฯ–ปริมณฑล",["กรุงเทพ","นนทบุรี","ปทุมธานี","สมุทรปราการ","สมุทรสาคร","นครปฐม"]],
+ ["north","ภาคเหนือ",["เชียงใหม่","เชียงราย","ลำปาง","ลำพูน","แพร่","น่าน","พะเยา","แม่ฮ่องสอน","อุตรดิตถ์","ตาก","สุโขทัย","กำแพงเพชร","พิจิตร","พิษณุโลก","เพชรบูรณ์","นครสวรรค์","อุทัยธานี"]],
+ ["isan","ภาคอีสาน",["ขอนแก่น","อุดรธานี","นครราชสีมา","โคราช","บุรีรัมย์","อุบลราชธานี","ชัยภูมิ","กาฬสินธุ์","มหาสารคาม","ร้อยเอ็ด","สกลนคร","นครพนม","หนองคาย","บึงกาฬ","เลย","หนองบัวลำภู","ยโสธร","อำนาจเจริญ","มุกดาหาร","ศรีสะเกษ","สุรินทร์"]],
+ ["central","ภาคกลาง",["อยุธยา","อ่างทอง","สิงห์บุรี","ลพบุรี","สระบุรี","ชัยนาท","สุพรรณบุรี","นครนายก","สมุทรสงคราม"]],
+ ["east","ภาคตะวันออก",["ชลบุรี","ระยอง","จันทบุรี","ตราด","ฉะเชิงเทรา","ปราจีนบุรี","สระแก้ว"]],
+ ["west","ภาคตะวันตก",["กาญจนบุรี","ราชบุรี","เพชรบุรี","ประจวบ"]],
+ ["south","ภาคใต้",["สงขลา","หาดใหญ่","ภูเก็ต","สุราษฎร์ธานี","นครศรีธรรมราช","กระบี่","พังงา","ตรัง","พัทลุง","สตูล","ชุมพร","ระนอง","ยะลา","ปัตตานี","นราธิวาส"]],
+ ["inter","ต่างประเทศ",["ลาว","ญี่ปุ่น","จีน","มาเลเซีย","เวียดนาม","สิงคโปร์","เกาหลี","ไต้หวัน"]]
+];
+const REGLABEL={};REGIONS.forEach(r=>REGLABEL[r[0]]=r[1]);REGLABEL.other="อื่นๆ";
+function regionOf(p){p=p||"";for(const r of REGIONS){if(r[2].some(w=>p.includes(w)))return r[0];}return "other";}
+function isClinic(n){return /workshop|clinic|คลินิก|ปรับท่า|อบรม|สัมมนา|เวิร์กช็อป|เวิร์คช็อป/i.test(n||"");}
 let UP=[];
 const monsel=document.getElementById('mon');
+const regsel=document.getElementById('region');
 function card(e){
   const multi=e.multi?'<span class="tag multi">หลายวัน</span>':'';
   let reg='';
@@ -231,32 +247,47 @@ function card(e){
   else reg='<span></span>';
   const link=e.link||('https://www.google.com/search?q='+encodeURIComponent(e.n+' วิ่ง สมัคร'));
   const label=e.link?'ดูรายละเอียด →':'ค้นหา/สมัคร →';
+  const clinicTag=e.isClinic?'<span class="tag multi">คลินิก/เวิร์กช็อป</span>':'';
   return '<div class="card"><div class="top"><div><h3>'+e.n+'</h3></div>'
     +'<div class="date-pill"><div class="d">'+e.d+'</div><div class="m">'+TH[e.mo]+'</div><div class="y">'+e.y+'</div></div></div>'
     +(e.place?'<div class="place"><span>📍</span><span>'+e.place+'</span></div>':'')
-    +'<div class="meta"><span class="tag '+e.type+'">'+(TYPE[e.type]||e.type)+'</span>'+multi+'</div>'
+    +'<div class="meta"><span class="tag '+e.type+'">'+(TYPE[e.type]||e.type)+'</span>'+clinicTag+multi+'</div>'
     +'<div class="foot">'+reg+'<a href="'+link+'" target="_blank" rel="noopener">'+label+'</a></div></div>';
 }
 function render(){
   const f=document.querySelector('#chips .chip.on').dataset.f;
-  const mk=monsel.value;
+  const rg=regsel.value,mk=monsel.value;
   const q=document.getElementById('q').value.trim().toLowerCase();
-  const list=UP.filter(e=>(f==='all'||e.type===f)&&(mk==='all'||(e.y+'-'+e.mo)===mk)&&(q===''||(e.n+' '+(e.place||'')).toLowerCase().includes(q)));
+  const list=UP.filter(e=>{
+    if(f==='all'){if(e.isClinic)return false;}
+    else if(f==='clinic'){if(!e.isClinic)return false;}
+    else {if(e.isClinic)return false;if(e.type!==f)return false;}
+    if(rg!=='all'&&e.region!==rg)return false;
+    if(mk!=='all'&&(e.y+'-'+e.mo)!==mk)return false;
+    if(q&&!((e.n+' '+(e.place||'')).toLowerCase().includes(q)))return false;
+    return true;
+  });
   document.getElementById('count').textContent='พบ '+list.length+' งาน';
   const g=document.getElementById('grid');
   g.innerHTML=list.length?list.map(card).join(''):'<div class="empty">ไม่พบงานที่ตรงเงื่อนไข ลองเปลี่ยนตัวกรองดูนะ</div>';
 }
 document.querySelectorAll('#chips .chip').forEach(c=>c.addEventListener('click',()=>{document.querySelector('#chips .chip.on').classList.remove('on');c.classList.add('on');render();}));
+regsel.addEventListener('change',render);
 monsel.addEventListener('change',render);
 document.getElementById('q').addEventListener('input',render);
 fetch('events.json?t='+Date.now()).then(r=>r.json()).then(data=>{
   const today=new Date();const cut=new Date(today.getFullYear(),today.getMonth(),today.getDate()-1);
-  UP=(data.events||[]).filter(e=>new Date(e.y,e.mo,e.d)>=cut).sort((a,b)=>(a.y-b.y)||(a.mo-b.mo)||(a.d-b.d));
-  document.getElementById('stat-total').textContent=UP.length;
+  UP=(data.events||[]).filter(e=>new Date(e.y,e.mo,e.d)>=cut);
+  UP.forEach(e=>{e.isClinic=isClinic(e.n);e.region=regionOf(e.place);});
+  UP.sort((a,b)=>{const oa=a.reg===true?0:(a.reg===null?1:2),ob=b.reg===true?0:(b.reg===null?1:2);if(oa!==ob)return oa-ob;return (a.y-b.y)||(a.mo-b.mo)||(a.d-b.d);});
+  document.getElementById('stat-total').textContent=UP.filter(e=>!e.isClinic).length;
   document.getElementById('stat-trail').textContent=UP.filter(e=>e.type==='trail'||e.type==='ultra').length;
   document.getElementById('stat-open').textContent=UP.filter(e=>e.reg===true).length;
-  const monKeys=[...new Set(UP.map(e=>e.y+'-'+e.mo))];
-  monsel.innerHTML='<option value="all">ทุกเดือน</option>'+monKeys.map(k=>{const[y,m]=k.split('-');return '<option value="'+k+'">'+TH[m]+' '+y+'</option>';}).join('');
+  const rset=[...new Set(UP.map(e=>e.region))];
+  const rorder=REGIONS.map(r=>r[0]).concat(['other']).filter(k=>rset.includes(k));
+  regsel.innerHTML='<option value="all">ทุกภาค</option>'+rorder.map(k=>'<option value="'+k+'">'+REGLABEL[k]+'</option>').join('');
+  const mkeys=[...new Set(UP.slice().sort((a,b)=>(a.y-b.y)||(a.mo-b.mo)).map(e=>e.y+'-'+e.mo))];
+  monsel.innerHTML='<option value="all">ทุกเดือน</option>'+mkeys.map(k=>{const a=k.split('-');return '<option value="'+k+'">'+TH[a[1]]+' '+a[0]+'</option>';}).join('');
   if(data.generatedAt){const d=new Date(data.generatedAt);document.getElementById('updated').textContent='อัปเดตข้อมูลล่าสุด: '+d.toLocaleDateString('th-TH',{day:'numeric',month:'long',year:'numeric',timeZone:'Asia/Bangkok'});}
   render();
 }).catch(err=>{document.getElementById('count').textContent='โหลดข้อมูลไม่สำเร็จ กรุณารีเฟรชหน้าใหม่';});
