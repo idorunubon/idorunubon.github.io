@@ -3,16 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ไอดูรัน (I Do Run) — รวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง 2026-2027</title>
-<meta name="description" content="ไอดูรัน (I Do Run) แหล่งรวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง ทั้งถนน เทรล อัลตรา อัปเดตอัตโนมัติทุกสัปดาห์">
-<meta name="keywords" content="ไอดูรัน, I Do Run, งานวิ่ง, ปฏิทินงานวิ่ง, รวมงานวิ่ง, งานวิ่งไทย, วิ่งเทรล, มาราธอน">
+<title>ไอดูรัน (I Do Run) — รวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง 2569-2570 (2026-2027)</title>
+<meta name="description" content="ไอดูรัน (I Do Run) แหล่งรวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง 2569 ทั้งถนน เทรล อัลตรา เช็กสถานะรับสมัครจริงจากระบบ อัปเดตอัตโนมัติทุกสัปดาห์">
+<meta name="keywords" content="ไอดูรัน, I Do Run, งานวิ่ง, ปฏิทินงานวิ่ง, งานวิ่ง 2569, รวมงานวิ่ง, งานวิ่งไทย, วิ่งเทรล, มาราธอน">
 <link rel="canonical" href="https://idorunubon.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ไอดูรัน I Do Run">
 <meta property="og:title" content="ไอดูรัน (I Do Run) — รวมงานวิ่งทั่วไทย">
-<meta property="og:description" content="ไอดูรัน รวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง ถนน เทรล อัลตรา อัปเดตทุกสัปดาห์">
+<meta property="og:description" content="ไอดูรัน รวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง ถนน เทรล อัลตรา เช็กสถานะรับสมัครจริง อัปเดตทุกสัปดาห์">
 <meta property="og:url" content="https://idorunubon.github.io/">
 <meta property="og:locale" content="th_TH">
+<meta property="og:image" content="https://idorunubon.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ไอดูรัน (I Do Run) — รวมงานวิ่งทั่วไทย">
+<meta name="twitter:image" content="https://idorunubon.github.io/og-image.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"I Do Run","alternateName":["ไอดูรัน","ไอ ดู รัน","ไอดูรัน วิ่ง"],"url":"https://idorunubon.github.io/","description":"ไอดูรัน รวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง"},{"@type":"Organization","name":"I Do Run","alternateName":"ไอดูรัน","url":"https://idorunubon.github.io/","sameAs":["https://www.facebook.com/ido.run.ubon/"]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,6 +84,7 @@
   .tag.trail{background:#e8f5ec;color:var(--green)}
   .tag.ultra{background:#f0ecfb;color:var(--purple)}
   .tag.virtual{background:#e7f0fd;color:var(--blue)}
+  .tag.tri{background:#e0f7fa;color:#00778b}
   .tag.multi{background:#fff4d6;color:#9a6b00}
   .tag.dist{background:#eef2ff;color:#3949ab}
   .reg{display:inline-flex;align-items:center;gap:5px;font-size:.8rem;font-weight:600}
@@ -165,6 +172,7 @@
       <button class="chip" data-f="road">ถนน</button>
       <button class="chip" data-f="trail">เทรล</button>
       <button class="chip" data-f="ultra">อัลตรา</button>
+      <button class="chip" data-f="tri">ไตร/ทวิกีฬา</button>
       <button class="chip" data-f="virtual">Virtual</button>
       <button class="chip" data-f="clinic">คลินิก/เวิร์กช็อป</button>
     </div>
@@ -175,7 +183,7 @@
   </div>
   <div class="count" id="count">กำลังโหลดข้อมูล...</div>
   <div class="grid" id="grid"></div>
-  <div class="adminnote"><b>ความเห็นแอดมิน:</b> งานที่มีปุ่ม "ดูรายละเอียด" ดึงข้อมูลสดจากระบบ มีสถานะรับสมัครจริง ส่วนงานอื่นเป็นฐานที่แอดมินคัดไว้ กดปุ่ม "ค้นหา" เพื่อหาข้อมูลล่าสุด ก่อนสมัครเช็กระยะ จุดสตาร์ท และค่าสมัครหน้างานจริงทุกครั้ง</div>
+  <div class="adminnote"><b>ความเห็นแอดมิน:</b> งานที่มีปุ่ม "ดูรายละเอียด" ดึงข้อมูลสดจากระบบรับสมัคร สถานะเปิด/ปิดรับสมัครเป็นข้อมูลจริง ส่วนงานที่มีปุ่ม "ค้นหา/สมัคร" เป็นฐานที่แอดมินคัดไว้ กดเพื่อค้นข้อมูลล่าสุด ก่อนสมัครเช็กวันจัด ระยะ จุดสตาร์ท และค่าสมัครกับผู้จัดโดยตรงทุกครั้ง</div>
 </div></section>
 <section id="blog"><div class="wrap">
   <div class="sec-head">
@@ -192,7 +200,7 @@
     <p>เราเริ่มจากเพจจัดงานวิ่งที่อุบลฯ วันนี้เติบโตเป็นแหล่งรวมข้อมูลงานวิ่งทั่วไทย ยึดหลักง่าย ๆ คือรวมหลายงานแบบเป็นกลาง บอกทั้งข้อดีและจุดที่ต้องชั่งใจ ให้เพื่อนนักวิ่งตัดสินใจเองได้</p>
     <div class="values">
       <div class="val"><div class="ic">⚖️</div><div><b>เป็นกลาง</b><br><span>ไม่เชียร์งานเดียว รวมหลายงานให้เปรียบเทียบ</span></div></div>
-      <div class="val"><div class="ic">🔄</div><div><b>อัปเดตเอง</b><br><span>ดึงข้อมูลอัปเดตเองอัตโนมัติทุกสัปดาห์</span></div></div>
+      <div class="val"><div class="ic">🔄</div><div><b>อัปเดตเอง</b><br><span>ดึงข้อมูลอัปเดตเองอัตโนมัติทุกสัปดาห์ พร้อมสถานะรับสมัครจริงจากระบบ</span></div></div>
       <div class="val"><div class="ic">🤝</div><div><b>เป็นกันเอง</b><br><span>ภาษาลูกทุ่ง อ่านง่าย ไม่วิชาการ</span></div></div>
     </div>
   </div>
@@ -214,13 +222,13 @@
       <p class="disclaim">หมายเหตุ: ข้อมูลงานเป็นการรวบรวมเพื่ออำนวยความสะดวก โปรดตรวจสอบวันจัด ระยะ และค่าสมัครกับผู้จัดงานโดยตรงก่อนสมัครทุกครั้ง</p>
     </div>
     <div><h4>เมนู</h4><a href="#events">งานวิ่ง</a><a href="#blog">ข่าว/บล็อก</a><a href="#about">เกี่ยวกับเรา</a></div>
-    <div><h4>ติดตามเรา</h4><a href="https://www.facebook.com/ido.run.ubon/" target="_blank" rel="noopener">Facebook</a></div>
+    <div><h4>ติดต่อเรา</h4><a href="https://www.facebook.com/ido.run.ubon/" target="_blank" rel="noopener">Facebook</a><a href="https://www.facebook.com/ido.run.ubon/" target="_blank" rel="noopener">ผู้จัดงานอยากลงงานวิ่ง ทักเพจได้เลย</a></div>
   </div>
-  <div class="foot-bot"><span>© 2026 I Do Run. เว็บตัวอย่าง (prototype)</span><span>ทำด้วยใจ เพื่อเพื่อนนักวิ่ง</span></div>
+  <div class="foot-bot"><span>© 2026 I Do Run</span><span>ทำด้วยใจ เพื่อเพื่อนนักวิ่ง</span></div>
 </div></footer>
 <script>
 const TH=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
-const TYPE={road:"ถนน",trail:"เทรล",ultra:"อัลตรา",virtual:"Virtual"};
+const TYPE={road:"ถนน",trail:"เทรล",ultra:"อัลตรา",virtual:"Virtual",tri:"ไตร/ทวิกีฬา"};
 const REGIONS=[
  ["bkk","กรุงเทพฯ–ปริมณฑล",["กรุงเทพ","นนทบุรี","ปทุมธานี","สมุทรปราการ","สมุทรสาคร","นครปฐม"]],
  ["north","ภาคเหนือ",["เชียงใหม่","เชียงราย","ลำปาง","ลำพูน","แพร่","น่าน","พะเยา","แม่ฮ่องสอน","อุตรดิตถ์","ตาก","สุโขทัย","กำแพงเพชร","พิจิตร","พิษณุโลก","เพชรบูรณ์","นครสวรรค์","อุทัยธานี"]],
@@ -229,7 +237,7 @@ const REGIONS=[
  ["east","ภาคตะวันออก",["ชลบุรี","ระยอง","จันทบุรี","ตราด","ฉะเชิงเทรา","ปราจีนบุรี","สระแก้ว"]],
  ["west","ภาคตะวันตก",["กาญจนบุรี","ราชบุรี","เพชรบุรี","ประจวบ"]],
  ["south","ภาคใต้",["สงขลา","หาดใหญ่","ภูเก็ต","สุราษฎร์ธานี","นครศรีธรรมราช","กระบี่","พังงา","ตรัง","พัทลุง","สตูล","ชุมพร","ระนอง","ยะลา","ปัตตานี","นราธิวาส"]],
- ["inter","ต่างประเทศ",["ลาว","ญี่ปุ่น","จีน","มาเลเซีย","เวียดนาม","สิงคโปร์","เกาหลี","ไต้หวัน"]]
+ ["inter","ต่างประเทศ",["ลาว","ญี่ปุ่น","จีน","มาเลเซีย","เวียดนาม","สิงคโปร์","เกาหลี","ไต้หวัน","อินโดนีเซีย","ต่างประเทศ","Selangor","Pulau Pinang","Kuala Lumpur","Bali"]]
 ];
 const REGLABEL={};REGIONS.forEach(r=>REGLABEL[r[0]]=r[1]);REGLABEL.other="อื่นๆ";
 function regionOf(p){p=p||"";for(const r of REGIONS){if(r[2].some(w=>p.includes(w)))return r[0];}return "other";}
@@ -292,7 +300,21 @@ fetch('events.json?t='+Date.now()).then(r=>r.json()).then(data=>{
   regsel.innerHTML='<option value="all">ทุกภาค</option>'+rorder.map(k=>'<option value="'+k+'">'+REGLABEL[k]+'</option>').join('');
   const mkeys=[...new Set(UP.slice().sort((a,b)=>(a.y-b.y)||(a.mo-b.mo)).map(e=>e.y+'-'+e.mo))];
   monsel.innerHTML='<option value="all">ทุกเดือน</option>'+mkeys.map(k=>{const a=k.split('-');return '<option value="'+k+'">'+TH[a[1]]+' '+a[0]+'</option>';}).join('');
-  if(data.generatedAt){const d=new Date(data.generatedAt);document.getElementById('updated').textContent='อัปเดตข้อมูลล่าสุด: '+d.toLocaleDateString('th-TH',{day:'numeric',month:'long',year:'numeric',timeZone:'Asia/Bangkok'});}
+  if(data.generatedAt){const d=new Date(data.generatedAt);document.getElementById('updated').textContent='อัปเดตข้อมูลล่าสุด: '+d.getDate()+' '+TH[d.getMonth()]+' '+d.getFullYear();}
+  // SEO: inject Event structured data (JSON-LD) for upcoming events with real links
+  try{
+    const items=UP.filter(e=>e.link&&!e.isClinic).slice(0,30).map((e,i)=>({
+      "@type":"ListItem","position":i+1,"item":{
+        "@type":"Event","name":e.n,
+        "startDate":e.y+"-"+String(e.mo+1).padStart(2,"0")+"-"+String(e.d).padStart(2,"0"),
+        "eventStatus":"https://schema.org/EventScheduled",
+        "eventAttendanceMode":e.type==="virtual"?"https://schema.org/OnlineEventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+        "location":{"@type":"Place","name":e.place||"Thailand","address":{"@type":"PostalAddress","addressCountry":"TH"}},
+        "url":e.link}}));
+    const s=document.createElement('script');s.type='application/ld+json';
+    s.textContent=JSON.stringify({"@context":"https://schema.org","@type":"ItemList","name":"ปฏิทินงานวิ่งไทย - I Do Run","itemListElement":items});
+    document.head.appendChild(s);
+  }catch(err){}
   render();
 }).catch(err=>{document.getElementById('count').textContent='โหลดข้อมูลไม่สำเร็จ กรุณารีเฟรชหน้าใหม่';});
 </script>
