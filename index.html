@@ -7,6 +7,7 @@
 <meta name="description" content="ไอดูรัน (I Do Run) แหล่งรวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง 2569 ทั้งถนน เทรล อัลตรา เช็กสถานะรับสมัครจริงจากระบบ อัปเดตอัตโนมัติทุกสัปดาห์">
 <meta name="keywords" content="ไอดูรัน, I Do Run, งานวิ่ง, ปฏิทินงานวิ่ง, งานวิ่ง 2569, รวมงานวิ่ง, งานวิ่งไทย, วิ่งเทรล, มาราธอน">
 <link rel="canonical" href="https://idorunubon.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F25C2A'/%3E%3Cpath d='M24 18v28l24-14z' fill='white'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ไอดูรัน I Do Run">
 <meta property="og:title" content="ไอดูรัน (I Do Run) — รวมงานวิ่งทั่วไทย">
@@ -92,6 +93,9 @@
   .reg .dot{width:8px;height:8px;border-radius:50%;background:currentColor}
   .card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:2px;padding-top:9px;border-top:1px dashed var(--line)}
   .card .foot a{color:var(--orange);font-weight:600;font-size:.88rem}
+  .card .acts{display:flex;gap:12px;align-items:center}
+  .card .acts a.mini{color:var(--muted);font-weight:500;font-size:.8rem}
+  .card .acts a.mini:hover{color:var(--navy)}
   .card .foot .nolink{color:var(--muted);font-weight:400}
   .empty{text-align:center;color:var(--muted);padding:40px;grid-column:1/-1}
   .adminnote{background:#fff;border-left:4px solid var(--orange);border-radius:0 12px 12px 0;padding:14px 18px;margin-top:22px;box-shadow:var(--shadow);font-size:.94rem;color:var(--muted)}
@@ -258,11 +262,22 @@ function card(e){
   const label=e.link?'ดูรายละเอียด →':'ค้นหา/สมัคร →';
   const clinicTag=e.isClinic?'<span class="tag multi">คลินิก/เวิร์กช็อป</span>':'';
   const distTag=(e.dist&&e.dist.length)?'<span class="tag dist">'+e.dist.join('/')+' กม.</span>':'';
+  const d0=new Date(e.y,e.mo,e.d),d1=new Date(e.y,e.mo,e.d+1);
+  const ymd=dt=>dt.getFullYear()+String(dt.getMonth()+1).padStart(2,'0')+String(dt.getDate()).padStart(2,'0');
+  const gcal='https://calendar.google.com/calendar/render?action=TEMPLATE'
+    +'&text='+encodeURIComponent(e.n)
+    +'&dates='+ymd(d0)+'/'+ymd(d1)
+    +'&location='+encodeURIComponent(e.place||'')
+    +'&details='+encodeURIComponent((e.link?e.link+'\n':'')+'ข้อมูลจาก I Do Run — https://idorunubon.github.io/');
+  const lineShare='https://line.me/R/share?text='+encodeURIComponent(e.n+' | '+e.d+' '+TH[e.mo]+' '+e.y+(e.place?' | '+e.place:'')+' | '+link+' (จากเว็บ I Do Run https://idorunubon.github.io/)');
   return '<div class="card"><div class="top"><div><h3>'+e.n+'</h3></div>'
     +'<div class="date-pill"><div class="d">'+e.d+'</div><div class="m">'+TH[e.mo]+'</div><div class="y">'+e.y+'</div></div></div>'
     +(e.place?'<div class="place"><span>📍</span><span>'+e.place+'</span></div>':'')
     +'<div class="meta"><span class="tag '+e.type+'">'+(TYPE[e.type]||e.type)+'</span>'+distTag+clinicTag+multi+'</div>'
-    +'<div class="foot">'+reg+'<a href="'+link+'" target="_blank" rel="noopener">'+label+'</a></div></div>';
+    +'<div class="foot">'+reg+'<div class="acts">'
+    +'<a class="mini" href="'+gcal+'" target="_blank" rel="noopener" title="เพิ่มลง Google Calendar">+ ปฏิทิน</a>'
+    +'<a class="mini" href="'+lineShare+'" target="_blank" rel="noopener" title="แชร์เข้า LINE">แชร์ LINE</a>'
+    +'<a href="'+link+'" target="_blank" rel="noopener">'+label+'</a></div></div></div>';
 }
 function render(){
   const f=document.querySelector('#chips .chip.on').dataset.f;
