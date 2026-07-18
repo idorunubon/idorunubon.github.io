@@ -7,6 +7,7 @@
 <meta name="description" content="ไอดูรัน (I Do Run) แหล่งรวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง 2569 ทั้งถนน เทรล อัลตรา เช็กสถานะรับสมัครจริงจากระบบ อัปเดตอัตโนมัติทุกสัปดาห์">
 <meta name="keywords" content="ไอดูรัน, I Do Run, งานวิ่ง, ปฏิทินงานวิ่ง, งานวิ่ง 2569, รวมงานวิ่ง, งานวิ่งไทย, วิ่งเทรล, มาราธอน">
 <link rel="canonical" href="https://idorunubon.github.io/">
+<meta name="theme-color" content="#16335B">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F25C2A'/%3E%3Cpath d='M24 18v28l24-14z' fill='white'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ไอดูรัน I Do Run">
@@ -41,7 +42,13 @@
   .btn{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;font-weight:600;padding:10px 18px;border-radius:30px;font-size:.95rem;border:none;cursor:pointer;transition:.15s}
   .btn:hover{background:var(--orange-dark);transform:translateY(-1px)}
   .btn.ghost{background:transparent;color:#fff;border:1.5px solid #fff}
-  @media(max-width:820px){.nav-links a:not(.btn){display:none}}
+  .menu-btn{display:none;width:42px;height:42px;border:1.5px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;font-size:1.25rem;color:var(--navy);align-items:center;justify-content:center;line-height:1}
+  @media(max-width:820px){.nav-links a:not(.btn){display:none}.menu-btn{display:flex}}
+  @media(max-width:480px){.nav-links .btn{display:none}}
+  .mobile-menu{display:none;border-top:1px solid var(--line);background:rgba(255,247,242,.97);padding:6px 0 12px}
+  .mobile-menu.open{display:block}
+  .mobile-menu a{display:block;padding:11px 4px;font-weight:500;color:var(--navy);border-bottom:1px dashed var(--line)}
+  .mobile-menu a:last-child{border-bottom:none;color:var(--orange);font-weight:600}
   .hero{background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:#fff;position:relative;overflow:hidden}
   .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;background:radial-gradient(circle,rgba(242,92,42,.55),transparent 70%);border-radius:50%}
   .hero-in{position:relative;z-index:2;padding:64px 0 70px;max-width:700px}
@@ -98,6 +105,13 @@
   .card .acts a.mini:hover{color:var(--navy)}
   .card .foot .nolink{color:var(--muted);font-weight:400}
   .empty{text-align:center;color:var(--muted);padding:40px;grid-column:1/-1}
+  .chip.clear{border-color:var(--orange);color:var(--orange)}
+  .morewrap{text-align:center;margin-top:26px}
+  .morewrap .btn{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+  .morewrap .btn:hover{border-color:var(--orange);color:var(--orange);background:#fff}
+  #totop{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;background:var(--navy);color:#fff;border:none;cursor:pointer;font-size:1.15rem;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.2s;z-index:60}
+  #totop.show{opacity:.92;pointer-events:auto}
+  #totop:hover{background:var(--orange)}
   .adminnote{background:#fff;border-left:4px solid var(--orange);border-radius:0 12px 12px 0;padding:14px 18px;margin-top:22px;box-shadow:var(--shadow);font-size:.94rem;color:var(--muted)}
   .adminnote b{color:var(--navy)}
   .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
@@ -148,7 +162,15 @@
     <a href="#about">เกี่ยวกับเรา</a>
     <a class="btn" href="https://www.facebook.com/ido.run.ubon/" target="_blank" rel="noopener">เข้าเพจ Facebook</a>
   </nav>
-</div></header>
+  <button class="menu-btn" id="menu-btn" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+</div>
+<nav class="mobile-menu" id="mobile-menu"><div class="wrap">
+  <a href="#events">งานวิ่ง</a>
+  <a href="#blog">ข่าว/บล็อก</a>
+  <a href="#about">เกี่ยวกับเรา</a>
+  <a href="https://www.facebook.com/ido.run.ubon/" target="_blank" rel="noopener">เข้าเพจ Facebook →</a>
+</div></nav>
+</header>
 <section class="hero" id="top" style="padding:0"><div class="wrap hero-in">
   <span class="kicker">รวมงานวิ่งทั่วไทย · อัปเดตอัตโนมัติทุกสัปดาห์</span>
   <h1>หางาน<span>วิ่ง</span>ที่ใช่ <br>จบในที่เดียว</h1>
@@ -180,13 +202,15 @@
       <button class="chip" data-f="virtual">Virtual</button>
       <button class="chip" data-f="clinic">คลินิก/เวิร์กช็อป</button>
     </div>
-    <select class="mon" id="region"></select>
-    <select class="mon" id="dist"><option value="all">ทุกระยะ</option><option value="fun">Fun Run</option><option value="5k">5 กม.</option><option value="10k">10 กม.</option><option value="half">ฮาล์ฟ ~21 กม.</option><option value="full">ฟูล ~42 กม.</option><option value="ultra">อัลตรา 50 กม.+</option></select>
-    <select class="mon" id="mon"></select>
-    <div class="search"><span>🔎</span><input id="q" type="text" placeholder="ค้นชื่องาน หรือ จังหวัด..."></div>
+    <select class="mon" id="region" aria-label="กรองตามภาค"></select>
+    <select class="mon" id="dist" aria-label="กรองตามระยะ"><option value="all">ทุกระยะ</option><option value="fun">Fun Run</option><option value="5k">5 กม.</option><option value="10k">10 กม.</option><option value="half">ฮาล์ฟ ~21 กม.</option><option value="full">ฟูล ~42 กม.</option><option value="ultra">อัลตรา 50 กม.+</option></select>
+    <select class="mon" id="mon" aria-label="กรองตามเดือน"></select>
+    <div class="search"><span aria-hidden="true">🔎</span><input id="q" type="text" placeholder="ค้นชื่องาน หรือ จังหวัด..." aria-label="ค้นหางานวิ่ง"></div>
+    <button class="chip clear" id="clearf" hidden>✕ ล้างตัวกรอง</button>
   </div>
-  <div class="count" id="count">กำลังโหลดข้อมูล...</div>
+  <div class="count" id="count" aria-live="polite">กำลังโหลดข้อมูล...</div>
   <div class="grid" id="grid"></div>
+  <div class="morewrap" id="morewrap" hidden><button class="btn" id="morebtn">แสดงงานเพิ่ม</button></div>
   <div class="adminnote"><b>ความเห็นแอดมิน:</b> งานที่มีปุ่ม "ดูรายละเอียด" ดึงข้อมูลสดจากระบบรับสมัคร สถานะเปิด/ปิดรับสมัครเป็นข้อมูลจริง ส่วนงานที่มีปุ่ม "ค้นหา/สมัคร" เป็นฐานที่แอดมินคัดไว้ กดเพื่อค้นข้อมูลล่าสุด ก่อนสมัครเช็กวันจัด ระยะ จุดสตาร์ท และค่าสมัครกับผู้จัดโดยตรงทุกครั้ง</div>
 </div></section>
 <section id="blog"><div class="wrap">
@@ -230,6 +254,27 @@
   </div>
   <div class="foot-bot"><span>© 2026 I Do Run</span><span>ทำด้วยใจ เพื่อเพื่อนนักวิ่ง</span></div>
 </div></footer>
+<button id="totop" aria-label="กลับขึ้นด้านบน" title="กลับขึ้นด้านบน">↑</button>
+<script>
+// เมนูมือถือ
+(function(){
+  const btn=document.getElementById('menu-btn'),menu=document.getElementById('mobile-menu');
+  btn.addEventListener('click',()=>{
+    const open=menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.textContent=open?'✕':'☰';
+  });
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    menu.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.textContent='☰';
+  }));
+})();
+// ปุ่มกลับขึ้นบน
+(function(){
+  const t=document.getElementById('totop');
+  window.addEventListener('scroll',()=>{t.classList.toggle('show',window.scrollY>600);},{passive:true});
+  t.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+})();
+</script>
 <script>
 const TH=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
 const TYPE={road:"ถนน",trail:"เทรล",ultra:"อัลตรา",virtual:"Virtual",tri:"ไตร/ทวิกีฬา"};
@@ -279,7 +324,14 @@ function card(e){
     +'<a class="mini" href="'+lineShare+'" target="_blank" rel="noopener" title="แชร์เข้า LINE">แชร์ LINE</a>'
     +'<a href="'+link+'" target="_blank" rel="noopener">'+label+'</a></div></div></div>';
 }
-function render(){
+const PAGE=24;let visCount=PAGE;
+function hasFilter(){
+  return document.querySelector('#chips .chip.on').dataset.f!=='all'
+    ||regsel.value!=='all'||distsel.value!=='all'||monsel.value!=='all'
+    ||document.getElementById('q').value.trim()!=='';
+}
+function render(keepPage){
+  if(keepPage!==true)visCount=PAGE;
   const f=document.querySelector('#chips .chip.on').dataset.f;
   const rg=regsel.value,mk=monsel.value;
   const q=document.getElementById('q').value.trim().toLowerCase();
@@ -295,13 +347,31 @@ function render(){
   });
   document.getElementById('count').textContent='พบ '+list.length+' งาน';
   const g=document.getElementById('grid');
-  g.innerHTML=list.length?list.map(card).join(''):'<div class="empty">ไม่พบงานที่ตรงเงื่อนไข ลองเปลี่ยนตัวกรองดูนะ</div>';
+  const shown=list.slice(0,visCount);
+  g.innerHTML=shown.length?shown.map(card).join(''):'<div class="empty">ไม่พบงานที่ตรงเงื่อนไข ลองเปลี่ยนตัวกรองดูนะ<br><br><button class="chip clear" onclick="clearFilters()">✕ ล้างตัวกรองทั้งหมด</button></div>';
+  const morewrap=document.getElementById('morewrap');
+  if(list.length>visCount){
+    morewrap.hidden=false;
+    document.getElementById('morebtn').textContent='แสดงงานเพิ่ม (เหลืออีก '+(list.length-visCount)+' งาน)';
+  } else {
+    morewrap.hidden=true;
+  }
+  document.getElementById('clearf').hidden=!hasFilter();
 }
+function clearFilters(){
+  document.querySelector('#chips .chip.on').classList.remove('on');
+  document.querySelector('#chips .chip[data-f="all"]').classList.add('on');
+  regsel.value='all';distsel.value='all';monsel.value='all';
+  document.getElementById('q').value='';
+  render();
+}
+document.getElementById('clearf').addEventListener('click',clearFilters);
+document.getElementById('morebtn').addEventListener('click',()=>{visCount+=PAGE;render(true);});
 document.querySelectorAll('#chips .chip').forEach(c=>c.addEventListener('click',()=>{document.querySelector('#chips .chip.on').classList.remove('on');c.classList.add('on');render();}));
-regsel.addEventListener('change',render);
-distsel.addEventListener('change',render);
-monsel.addEventListener('change',render);
-document.getElementById('q').addEventListener('input',render);
+regsel.addEventListener('change',()=>render());
+distsel.addEventListener('change',()=>render());
+monsel.addEventListener('change',()=>render());
+document.getElementById('q').addEventListener('input',()=>render());
 fetch('events.json?t='+Date.now()).then(r=>r.json()).then(data=>{
   const today=new Date();const cut=new Date(today.getFullYear(),today.getMonth(),today.getDate()-1);
   UP=(data.events||[]).filter(e=>new Date(e.y,e.mo,e.d)>=cut);
