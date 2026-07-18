@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3: Skills — สร้างเครื่องมือธุรกิจ 5 ตัว | คอร์ส Claude AI Cowork</title>
+<meta name="description" content="Module 3 ของคอร์ส Claude AI Cowork: วิธีติดตั้ง Skills และสร้าง 5 Skills ธุรกิจ — AdSpy, Landing Page Builder, Competitor Snapshot, CEO Dashboard และ ICP Profiler">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F25C2A'/%3E%3Ctext x='32' y='44' font-size='34' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3EAI%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700;800&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="mark">AI</span> Claude Cowork Course</a>
+    <nav class="nav-links">
+      <a href="module-1.html">Module 1</a>
+      <a href="module-2.html">Module 2</a>
+      <a href="module-3.html" class="on">Module 3</a>
+      <a href="module-4.html">Module 4</a>
+      <a href="module-5.html">Module 5</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap layout">
+
+<aside class="toc">
+  <div class="t">บทเรียนใน Module 3</div>
+  <a href="#l0">วิธีติดตั้ง Skills</a>
+  <a href="#l1">#1 AdSpy</a>
+  <a href="#l2">#2 Landing Page Builder</a>
+  <a href="#l3">#3 Competitor Snapshot</a>
+  <a href="#l4">#4 CEO Dashboard</a>
+  <a href="#l5">#5 ICP Profiler</a>
+  <div class="mods">
+    <a href="index.html">← หน้าหลักคอร์ส</a>
+    <a href="module-2.html">← Module 2: Connectors</a>
+    <a href="module-4.html">Module 4: Bonus →</a>
+  </div>
+</aside>
+
+<main class="lesson">
+  <h1>Module 3: Skills<br>สร้างเครื่องมือธุรกิจ 5 ตัว</h1>
+  <p class="sub">Skill คือการเปลี่ยน "วิธีทำงานที่เวิร์ก" ให้กลายเป็นเครื่องมือถาวรที่เรียกใช้ได้ทุกเมื่อ — Module นี้เริ่มจากวิธีติดตั้ง แล้วพาสร้าง 5 Skills ธุรกิจแบบจับมือทำ พร้อมโครง Skill ให้นำไปปรับใช้ได้เลย</p>
+
+  <!-- ================= Setup ================= -->
+  <article id="l0">
+    <span class="lnum">Setup</span>
+    <h2>วิธีติดตั้งและสร้าง Skills</h2>
+    <div class="goal"><b>เป้าหมายบทนี้:</b> เข้าใจโครงสร้างของ Skill และติดตั้ง/สร้าง Skill แรกได้</div>
+    <h3>Skill ประกอบด้วยอะไร</h3>
+    <p>Skill คือชุดคำสั่ง (เขียนเป็นภาษาคนธรรมดา) ที่บอก Claude ว่า <strong>งานนี้ทำเมื่อไร ทำอย่างไรทีละขั้น และผลลัพธ์หน้าตาแบบไหน</strong> โครงสร้างหลักมี 3 ส่วน:</p>
+    <ol>
+      <li><strong>ชื่อ + คำอธิบาย:</strong> ใช้เมื่อไร — Claude ใช้ส่วนนี้ตัดสินใจหยิบ Skill มาใช้อัตโนมัติ</li>
+      <li><strong>ขั้นตอนการทำงาน:</strong> step-by-step ที่อยากให้ทำเหมือนกันทุกครั้ง</li>
+      <li><strong>รูปแบบผลลัพธ์:</strong> โครงรายงาน/ไฟล์ที่ต้องส่งมอบ</li>
+    </ol>
+    <h3>วิธีติดตั้ง</h3>
+    <ol>
+      <li>ไปที่ <strong>Settings → Capabilities/Skills</strong> ใน Claude — เปิดใช้ Skills สำเร็จรูป หรือเพิ่ม Skill ใหม่ของเราเอง</li>
+      <li>วิธีที่ง่ายที่สุด: <strong>ให้ Claude สร้าง Skill ให้</strong> — บอกว่าอยากได้ Skill ทำอะไร แล้วให้ Claude เขียนไฟล์ Skill ตามมาตรฐานให้เลย</li>
+      <li>ทดสอบโดยสั่งงานที่ตรงกับ Skill แล้วดูว่า Claude หยิบ Skill ไปใช้และได้ผลลัพธ์ตามรูปแบบที่วางไว้</li>
+    </ol>
+    <div class="prompt-box">ช่วยสร้าง Skill ให้ฉันตามสเปกนี้:
+- ชื่อ: [ชื่อ Skill]
+- ใช้เมื่อ: [สถานการณ์ที่ควรหยิบ Skill นี้มาใช้]
+- ขั้นตอน: [ขั้นตอนการทำงานที่อยากให้ทำทุกครั้ง]
+- ผลลัพธ์: [โครงรายงาน/ไฟล์ที่ต้องได้]
+เขียนเป็นไฟล์ Skill ตามมาตรฐานของ Claude ให้เลย พร้อมบอกวิธีติดตั้ง</div>
+    <div class="tip"><strong>5 Skills ต่อจากนี้</strong> ใช้สูตรเดียวกันหมด: เรากำหนด "ใช้เมื่อไร-ขั้นตอน-ผลลัพธ์" แล้วให้ Claude ประกอบเป็น Skill — คุณสามารถคัดลอกโครงในแต่ละบทไปสร้างตามได้ทันที</div>
+  </article>
+
+  <!-- ================= Skill 1 ================= -->
+  <article id="l1">
+    <span class="lnum">Skill #1</span>
+    <h2>AdSpy — วิเคราะห์โฆษณาคู่แข่ง</h2>
+    <div class="goal"><b>ใช้ทำอะไร:</b> วิเคราะห์ Ads คู่แข่ง หา winning ads แล้วนำ pattern ที่ได้มาต่อยอดยิงแอดของเราเอง</div>
+    <h3>แหล่งข้อมูลที่ใช้</h3>
+    <p>ใช้ข้อมูลโฆษณาที่เปิดเผยสาธารณะ เช่น Facebook/Meta Ad Library (คลังโฆษณาที่ Meta เปิดให้ทุกคนดูได้), TikTok Creative Center รวมถึงภาพ/แคปหน้าจอโฆษณาคู่แข่งที่เราเก็บมา — แนบให้ Claude วิเคราะห์ได้โดยตรง</p>
+    <h3>โครง Skill: AdSpy</h3>
+    <div class="prompt-box plain">ชื่อ Skill: AdSpy
+ใช้เมื่อ: ผู้ใช้ต้องการวิเคราะห์โฆษณาคู่แข่งหรือหาไอเดียยิงแอด
+
+ขั้นตอน:
+1. รับข้อมูลโฆษณาคู่แข่ง (ลิงก์ Ad Library / ภาพแคป / ข้อความโฆษณา อย่างน้อย 5 ชิ้น)
+2. วิเคราะห์แต่ละชิ้น: Hook ที่ใช้, Pain point ที่แตะ, ข้อเสนอ (Offer), CTA, รูปแบบครีเอทีฟ
+3. หา "winning pattern": ชิ้นไหนน่าจะเวิร์กเพราะอะไร (ดูจากระยะเวลาที่รันต่อเนื่อง จำนวนเวอร์ชัน ความถี่ที่เจอซ้ำ)
+4. สรุปเป็นตาราง: คู่แข่ง / มุมที่เล่น / จุดแข็ง / ช่องว่างที่เขายังไม่เล่น
+
+ผลลัพธ์:
+- ตารางวิเคราะห์โฆษณาคู่แข่ง
+- Winning pattern 3-5 ข้อ
+- ร่างโฆษณาของเรา 3 เวอร์ชันที่ใช้ pattern ที่เจอ แต่ปรับเป็นจุดขายของเราเอง (ห้ามลอกข้อความคู่แข่ง)</div>
+    <div class="warn"><strong>จริยธรรมสำคัญ:</strong> เราวิเคราะห์เพื่อเรียนรู้ "โครงสร้างที่เวิร์ก" ไม่ใช่ก๊อบปี้ข้อความหรือภาพของคู่แข่ง — Skill นี้จึงบังคับให้ผลลัพธ์สุดท้ายเป็นงานต้นฉบับของเราเสมอ</div>
+    <div class="exercise">
+      <div class="et">แบบฝึกหัด</div>
+      เก็บโฆษณาคู่แข่ง 5 ชิ้นจาก Meta Ad Library สร้าง Skill AdSpy ตามโครงด้านบน แล้วรันวิเคราะห์รอบแรก
+    </div>
+  </article>
+
+  <!-- ================= Skill 2 ================= -->
+  <article id="l2">
+    <span class="lnum">Skill #2</span>
+    <h2>Landing Page Builder — สร้างหน้าเว็บขาย</h2>
+    <div class="goal"><b>ใช้ทำอะไร:</b> สร้างหน้าเว็บขายพร้อม copy และ structure อัตโนมัติ พร้อมใช้งานทันที</div>
+    <h3>โครงสร้างหน้าขายที่พิสูจน์แล้ว</h3>
+    <ol>
+      <li><strong>Hero:</strong> พาดหัวที่บอกผลลัพธ์ที่ลูกค้าได้ + ปุ่ม CTA</li>
+      <li><strong>Pain:</strong> ปัญหาที่ลูกค้าเจอ (ให้เขารู้สึกว่า "นี่มันเรื่องของฉัน")</li>
+      <li><strong>Solution:</strong> สินค้า/บริการของเราแก้อย่างไร</li>
+      <li><strong>Proof:</strong> รีวิว ตัวเลข ผลงานจริง</li>
+      <li><strong>Offer:</strong> ราคา สิ่งที่ได้ โบนัส การรับประกัน</li>
+      <li><strong>FAQ + CTA ปิดท้าย</strong></li>
+    </ol>
+    <h3>โครง Skill: Landing Page Builder</h3>
+    <div class="prompt-box plain">ชื่อ Skill: Landing Page Builder
+ใช้เมื่อ: ผู้ใช้ต้องการหน้าเว็บขายสินค้า/บริการ/อีเวนต์
+
+ขั้นตอน:
+1. ถามข้อมูลให้ครบก่อนเริ่ม: สินค้าคืออะไร ราคา กลุ่มเป้าหมาย จุดขาย 3 ข้อ
+   รีวิว/หลักฐานที่มี และ CTA ที่ต้องการ (ทัก LINE / กรอกฟอร์ม / กดซื้อ)
+2. เขียน copy ตามโครง 6 ส่วน (Hero → Pain → Solution → Proof → Offer → FAQ)
+   ภาษาไทย อ่านง่าย เน้นผลลัพธ์ที่ลูกค้าได้
+3. สร้างไฟล์ HTML หน้าเดียวจบ: สวยงาม รองรับมือถือ โหลดเร็ว
+   ใส่ copy ทั้งหมดลงไปจริง ไม่ใช่ placeholder
+4. ตรวจงานก่อนส่ง: ลิงก์ CTA ทำงาน, แสดงผลบนจอมือถือได้ดี
+
+ผลลัพธ์:
+- ไฟล์ landing-page.html พร้อมเปิดใช้/นำขึ้นโฮสต์ทันที
+- สรุป copy แยกเป็นไฟล์ข้อความ เผื่อนำไปใช้ที่อื่น</div>
+    <div class="tip"><strong>พร้อมใช้งานทันที:</strong> ไฟล์ HTML ที่ได้เปิดดูในเครื่องได้เลย และนำขึ้นออนไลน์ฟรีได้หลายทาง เช่น GitHub Pages, Netlify, Vercel — หรือให้ Claude ช่วยพาอัปโหลดทีละขั้นก็ได้</div>
+    <div class="exercise">
+      <div class="et">แบบฝึกหัด</div>
+      สร้างหน้าขายของสินค้า/บริการจริงของคุณ 1 หน้า เปิดบนมือถือดูจริง แล้วสั่งแก้อย่างน้อย 2 รอบ (เปลี่ยนพาดหัว / สลับลำดับ Proof) เพื่อฝึกวน iteration
+    </div>
+  </article>
+
+  <!-- ================= Skill 3 ================= -->
+  <article id="l3">
+    <span class="lnum">Skill #3</span>
+    <h2>Competitor Snapshot — วิเคราะห์คู่แข่งแบบรวดเร็ว</h2>
+    <div class="goal"><b>ใช้ทำอะไร:</b> วิเคราะห์คู่แข่งแบบรวดเร็ว เข้าใจ positioning และใช้วางกลยุทธ์ธุรกิจ</div>
+    <h3>ต่างจาก AdSpy อย่างไร</h3>
+    <p>AdSpy เจาะเฉพาะ "โฆษณา" แต่ Competitor Snapshot มองภาพใหญ่ทั้งบริษัท: ขายอะไร ราคาเท่าไร จุดยืนในตลาดคืออะไร แข็งตรงไหน อ่อนตรงไหน — เหมาะกับตอนวางแผนกลยุทธ์รายไตรมาส หรือก่อนออกสินค้าใหม่</p>
+    <h3>โครง Skill: Competitor Snapshot</h3>
+    <div class="prompt-box plain">ชื่อ Skill: Competitor Snapshot
+ใช้เมื่อ: ผู้ใช้ต้องการภาพรวมคู่แข่งเพื่อวางกลยุทธ์
+
+ขั้นตอน:
+1. รับรายชื่อคู่แข่ง 3-5 ราย + ข้อมูลที่มี (เว็บไซต์ เพจ ราคา แคตตาล็อก)
+   ถ้าเชื่อมเครื่องมือค้นเว็บไว้ ให้ค้นข้อมูลสาธารณะเพิ่มเติม
+2. วิเคราะห์รายคู่แข่ง: สินค้า/บริการหลัก, ช่วงราคา, กลุ่มลูกค้า,
+   ข้อความหลักที่ใช้สื่อสาร (positioning), จุดแข็ง, จุดอ่อนที่สังเกตได้
+3. ทำแผนที่ positioning: แกนราคา (ถูก-แพง) x แกนความเฉพาะทาง (ทั่วไป-เฉพาะกลุ่ม)
+   ระบุว่าใครอยู่ตรงไหน และ "ช่องว่าง" ในตลาดอยู่ตรงไหน
+4. เสนอกลยุทธ์: เราควรยืนตรงไหน สื่อสารด้วยข้อความหลักว่าอะไร
+
+ผลลัพธ์:
+- ตารางเทียบคู่แข่งรายตัว
+- แผนภาพ positioning (สร้างเป็นภาพ/HTML ให้เห็นจริง)
+- ข้อเสนอกลยุทธ์ 3 ข้อ พร้อมเหตุผล
+- ข้อควรระวัง: ระบุด้วยว่าข้อมูลส่วนไหนเป็นการประเมิน ไม่ใช่ข้อเท็จจริงยืนยัน</div>
+    <div class="exercise">
+      <div class="et">แบบฝึกหัด</div>
+      รัน Competitor Snapshot กับคู่แข่งจริง 3 ราย แล้วตอบให้ได้ 1 ประโยค: "เราต่างจากคู่แข่งเพราะ ______" — ถ้าตอบไม่ได้ แปลว่า positioning ยังไม่ชัด ให้วิเคราะห์ต่อ
+    </div>
+  </article>
+
+  <!-- ================= Skill 4 ================= -->
+  <article id="l4">
+    <span class="lnum">Skill #4</span>
+    <h2>CEO Dashboard — เห็นภาพรวมธุรกิจแบบ Real-time</h2>
+    <div class="goal"><b>ใช้ทำอะไร:</b> สร้าง Dashboard สำหรับผู้บริหาร ดูภาพรวมธุรกิจ และใช้ตัดสินใจเร็วขึ้น</div>
+    <h3>หลักการ Dashboard ที่ดี</h3>
+    <ul>
+      <li><strong>ตัวเลขน้อยแต่ใช่:</strong> 5-8 ตัวเลขที่ผู้บริหารต้องเห็นทุกสัปดาห์ ไม่ใช่ทุกตัวเลขที่มี</li>
+      <li><strong>เทียบกับอดีตเสมอ:</strong> ทุกตัวเลขต้องมี "เทียบกับช่วงก่อน" ถึงจะตัดสินใจได้</li>
+      <li><strong>ชี้สิ่งผิดปกติ:</strong> Dashboard ที่ดีบอกเองว่า "ตรงนี้ต้องดู"</li>
+    </ul>
+    <h3>โครง Skill: CEO Dashboard</h3>
+    <div class="prompt-box plain">ชื่อ Skill: CEO Dashboard
+ใช้เมื่อ: ผู้ใช้ต้องการภาพรวมธุรกิจจากไฟล์ข้อมูลล่าสุด
+
+ขั้นตอน:
+1. อ่านไฟล์ข้อมูลในโฟลเดอร์ที่กำหนด (ยอดขาย, ค่าใช้จ่าย, การตลาด, ลูกค้า)
+2. คำนวณตัวชี้วัดหลัก: ยอดขายรวม, กำไรขั้นต้น, จำนวนออเดอร์,
+   ยอดเฉลี่ยต่อออเดอร์, ลูกค้าใหม่ vs ลูกค้าเก่า, ROAS
+   ทุกตัวเทียบกับช่วงก่อนหน้า (% เปลี่ยนแปลง)
+3. สร้างไฟล์ dashboard.html: การ์ดตัวเลขหลักด้านบน, กราฟแนวโน้ม,
+   ตาราง Top สินค้า/ช่องทาง, ดูได้ดีทั้งจอคอมและมือถือ
+4. เพิ่มส่วน "สิ่งที่ควรดู" : 3 ประเด็นผิดปกติหรือโอกาสที่เห็นจากข้อมูล
+5. ระบุวันที่ข้อมูลล่าสุดบน Dashboard เสมอ
+
+ผลลัพธ์: ไฟล์ dashboard.html ที่เปิดดูได้ทันที + สรุปผู้บริหาร 5 บรรทัด</div>
+    <div class="tip"><strong>ทำให้เป็น "Real-time":</strong> จับ Skill นี้คู่กับ Scheduled Task จากบทที่ 9 — ตั้งให้สร้าง Dashboard ใหม่ทุกเช้าจากไฟล์ล่าสุด เท่านี้ผู้บริหารก็เปิดไฟล์เดียวเห็นภาพธุรกิจล่าสุดทุกวัน</div>
+    <div class="exercise">
+      <div class="et">แบบฝึกหัด</div>
+      สร้าง CEO Dashboard จากข้อมูลจริงของคุณ (หรือข้อมูลตัวอย่าง) แล้วให้คนอื่นดู 30 วินาที ถามว่าเขาเห็นอะไร — ถ้าตอบตรงประเด็นสำคัญ แปลว่า Dashboard ทำงาน
+    </div>
+  </article>
+
+  <!-- ================= Skill 5 ================= -->
+  <article id="l5">
+    <span class="lnum">Skill #5</span>
+    <h2>ICP Profiler — หา Customer ที่ใช่</h2>
+    <div class="goal"><b>ใช้ทำอะไร:</b> หา customer ที่ใช่ วิเคราะห์กลุ่มเป้าหมาย และใช้ยิงแอดได้แม่นขึ้น</div>
+    <h3>ICP คืออะไร</h3>
+    <p><strong>ICP (Ideal Customer Profile)</strong> คือโปรไฟล์ของ "ลูกค้าที่ใช่ที่สุด" — คนที่ซื้อง่าย จ่ายคุ้ม อยู่นาน และชวนเพื่อนมาซื้อต่อ การรู้ ICP ชัดทำให้ทั้งโฆษณา คอนเทนต์ และสินค้าใหม่แม่นขึ้นทั้งหมด เพราะเรารู้ว่ากำลังคุยกับใคร</p>
+    <h3>โครง Skill: ICP Profiler</h3>
+    <div class="prompt-box plain">ชื่อ Skill: ICP Profiler
+ใช้เมื่อ: ผู้ใช้ต้องการวิเคราะห์กลุ่มลูกค้าเพื่อหาลูกค้าในอุดมคติ
+
+ขั้นตอน:
+1. รับข้อมูลลูกค้าจริง: ไฟล์รายชื่อ/ประวัติซื้อ, รีวิว, ข้อความแชตที่ลูกค้าถามบ่อย
+   (ให้ลบ/ปกปิดข้อมูลส่วนตัวที่ระบุตัวบุคคลก่อนวิเคราะห์)
+2. แบ่งกลุ่มลูกค้า (Segment) จากพฤติกรรม: ซื้อบ่อย/ซื้อครั้งเดียว,
+   ยอดสูง/ยอดต่ำ, ซื้อสินค้าประเภทไหน
+3. หากลุ่มที่ "ใช่ที่สุด": กลุ่มไหนสร้างรายได้สูงสุดเทียบกับต้นทุนการได้มา
+4. สร้าง ICP Profile ของกลุ่มนั้น: ช่วงวัย อาชีพ ปัญหาที่เขาอยากแก้
+   สิ่งที่ทำให้ตัดสินใจซื้อ ข้อโต้แย้งก่อนซื้อ ช่องทางที่เจอเขาได้
+5. แปลงเป็นการใช้งานจริง: แนวทาง targeting โฆษณา,
+   ข้อความโฆษณาที่พูดกับกลุ่มนี้ตรง ๆ 3 แบบ, คอนเทนต์ที่กลุ่มนี้อยากอ่าน 5 หัวข้อ
+
+ผลลัพธ์: เอกสาร ICP Profile 1 หน้า + แผน targeting + ร่างข้อความโฆษณา 3 แบบ</div>
+    <div class="warn"><strong>ความเป็นส่วนตัวของลูกค้า:</strong> ก่อนส่งข้อมูลลูกค้าให้ AI วิเคราะห์ ให้ตัดข้อมูลระบุตัวตน (ชื่อเต็ม เบอร์ อีเมล ที่อยู่) ออกก่อน — การวิเคราะห์ ICP ใช้แค่พฤติกรรมและคุณลักษณะกลุ่ม ไม่จำเป็นต้องรู้ว่าใครเป็นใคร</div>
+    <div class="exercise">
+      <div class="et">โปรเจกต์ท้าย Module</div>
+      รัน ICP Profiler กับข้อมูลลูกค้าจริง (ปกปิดตัวตนแล้ว) จากนั้นนำ ICP ที่ได้ไปป้อนให้ Skill AdSpy และ Landing Page Builder — สังเกตว่างานทั้งสอง Skill แม่นขึ้นแค่ไหนเมื่อรู้ว่าคุยกับใคร
+    </div>
+  </article>
+
+  <div class="pager">
+    <a href="module-2.html">← Module 2: Connectors</a>
+    <a class="next" href="module-4.html">Module 4: Bonus Modules →</a>
+  </div>
+</main>
+</div>
+
+<footer>
+  <div class="wrap f-in">
+    <div>คอร์ส Claude AI Cowork — Module 3: Skills</div>
+    <div><a href="index.html">หน้าหลักคอร์ส</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

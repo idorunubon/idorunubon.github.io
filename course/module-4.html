@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4: Bonus Modules — ต่อยอดขั้นสูง | คอร์ส Claude AI Cowork</title>
+<meta name="description" content="Module 4 ของคอร์ส Claude AI Cowork: ใช้ Cowork สร้าง n8n Workflow, Skill เจนรูปภาพ, เชื่อมต่อ AI Meeting Recorder และเครื่องมือ Gen Instructions สำหรับใช้ใน Project">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F25C2A'/%3E%3Ctext x='32' y='44' font-size='34' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3EAI%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700;800&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="mark">AI</span> Claude Cowork Course</a>
+    <nav class="nav-links">
+      <a href="module-1.html">Module 1</a>
+      <a href="module-2.html">Module 2</a>
+      <a href="module-3.html">Module 3</a>
+      <a href="module-4.html" class="on">Module 4</a>
+      <a href="module-5.html">Module 5</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap layout">
+
+<aside class="toc">
+  <div class="t">บทเรียนใน Module 4</div>
+  <a href="#l1">1. สร้าง n8n Workflow</a>
+  <a href="#l2">2. Skill เจนรูปภาพ</a>
+  <a href="#l3">3. AI Meeting Recorder</a>
+  <a href="#l4">4. Gen Instructions</a>
+  <div class="mods">
+    <a href="index.html">← หน้าหลักคอร์ส</a>
+    <a href="module-3.html">← Module 3: Skills</a>
+    <a href="module-5.html">Module 5: สรุปเนื้อหา →</a>
+  </div>
+</aside>
+
+<main class="lesson">
+  <h1>Module 4: Bonus Modules</h1>
+  <p class="sub">4 เทคนิคต่อยอดขั้นสูง สำหรับคนที่ผ่าน Module 1-3 แล้วอยากขยายระบบให้ไกลขึ้น: Automation ภายนอกด้วย n8n, งานภาพ, งานประชุม และการสร้าง Instructions ระดับโปร</p>
+
+  <!-- ================= Lesson 1 ================= -->
+  <article id="l1">
+    <span class="lnum">Bonus 1</span>
+    <h2>ใช้ Claude Cowork สร้าง n8n Workflow</h2>
+    <div class="goal"><b>เป้าหมายบทนี้:</b> ให้ Claude ออกแบบและสร้าง workflow automation บน n8n ให้เรา แม้เราไม่เคยเขียน workflow มาก่อน</div>
+    <h3>n8n คืออะไร และทำไมต้องใช้คู่กับ Claude</h3>
+    <p><strong>n8n</strong> คือเครื่องมือ automation แบบ open-source ที่ต่อแอปเป็น workflow ได้อิสระมาก (คล้าย Zapier แต่ยืดหยุ่นกว่าและคุมเองได้) จุดที่คนติดคือ "การสร้าง workflow ครั้งแรกยาก" — และนี่คือจุดที่ Claude เข้ามาช่วย: <strong>เราบอกสิ่งที่อยากได้เป็นภาษาคน แล้วให้ Claude ออกแบบและเขียนตัว workflow ให้เลย</strong></p>
+    <h3>วิธีทำ</h3>
+    <ol>
+      <li>อธิบายงาน automation ที่ต้องการให้ Claude ฟังแบบละเอียด: อะไรเป็นตัวจุดชนวน (trigger) → ทำอะไรต่อทีละขั้น → ผลลัพธ์ไปที่ไหน</li>
+      <li>ให้ Claude ออกแบบ workflow และสร้างเป็นไฟล์ JSON ของ n8n (n8n รองรับการ import workflow จาก JSON)</li>
+      <li>นำไฟล์ไป <strong>Import</strong> ใน n8n แล้วใส่ credentials ของแอปที่เกี่ยวข้อง</li>
+      <li>ทดสอบรัน ถ้าติดตรงไหน แคปหน้าจอ/คัดลอก error กลับมาให้ Claude แก้ให้</li>
+    </ol>
+    <div class="prompt-box">ช่วยสร้าง n8n workflow ให้ฉัน:
+- Trigger: มีคน submit ฟอร์มสั่งซื้อ (webhook)
+- ขั้นที่ 1: บันทึกข้อมูลออเดอร์ลง Google Sheets
+- ขั้นที่ 2: ส่งอีเมลยืนยันหาลูกค้า (มีชื่อ สินค้า ยอดเงิน)
+- ขั้นที่ 3: ถ้ายอดเกิน 5,000 บาท แจ้งเตือนทีมขายทาง LINE
+สร้างเป็นไฟล์ JSON ที่ import เข้า n8n ได้เลย
+พร้อมอธิบายว่าแต่ละ node ทำอะไร และต้องใส่ credentials ตรงไหนบ้าง</div>
+    <div class="tip"><strong>แบ่งงานให้ถูกตัว:</strong> งานที่ต้อง "คิด/วิเคราะห์/เขียน" ให้ Claude ทำ — งานที่ "ส่งต่อข้อมูลอัตโนมัติวันละร้อยรอบ" ให้ n8n ทำ และสองอย่างนี้ต่อกันได้: n8n เรียกใช้ Claude ผ่าน API ในขั้นตอนที่ต้องใช้สมองก็ได้</div>
+    <div class="exercise">
+      <div class="et">แบบฝึกหัด</div>
+      เลือกงานส่งต่อข้อมูล 1 งานในธุรกิจคุณ ให้ Claude สร้าง n8n workflow JSON แล้ว import ทดสอบรันจริง 1 รอบ
+    </div>
+  </article>
+
+  <!-- ================= Lesson 2 ================= -->
+  <article id="l2">
+    <span class="lnum">Bonus 2</span>
+    <h2>ใช้ Cowork เรียกใช้ Skill เจนรูป</h2>
+    <div class="goal"><b>เป้าหมายบทนี้:</b> ตั้งระบบงานภาพ: ให้ AI ช่วยตั้งแต่คิดคอนเซปต์ เขียน prompt ไปจนถึงสร้างภาพผ่านเครื่องมือที่เชื่อมไว้</div>
+    <h3>แนวทางการทำงานภาพด้วย Cowork</h3>
+    <ol>
+      <li><strong>เชื่อมเครื่องมือสร้างภาพ:</strong> ผ่าน Connector ที่รองรับ เช่น Canva (สร้างงานออกแบบจากเนื้อหาที่ Claude เตรียม) หรือเครื่องมือเจนรูปอื่นที่เชื่อมผ่าน MCP/Zapier ได้</li>
+      <li><strong>สร้าง Skill "Art Direction" ของแบรนด์:</strong> เก็บโทนสี สไตล์ภาพ สิ่งที่ห้ามทำ ไว้ใน Skill เพื่อให้งานภาพทุกชิ้นไปทางเดียวกัน</li>
+      <li><strong>ให้ Claude เขียน image prompt ให้:</strong> จุดที่คนส่วนใหญ่พลาดคือเขียน prompt ภาพไม่เก่ง — ให้ Claude แปลงโจทย์การตลาดเป็น prompt ภาพที่ละเอียดแทนเรา</li>
+    </ol>
+    <div class="prompt-box plain">ชื่อ Skill: Brand Image Prompter
+ใช้เมื่อ: ต้องการภาพประกอบคอนเทนต์หรือโฆษณาของแบรนด์
+
+ขั้นตอน:
+1. รับโจทย์: ภาพใช้ทำอะไร ลงช่องทางไหน สัดส่วนเท่าไร สื่ออารมณ์อะไร
+2. ยึด Art Direction ของแบรนด์: โทนสีอบอุ่น แสงธรรมชาติ
+   คนจริงไม่ใช่การ์ตูน ห้ามใส่ข้อความในภาพ
+3. เขียน image prompt ภาษาอังกฤษแบบละเอียด 3 เวอร์ชัน
+   (มุมกล้อง แสง อารมณ์ องค์ประกอบ)
+4. ถ้ามีเครื่องมือสร้างภาพเชื่อมอยู่ ให้สร้างภาพจาก prompt ที่ดีที่สุด
+   ถ้าไม่มี ให้ส่ง prompt ทั้ง 3 ให้ผู้ใช้นำไปใช้เอง</div>
+    <div class="warn"><strong>ข้อควรระวังงานภาพ AI:</strong> ตรวจภาพก่อนใช้จริงเสมอ (นิ้วมือ ตัวอักษรเพี้ยน โลโก้แปลกปลอม), อย่าเจนภาพเลียนแบบบุคคลจริงหรืองานมีลิขสิทธิ์ และเช็กเงื่อนไขการใช้เชิงพาณิชย์ของเครื่องมือที่ใช้</div>
+    <div class="exercise">
+      <div class="et">แบบฝึกหัด</div>
+      สร้าง Skill Art Direction ของแบรนด์คุณ แล้วให้ Claude ผลิต image prompt สำหรับคอนเทนต์จริง 1 ชิ้น นำไปเจนภาพและเทียบผลกับ prompt ที่คุณเคยเขียนเอง
+    </div>
+  </article>
+
+  <!-- ================= Lesson 3 ================= -->
+  <article id="l3">
+    <span class="lnum">Bonus 3</span>
+    <h2>Connect กับ AI Meeting Recorder</h2>
+    <div class="goal"><b>เป้าหมายบทนี้:</b> ปิดวงจรงานประชุม: อัดเสียง → ถอดความ → ให้ Claude สรุปและแตกงานต่ออัตโนมัติ</div>
+    <h3>วงจรงานประชุมอัตโนมัติ</h3>
+    <ol>
+      <li><strong>อัด + ถอดความ:</strong> ใช้เครื่องมือ meeting recorder ที่มี transcript เช่น เครื่องมืออัดเสียงที่ถอดความได้ หรือฟีเจอร์บันทึกของโปรแกรมประชุมที่ใช้อยู่</li>
+      <li><strong>ส่งเข้าระบบ:</strong> ตั้งให้ transcript ถูกบันทึกลงโฟลเดอร์ที่ Cowork เข้าถึงได้ (หรือเชื่อมผ่าน Connector ของเครื่องมือนั้นถ้ามี)</li>
+      <li><strong>ให้ Claude ประมวลผล:</strong> สรุปประชุม แตกรายการงาน (ใครทำอะไร เมื่อไร) และร่างอีเมล follow-up</li>
+      <li><strong>ต่อยอดอัตโนมัติ:</strong> สร้างเป็น Scheduled Task ให้กวาดไฟล์ transcript ใหม่ทุกเย็นแล้วสรุปให้เอง</li>
+    </ol>
+    <div class="prompt-box">ในโฟลเดอร์ "ประชุม" มีไฟล์ transcript การประชุมล่าสุด
+ช่วยทำ 3 อย่าง:
+1. สรุปการประชุม: ประเด็นหลัก การตัดสินใจ และเหตุผล (ไม่เกิน 1 หน้า)
+2. แตกรายการ Action Items เป็นตาราง: งาน / ผู้รับผิดชอบ / กำหนดเสร็จ
+   ถ้าในประชุมไม่ได้ระบุคนหรือวัน ให้ทำเครื่องหมาย [ต้องยืนยัน]
+3. ร่างอีเมลสรุปส่งผู้เข้าประชุม แนบทั้งสรุปและ Action Items
+บันทึกทั้งหมดเป็นไฟล์ "สรุปประชุม-[วันที่].docx"</div>
+    <div class="warn"><strong>มารยาทและกฎหมาย:</strong> แจ้งผู้เข้าประชุมทุกครั้งก่อนอัดเสียง และระวังการส่งเนื้อหาประชุมที่เป็นความลับเข้าเครื่องมือภายนอก — ตรวจนโยบายข้อมูลของบริษัทคุณก่อนตั้งระบบนี้</div>
+    <div class="exercise">
+      <div class="et">แบบฝึกหัด</div>
+      นำ transcript ประชุมจริง 1 รายการ (หรือพิมพ์บันทึกการประชุมคร่าว ๆ) มารันด้วย Prompt ด้านบน แล้วเทียบกับสรุปที่คุณเคยทำมือว่าครบกว่ากันแค่ไหน
+    </div>
+  </article>
+
+  <!-- ================= Lesson 4 ================= -->
+  <article id="l4">
+    <span class="lnum">Bonus 4</span>
+    <h2>เครื่องมือ Gen Instructions สำหรับใช้ใน Project</h2>
+    <div class="goal"><b>เป้าหมายบทนี้:</b> ใช้ AI ช่วยเขียน Instructions ของ Project ให้เอง — เขียนครั้งเดียว ดีทุกแชต</div>
+    <h3>ทำไม Instructions ถึงสำคัญที่สุดใน Project</h3>
+    <p>จาก Module 1 บทที่ 7 เรารู้แล้วว่า Instructions คือสิ่งที่ทุกแชตใน Project ทำตามอัตโนมัติ — แต่คนส่วนใหญ่เขียนสั้นเกินไปหรือกว้างเกินไป เทคนิคของบทนี้คือ <strong>ให้ Claude สัมภาษณ์เราแล้วเขียน Instructions ให้เอง</strong></p>
+    <h3>เครื่องมือ: Instructions Generator</h3>
+    <div class="prompt-box">คุณคือผู้เชี่ยวชาญการเขียน Project Instructions สำหรับ Claude
+ฉันกำลังจะสร้าง Project ใหม่ ช่วยสัมภาษณ์ฉันทีละข้อ (ถามทีละคำถาม รอคำตอบก่อนถามต่อ):
+1. Project นี้ใช้ทำงานอะไร ผลงานหลักคืออะไร
+2. ใครใช้ Project นี้บ้าง และผลงานส่งให้ใครดู
+3. มีกติกา/ข้อห้ามอะไรที่ต้องยึดเสมอ (โทนภาษา แบรนด์ ข้อมูลที่ห้ามแต่งเอง)
+4. รูปแบบผลลัพธ์มาตรฐานที่ต้องการ
+5. ตัวอย่างงานที่เคยพอใจ (ถ้ามี ให้แนบ)
+เมื่อได้คำตอบครบ เขียน Project Instructions ฉบับสมบูรณ์ให้ โดย:
+- แบ่งหมวด: บทบาท / บริบทธุรกิจ / กติกา / รูปแบบผลลัพธ์ / สิ่งที่ห้ามทำ
+- เขียนเป็นคำสั่งที่ชัดเจน วัดได้ ไม่กำกวม
+- ปิดท้ายด้วยรายการไฟล์ Knowledge ที่แนะนำให้อัปโหลดเข้า Project</div>
+    <h3>เช็กลิสต์ Instructions ที่ดี</h3>
+    <ul class="checks">
+      <li>อ่านแล้วรู้ทันทีว่า Project นี้ทำอะไร ให้ใคร</li>
+      <li>มีกติกาที่ "วัดได้" เช่น "ไม่เกิน 5 บรรทัด" ไม่ใช่ "สั้น ๆ"</li>
+      <li>ระบุแหล่งข้อมูลที่ให้ยึด และสิ่งที่ห้ามแต่งเอง</li>
+      <li>มีรูปแบบผลลัพธ์มาตรฐานชัดเจน</li>
+      <li>ยาวพอดี — ครอบคลุมแต่ไม่ยัดทุกอย่างจนขัดกันเอง</li>
+    </ul>
+    <div class="exercise">
+      <div class="et">โปรเจกต์ท้าย Module</div>
+      ใช้ Instructions Generator สร้าง Instructions ให้ Project ที่คุณสร้างไว้ใน Module 1 ใหม่ทั้งหมด แล้วเทียบคุณภาพงานก่อน-หลัง ด้วยคำสั่งเดียวกัน
+    </div>
+  </article>
+
+  <div class="pager">
+    <a href="module-3.html">← Module 3: Skills</a>
+    <a class="next" href="module-5.html">Module 5: วิดีโอ &amp; สรุปเนื้อหา →</a>
+  </div>
+</main>
+</div>
+
+<footer>
+  <div class="wrap f-in">
+    <div>คอร์ส Claude AI Cowork — Module 4: Bonus Modules</div>
+    <div><a href="index.html">หน้าหลักคอร์ส</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

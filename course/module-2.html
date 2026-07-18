@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2: Cowork Connectors — เชื่อม Claude กับแอปทำงานจริง | คอร์ส Claude AI Cowork</title>
+<meta name="description" content="Module 2 ของคอร์ส Claude AI Cowork: เชื่อม Claude กับแอปที่ใช้ทำงานผ่าน MCP servers และ Zapier ทั้งบนเว็บและ Desktop พร้อมรายการเครื่องมือที่ AI ทำงานร่วมด้วยได้ดี">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F25C2A'/%3E%3Ctext x='32' y='44' font-size='34' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3EAI%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700;800&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="mark">AI</span> Claude Cowork Course</a>
+    <nav class="nav-links">
+      <a href="module-1.html">Module 1</a>
+      <a href="module-2.html" class="on">Module 2</a>
+      <a href="module-3.html">Module 3</a>
+      <a href="module-4.html">Module 4</a>
+      <a href="module-5.html">Module 5</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap layout">
+
+<aside class="toc">
+  <div class="t">บทเรียนใน Module 2</div>
+  <a href="#l1">1. MCP คืออะไร</a>
+  <a href="#l2">2. MCP servers ของ Zapier</a>
+  <a href="#l3">3. เชื่อมต่อบนเว็บและ Desktop</a>
+  <a href="#l4">4. List เครื่องมือที่แนะนำ</a>
+  <div class="mods">
+    <a href="index.html">← หน้าหลักคอร์ส</a>
+    <a href="module-1.html">← Module 1: Foundations</a>
+    <a href="module-3.html">Module 3: Skills →</a>
+  </div>
+</aside>
+
+<main class="lesson">
+  <h1>Module 2: Cowork Connectors</h1>
+  <p class="sub">พลังที่แท้จริงของ AI Agent เกิดขึ้นเมื่อมันเชื่อมกับเครื่องมือที่เราใช้ทำงานทุกวัน — Module นี้พาเชื่อม Claude เข้ากับแอปต่าง ๆ ผ่าน MCP และ Zapier ทั้งบนเว็บและ Desktop</p>
+
+  <!-- ================= Lesson 1 ================= -->
+  <article id="l1">
+    <span class="lnum">Lesson 1</span>
+    <h2>MCP คืออะไร — ภาษากลางที่ทำให้ AI คุยกับแอปอื่นได้</h2>
+    <div class="goal"><b>เป้าหมายบทนี้:</b> เข้าใจแนวคิด MCP และ Connector ก่อนลงมือเชื่อมจริงในบทถัดไป</div>
+    <p><strong>MCP (Model Context Protocol)</strong> คือมาตรฐานกลางที่ทำให้ AI เชื่อมต่อกับแอปและแหล่งข้อมูลภายนอกได้อย่างปลอดภัย — คิดง่าย ๆ ว่าเป็น "หัวปลั๊ก USB ของโลก AI": แอปไหนทำ MCP server ไว้ Claude ก็เสียบใช้ได้เลย</p>
+    <ul>
+      <li><strong>MCP server</strong> = ตัวแทนของแอปหนึ่ง ๆ ที่เปิด "เครื่องมือ" ให้ AI เรียกใช้ เช่น MCP ของปฏิทินจะมีเครื่องมือ ดูตารางนัด / สร้างนัด</li>
+      <li><strong>Connector</strong> = ชื่อเรียกการเชื่อมต่อเหล่านี้ในหน้า Settings ของ Claude — กดเชื่อม ล็อกอินอนุญาตสิทธิ์ แล้วใช้ได้เลย</li>
+    </ul>
+    <p>เมื่อเชื่อมแล้ว สิ่งที่เปลี่ยนไปคือ Claude ทำงาน "ข้ามแอป" ได้ในคำสั่งเดียว เช่น "ดูอีเมลจากลูกค้า A เมื่อวาน สรุปประเด็น แล้วสร้างนัดประชุมทีมพรุ่งนี้ 10 โมง" — อ่านเมล + สรุป + ลงปฏิทิน จบในคำสั่งเดียว</p>
+    <div class="tip"><strong>หลักการเลือกว่าจะเชื่อมอะไร:</strong> เริ่มจากแอปที่คุณเปิดบ่อยที่สุด 3 อันดับแรกในแต่ละวัน — นั่นคือจุดที่ Connector คืนเวลาให้คุณมากที่สุด</div>
+  </article>
+
+  <!-- ================= Lesson 2 ================= -->
+  <article id="l2">
+    <span class="lnum">Lesson 2</span>
+    <h2>MCP servers ของ Zapier — ประตูสู่แอปหลายพันตัว</h2>
+    <div class="goal"><b>เป้าหมายบทนี้:</b> ใช้ Zapier MCP เชื่อม Claude กับแอปที่ยังไม่มี Connector ตรง</div>
+    <p><strong>Zapier</strong> คือแพลตฟอร์มเชื่อมแอปกว่า 7,000 ตัว (LINE, Google Sheets, Facebook, Shopify, Notion, HubSpot ฯลฯ) และ Zapier มี MCP server ที่ทำให้ Claude สั่งงานแอปเหล่านั้นผ่าน Zapier ได้ — เท่ากับว่าเชื่อม Zapier ตัวเดียว ได้ประตูไปสู่แอปเกือบทุกตัวที่ธุรกิจใช้</p>
+    <h3>ขั้นตอนการตั้งค่า</h3>
+    <ol>
+      <li>สมัคร/ล็อกอิน Zapier แล้วไปที่หน้า <strong>Zapier MCP</strong> (mcp.zapier.com)</li>
+      <li>สร้าง MCP endpoint ของเรา แล้วเลือกว่าจะเปิด "เครื่องมือ" อะไรให้ AI ใช้บ้าง เช่น เพิ่มแถวใน Google Sheets, ส่งข้อความแจ้งเตือน, สร้าง Task</li>
+      <li>นำการเชื่อมต่อที่ได้ไปเพิ่มใน Claude ที่หน้า <strong>Settings → Connectors → Add custom connector</strong></li>
+      <li>ทดสอบด้วยคำสั่งง่าย ๆ ก่อน เช่น "เพิ่มแถวทดสอบใน Google Sheets ชื่อ Test"</li>
+    </ol>
+    <div class="prompt-box">ทุกครั้งที่ฉันบอกว่า "บันทึกลูกค้าใหม่" ให้ทำสิ่งนี้:
+1. ถามข้อมูล: ชื่อ เบอร์โทร สินค้าที่สนใจ ช่องทางที่รู้จักเรา
+2. เพิ่มลงชีต "รายชื่อลูกค้า" ผ่าน Zapier (เครื่องมือ Google Sheets: Create Row)
+3. ยืนยันกลับมาว่าบันทึกแถวไหน สำเร็จหรือไม่
+ตอนนี้: บันทึกลูกค้าใหม่</div>
+    <div class="warn"><strong>ข้อควรระวัง:</strong> เปิดเครื่องมือใน Zapier MCP เท่าที่ใช้จริงเท่านั้น และเลี่ยงการเปิดเครื่องมือประเภท "ลบข้อมูล" ให้ AI ใช้ — เพิ่ม/อ่าน ปลอดภัยกว่าแก้/ลบ</div>
+  </article>
+
+  <!-- ================= Lesson 3 ================= -->
+  <article id="l3">
+    <span class="lnum">Lesson 3</span>
+    <h2>เชื่อม Claude กับแอป — ทั้งบนเว็บและ Desktop</h2>
+    <div class="goal"><b>เป้าหมายบทนี้:</b> รู้วิธีเพิ่ม Connector ทั้งสองช่องทาง และเลือกใช้ให้ถูกกับลักษณะงาน</div>
+    <h3>บนเว็บ / แอปมือถือ (claude.ai)</h3>
+    <ol>
+      <li>ไปที่ <strong>Settings → Connectors</strong></li>
+      <li>เลือกแอปที่มีให้เชื่อมโดยตรง (เช่น Google Drive, Gmail, ปฏิทิน, Notion, Canva) แล้วกด Connect</li>
+      <li>ล็อกอินและอนุญาตสิทธิ์ของแอปนั้น — เชื่อมครั้งเดียวใช้ได้ทุกแชต</li>
+      <li>Connector แบบ custom (เช่นจาก Zapier หรือที่เราสร้างเอง) เพิ่มได้จาก Add custom connector</li>
+    </ol>
+    <h3>บนแอป Desktop (สำหรับ Cowork)</h3>
+    <ol>
+      <li>Connector ที่เชื่อมบนบัญชีจะใช้ได้บน Desktop ด้วย</li>
+      <li>ส่วน MCP server แบบติดตั้งในเครื่อง (Local MCP) เพิ่มได้จากไฟล์ตั้งค่าของแอป Desktop หรือเมนู Developer/Extensions — เหมาะกับการเชื่อมระบบภายในบริษัทที่ไม่ได้อยู่บนคลาวด์</li>
+      <li>จุดแข็งของ Desktop คือใช้ Connector ควบคู่กับการเข้าถึงไฟล์ในเครื่อง เช่น "ดึงข้อมูลจากระบบ → ประมวลผล → บันทึกเป็นไฟล์ Excel ในโฟลเดอร์งาน"</li>
+    </ol>
+    <h3>เลือกช่องทางให้ถูกงาน</h3>
+    <div class="table-scroll"><table class="cmp">
+      <tr><th>ลักษณะงาน</th><th>ใช้ช่องทางไหน</th></tr>
+      <tr><td>ถาม-ตอบ / สรุปข้อมูลจากแอปคลาวด์ ระหว่างเดินทาง</td><td>เว็บ / มือถือ + Connector</td></tr>
+      <tr><td>งานที่ต้องอ่าน-สร้างไฟล์จริงในเครื่อง</td><td>Desktop + Cowork</td></tr>
+      <tr><td>งานข้ามระบบ: ดึงจากแอป → ทำไฟล์ → ส่งต่อ</td><td>Desktop + Cowork + Connector (ครบสุด)</td></tr>
+    </table></div>
+    <div class="exercise">
+      <div class="et">แบบฝึกหัดท้ายบท</div>
+      เชื่อม Connector อย่างน้อย 2 ตัวที่ตรงกับงานคุณ แล้วทดสอบคำสั่ง "ข้ามแอป" 1 คำสั่ง เช่น สรุปอีเมลสัปดาห์นี้แล้วบันทึกประเด็นลงไฟล์
+    </div>
+  </article>
+
+  <!-- ================= Lesson 4 ================= -->
+  <article id="l4">
+    <span class="lnum">Lesson 4</span>
+    <h2>List เครื่องมือต่าง ๆ ที่ AI ทำงานได้ด้วยดี</h2>
+    <div class="goal"><b>เป้าหมายบทนี้:</b> มีรายการอ้างอิงว่าควรเชื่อมอะไร เพื่องานแบบไหน</div>
+    <div class="table-scroll"><table class="cmp">
+      <tr><th>หมวด</th><th>เครื่องมือ</th><th>ตัวอย่างงานที่ AI ทำให้ได้</th></tr>
+      <tr><td><strong>ไฟล์ &amp; เอกสาร</strong></td><td>Google Drive, ไฟล์ในเครื่อง (Cowork)</td><td>ค้นเอกสาร สรุปไฟล์ รวมข้อมูลหลายไฟล์ สร้างรายงาน</td></tr>
+      <tr><td><strong>อีเมล</strong></td><td>Gmail</td><td>สรุปเมลค้าง ร่างเมลตอบ ติดตามเมลสำคัญ</td></tr>
+      <tr><td><strong>ปฏิทิน</strong></td><td>Google Calendar</td><td>ดูตารางว่าง สร้างนัด สรุปตารางสัปดาห์</td></tr>
+      <tr><td><strong>โน้ต &amp; จัดการงาน</strong></td><td>Notion, Asana, Linear, Jira</td><td>สร้าง/อัปเดต Task สรุปสถานะโปรเจกต์ เขียนเอกสารทีม</td></tr>
+      <tr><td><strong>สื่อสารทีม</strong></td><td>Slack, Microsoft Teams</td><td>สรุปแชตที่พลาด ร่างประกาศ ส่งสรุปรายงานเข้าห้องทีม</td></tr>
+      <tr><td><strong>ออกแบบ &amp; นำเสนอ</strong></td><td>Canva, Figma, Gamma</td><td>สร้างงานออกแบบ/สไลด์จากเนื้อหาที่ AI เตรียม</td></tr>
+      <tr><td><strong>ธุรกิจ &amp; การขาย</strong></td><td>HubSpot, Stripe, Shopify (ผ่าน Zapier)</td><td>สรุปดีล เช็กยอดขาย ติดตามลูกค้า</td></tr>
+      <tr><td><strong>อื่น ๆ อีกหลายพันแอป</strong></td><td>ผ่าน Zapier MCP</td><td>LINE Notify, Facebook Lead, Airtable ฯลฯ</td></tr>
+    </table></div>
+    <h3>หลักการจัดชุดเครื่องมือ (Tool Stack) ของคุณ</h3>
+    <ol>
+      <li><strong>ชุดเริ่มต้น (ทุกคนควรมี):</strong> ไฟล์ + อีเมล + ปฏิทิน</li>
+      <li><strong>ชุดตามสายงาน:</strong> การตลาดเพิ่ม Canva/Meta, ฝ่ายขายเพิ่ม CRM, ผู้บริหารเพิ่มเครื่องมือรายงาน</li>
+      <li><strong>ทบทวนทุกเดือน:</strong> Connector ไหนไม่ได้ใช้ ให้ถอดออก — ยิ่งน้อยยิ่งปลอดภัยและ AI เลือกเครื่องมือได้แม่นขึ้น</li>
+    </ol>
+    <div class="exercise">
+      <div class="et">โปรเจกต์ท้าย Module</div>
+      ออกแบบ Tool Stack ของคุณเอง: เลือกเครื่องมือ 3-5 ตัว เชื่อมให้ครบ แล้วสร้าง workflow ข้ามแอป 1 เส้น เช่น "ทุกเช้าสรุปเมล + ตารางนัดวันนี้ + งานค้าง เป็นข้อความ Briefing เดียว"
+    </div>
+  </article>
+
+  <div class="pager">
+    <a href="module-1.html">← Module 1: Foundations</a>
+    <a class="next" href="module-3.html">Module 3: Skills →</a>
+  </div>
+</main>
+</div>
+
+<footer>
+  <div class="wrap f-in">
+    <div>คอร์ส Claude AI Cowork — Module 2: Cowork Connectors</div>
+    <div><a href="index.html">หน้าหลักคอร์ส</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
