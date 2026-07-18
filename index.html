@@ -211,7 +211,7 @@
   <div class="count" id="count" aria-live="polite">กำลังโหลดข้อมูล...</div>
   <div class="grid" id="grid"></div>
   <div class="morewrap" id="morewrap" hidden><button class="btn" id="morebtn">แสดงงานเพิ่ม</button></div>
-  <div class="adminnote"><b>ความเห็นแอดมิน:</b> งานที่มีปุ่ม "ดูรายละเอียด" ดึงข้อมูลสดจากระบบรับสมัคร สถานะเปิด/ปิดรับสมัครเป็นข้อมูลจริง ส่วนงานที่มีปุ่ม "ค้นหา/สมัคร" เป็นฐานที่แอดมินคัดไว้ กดเพื่อค้นข้อมูลล่าสุด ก่อนสมัครเช็กวันจัด ระยะ จุดสตาร์ท และค่าสมัครกับผู้จัดโดยตรงทุกครั้ง</div>
+  <div class="adminnote"><b>ความเห็นแอดมิน:</b> เว็บนี้ทำหน้าที่ประชาสัมพันธ์งานวิ่งเท่านั้น ไม่ได้เป็นผู้จัดหรือรับสมัคร สถานะเปิด/ปิดรับสมัครอัปเดตอัตโนมัติทุกสัปดาห์ ปุ่ม "ค้นหา/สมัคร" จะพาไปค้น Google ตามชื่องาน เพื่อเข้าเว็บผู้จัดหรือช่องทางสมัครอย่างเป็นทางการด้วยตัวเอง ก่อนสมัครเช็กวันจัด ระยะ จุดสตาร์ท และค่าสมัครกับผู้จัดโดยตรงทุกครั้ง</div>
 </div></section>
 <section id="blog"><div class="wrap">
   <div class="sec-head">
@@ -303,8 +303,8 @@ function card(e){
   if(e.reg===true)reg='<span class="reg open"><span class="dot"></span>เปิดรับสมัคร</span>';
   else if(e.reg===false)reg='<span class="reg closed"><span class="dot"></span>ปิด/รอประกาศ</span>';
   else reg='<span></span>';
-  const link=e.link||('https://www.google.com/search?q='+encodeURIComponent(e.n+' วิ่ง สมัคร'));
-  const label=e.link?'ดูรายละเอียด →':'ค้นหา/สมัคร →';
+  const link='https://www.google.com/search?q='+encodeURIComponent(e.n+' วิ่ง สมัคร');
+  const label='ค้นหา/สมัคร →';
   const clinicTag=e.isClinic?'<span class="tag multi">คลินิก/เวิร์กช็อป</span>':'';
   const distTag=(e.dist&&e.dist.length)?'<span class="tag dist">'+e.dist.join('/')+' กม.</span>':'';
   const d0=new Date(e.y,e.mo,e.d),d1=new Date(e.y,e.mo,e.d+1);
@@ -313,7 +313,7 @@ function card(e){
     +'&text='+encodeURIComponent(e.n)
     +'&dates='+ymd(d0)+'/'+ymd(d1)
     +'&location='+encodeURIComponent(e.place||'')
-    +'&details='+encodeURIComponent((e.link?e.link+'\n':'')+'ข้อมูลจาก I Do Run — https://idorunubon.github.io/');
+    +'&details='+encodeURIComponent('ข้อมูลจาก I Do Run — https://idorunubon.github.io/');
   const lineShare='https://line.me/R/share?text='+encodeURIComponent(e.n+' | '+e.d+' '+TH[e.mo]+' '+e.y+(e.place?' | '+e.place:'')+' | '+link+' (จากเว็บ I Do Run https://idorunubon.github.io/)');
   return '<div class="card"><div class="top"><div><h3>'+e.n+'</h3></div>'
     +'<div class="date-pill"><div class="d">'+e.d+'</div><div class="m">'+TH[e.mo]+'</div><div class="y">'+e.y+'</div></div></div>'
@@ -386,16 +386,15 @@ fetch('events.json?t='+Date.now()).then(r=>r.json()).then(data=>{
   const mkeys=[...new Set(UP.slice().sort((a,b)=>(a.y-b.y)||(a.mo-b.mo)).map(e=>e.y+'-'+e.mo))];
   monsel.innerHTML='<option value="all">ทุกเดือน</option>'+mkeys.map(k=>{const a=k.split('-');return '<option value="'+k+'">'+TH[a[1]]+' '+a[0]+'</option>';}).join('');
   if(data.generatedAt){const d=new Date(data.generatedAt);document.getElementById('updated').textContent='อัปเดตข้อมูลล่าสุด: '+d.getDate()+' '+TH[d.getMonth()]+' '+d.getFullYear();}
-  // SEO: inject Event structured data (JSON-LD) for upcoming events with real links
+  // SEO: inject Event structured data (JSON-LD) for upcoming events
   try{
-    const items=UP.filter(e=>e.link&&!e.isClinic).slice(0,30).map((e,i)=>({
+    const items=UP.filter(e=>!e.isClinic).slice(0,30).map((e,i)=>({
       "@type":"ListItem","position":i+1,"item":{
         "@type":"Event","name":e.n,
         "startDate":e.y+"-"+String(e.mo+1).padStart(2,"0")+"-"+String(e.d).padStart(2,"0"),
         "eventStatus":"https://schema.org/EventScheduled",
         "eventAttendanceMode":e.type==="virtual"?"https://schema.org/OnlineEventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
-        "location":{"@type":"Place","name":e.place||"Thailand","address":{"@type":"PostalAddress","addressCountry":"TH"}},
-        "url":e.link}}));
+        "location":{"@type":"Place","name":e.place||"Thailand","address":{"@type":"PostalAddress","addressCountry":"TH"}}}}));
     const s=document.createElement('script');s.type='application/ld+json';
     s.textContent=JSON.stringify({"@context":"https://schema.org","@type":"ItemList","name":"ปฏิทินงานวิ่งไทย - I Do Run","itemListElement":items});
     document.head.appendChild(s);

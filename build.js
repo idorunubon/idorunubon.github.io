@@ -11,6 +11,10 @@
 // - ยุบงานซ้ำข้ามแหล่ง (thai.run vs วิ่งไหนดี) ด้วย token overlap + วันใกล้กัน
 //   *ยุบเฉพาะข้ามแหล่ง — แหล่งเดียวกันถือว่าคนละงาน (เช่น ซีรีส์ WRB12 จัด 12 จังหวัดวันเดียวกัน)
 // - ตัดช่องทางสมัครที่ไม่ใช่งานแข่งของนักวิ่งทั่วไป (foreigner channel, pacer registration)
+//
+// v3 (ก.ค. 2026): ไม่ใส่ลิงก์สมัครภายนอกใน events.json ที่เผยแพร่
+// - เว็บทำหน้าที่ประชาสัมพันธ์เท่านั้น ปุ่มบนหน้าเว็บพาไปค้น Google ตามชื่องาน
+// - ลิงก์ยังใช้ภายในสคริปต์นี้เพื่อเลือกตัวชนะตอนยุบงานซ้ำ แต่ถูกตัดออกก่อนเขียนไฟล์
 
 const fs = require('fs');
 
@@ -251,7 +255,7 @@ async function main(){
     generatedAt: new Date().toISOString(),
     count: upcoming.length,
     fromThaiRun: live.length,
-    events: upcoming
+    events: upcoming.map(({ link, ...rest }) => rest)
   };
   fs.writeFileSync('events.json', JSON.stringify(out));
   console.log('events.json written:', upcoming.length, 'events');
