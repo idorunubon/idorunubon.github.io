@@ -205,7 +205,8 @@ const MANUAL_DROP = new Set([
   'Bangkok Post International Mini Marathon 2026',
   'วิ่งติดมันส์ รันพระนคร ครั้งที่ 2/2026',
   'ACVRUN 2026: the Ultimate Line',
-  '(เลื่อน)Bangkok Marathon 2026 ครั้งที่37'
+  '(เลื่อน)Bangkok Marathon 2026 ครั้งที่37',
+  'Bangkok Marathon 2027 ครั้งที่ 37'   // ซ้ำกับ "กรุงเทพมาราธอน ครั้งที่ 37" (thai.run)
 ]);
 // ข้อมูลเสริมจากฐานที่อยากเก็บไว้แม้ตัวงานถูกยุบเข้ากับ thai.run
 const ENRICH = {
@@ -234,6 +235,11 @@ async function main(){
     const k = normKey(e.n);
     if (seen.has(k)) continue;
     seen.add(k); merged.push(e);
+  }
+
+  // 1.5) งานหลายวันที่ชื่อมีเลข 100/250 = สเตจเรซอัลตรา (เช่น Muser100, Udonthani 100)
+  for (const e of merged){
+    if (e.multi && e.type === 'road' && /100|x ?250/i.test(e.n)) e.type = 'ultra';
   }
 
   // 2) ยุบงานซ้ำข้ามแหล่งแบบชื่อไม่เหมือนกันเป๊ะ
