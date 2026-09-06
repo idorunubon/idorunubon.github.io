@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ไอดูรัน (I Do Run) — รวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง 2569-2570 (2026-2027)</title>
-<meta name="description" content="ไอดูรัน (I Do Run) แหล่งรวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง 2569 ทั้งถนน เทรล อัลตรา เช็กสถานะรับสมัครจริงจากระบบ อัปเดตอัตโนมัติทุกสัปดาห์">
+<meta name="description" content="ไอดูรัน (I Do Run) แหล่งรวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง 2569 ทั้งถนน เทรล อัลตรา สถานะรับสมัครอัปเดตรายสัปดาห์">
 <meta name="keywords" content="ไอดูรัน, I Do Run, งานวิ่ง, ปฏิทินงานวิ่ง, งานวิ่ง 2569, รวมงานวิ่ง, งานวิ่งไทย, วิ่งเทรล, มาราธอน">
 <link rel="canonical" href="https://idorunubon.github.io/">
 <meta name="theme-color" content="#16335B">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ไอดูรัน I Do Run">
 <meta property="og:title" content="ไอดูรัน (I Do Run) — รวมงานวิ่งทั่วไทย">
-<meta property="og:description" content="ไอดูรัน รวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง ถนน เทรล อัลตรา เช็กสถานะรับสมัครจริง อัปเดตทุกสัปดาห์">
+<meta property="og:description" content="ไอดูรัน รวมงานวิ่งทั่วไทย ปฏิทินงานวิ่ง ถนน เทรล อัลตรา สถานะรับสมัครอัปเดตรายสัปดาห์">
 <meta property="og:url" content="https://idorunubon.github.io/">
 <meta property="og:locale" content="th_TH">
 <meta property="og:image" content="https://idorunubon.github.io/og-image.png">
@@ -98,9 +98,9 @@
   .reg{display:inline-flex;align-items:center;gap:5px;font-size:.8rem;font-weight:600}
   .reg.open{color:var(--green)}.reg.closed{color:var(--muted)}
   .reg .dot{width:8px;height:8px;border-radius:50%;background:currentColor}
-  .card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:2px;padding-top:9px;border-top:1px dashed var(--line)}
+  .card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:2px;padding-top:9px;border-top:1px dashed var(--line);flex-wrap:wrap;gap:8px}
   .card .foot a{color:var(--orange);font-weight:600;font-size:.88rem}
-  .card .acts{display:flex;gap:12px;align-items:center}
+  .card .acts{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
   .card .acts a.mini{color:var(--muted);font-weight:500;font-size:.8rem}
   .card .acts a.mini:hover{color:var(--navy)}
   .card .foot .nolink{color:var(--muted);font-weight:400}
@@ -205,13 +205,13 @@
     <select class="mon" id="region" aria-label="กรองตามภาค"></select>
     <select class="mon" id="dist" aria-label="กรองตามระยะ"><option value="all">ทุกระยะ</option><option value="fun">Fun Run</option><option value="5k">5 กม.</option><option value="10k">10 กม.</option><option value="half">ฮาล์ฟ ~21 กม.</option><option value="full">ฟูล ~42 กม.</option><option value="ultra">อัลตรา 50 กม.+</option></select>
     <select class="mon" id="mon" aria-label="กรองตามเดือน"></select>
-    <div class="search"><span aria-hidden="true">🔎</span><input id="q" type="text" placeholder="ค้นชื่องาน หรือ จังหวัด..." aria-label="ค้นหางานวิ่ง"></div>
+    <div class="search"><span aria-hidden="true">🔎</span><input id="q" type="text" placeholder="ค้นชื่องาน หรือ จังหวัด (ไทย/อังกฤษ)..." aria-label="ค้นหางานวิ่ง"></div>
     <button class="chip clear" id="clearf" hidden>✕ ล้างตัวกรอง</button>
   </div>
   <div class="count" id="count" aria-live="polite">กำลังโหลดข้อมูล...</div>
   <div class="grid" id="grid"></div>
   <div class="morewrap" id="morewrap" hidden><button class="btn" id="morebtn">แสดงงานเพิ่ม</button></div>
-  <div class="adminnote"><b>ความเห็นแอดมิน:</b> งานที่มีปุ่ม "ดูรายละเอียด" ดึงข้อมูลสดจากระบบรับสมัคร สถานะเปิด/ปิดรับสมัครเป็นข้อมูลจริง ส่วนงานที่มีปุ่ม "ค้นหา/สมัคร" เป็นฐานที่แอดมินคัดไว้ กดเพื่อค้นข้อมูลล่าสุด ก่อนสมัครเช็กวันจัด ระยะ จุดสตาร์ท และค่าสมัครกับผู้จัดโดยตรงทุกครั้ง</div>
+  <div class="adminnote"><b>ความเห็นแอดมิน:</b> สถานะเปิด/ปิดรับสมัครอัปเดตจากระบบรับสมัครสัปดาห์ละครั้งทุกเช้าวันจันทร์ ไม่ใช่ข้อมูลเรียลไทม์ (ตรวจสอบล่าสุด: <span id="admin-checked">—</span>) ปุ่ม "ค้นหาข้อมูลงาน" จะเปิด Google เพื่อพาไปยังประกาศและช่องทางสมัครของผู้จัดโดยตรง ก่อนสมัครเช็กวันจัด ระยะ จุดสตาร์ท และค่าสมัครกับผู้จัดทุกครั้ง</div>
 </div></section>
 <section id="blog"><div class="wrap">
   <div class="sec-head">
@@ -228,7 +228,7 @@
     <p>เราเริ่มจากเพจจัดงานวิ่งที่อุบลฯ วันนี้เติบโตเป็นแหล่งรวมข้อมูลงานวิ่งทั่วไทย ยึดหลักง่าย ๆ คือรวมหลายงานแบบเป็นกลาง บอกทั้งข้อดีและจุดที่ต้องชั่งใจ ให้เพื่อนนักวิ่งตัดสินใจเองได้</p>
     <div class="values">
       <div class="val"><div class="ic">⚖️</div><div><b>เป็นกลาง</b><br><span>ไม่เชียร์งานเดียว รวมหลายงานให้เปรียบเทียบ</span></div></div>
-      <div class="val"><div class="ic">🔄</div><div><b>อัปเดตเอง</b><br><span>ดึงข้อมูลอัปเดตเองอัตโนมัติทุกสัปดาห์ พร้อมสถานะรับสมัครจริงจากระบบ</span></div></div>
+      <div class="val"><div class="ic">🔄</div><div><b>อัปเดตเอง</b><br><span>ดึงข้อมูลอัตโนมัติสัปดาห์ละครั้ง สถานะรับสมัครอ้างอิงจากระบบผู้จัด ณ วันที่ตรวจสอบ</span></div></div>
       <div class="val"><div class="ic">🤝</div><div><b>เป็นกันเอง</b><br><span>ภาษาลูกทุ่ง อ่านง่าย ไม่วิชาการ</span></div></div>
     </div>
   </div>
@@ -247,7 +247,7 @@
     <div>
       <div class="foot-logo">▶ I Do Run</div>
       <p style="opacity:.78;font-size:.92rem">แหล่งรวมงานวิ่งทั่วไทย อัปเดตอัตโนมัติทุกสัปดาห์ โดยทีมแอดมินไอดูรัน (I Do Run) ฐานอุบลฯ/อีสาน</p>
-      <p class="disclaim">หมายเหตุ: ข้อมูลงานเป็นการรวบรวมเพื่ออำนวยความสะดวก โปรดตรวจสอบวันจัด ระยะ และค่าสมัครกับผู้จัดงานโดยตรงก่อนสมัครทุกครั้ง</p>
+      <p class="disclaim">หมายเหตุ: ข้อมูลงานเป็นการรวบรวมเพื่ออำนวยความสะดวก สถานะรับสมัครตรวจสอบสัปดาห์ละครั้ง โปรดตรวจสอบวันจัด ระยะ และค่าสมัครกับผู้จัดงานโดยตรงก่อนสมัครทุกครั้ง</p>
     </div>
     <div><h4>เมนู</h4><a href="#events">งานวิ่ง</a><a href="#blog">ข่าว/บล็อก</a><a href="#about">เกี่ยวกับเรา</a></div>
     <div><h4>ติดต่อเรา</h4><a href="https://www.facebook.com/ido.run.ubon/" target="_blank" rel="noopener">Facebook</a><a href="https://www.facebook.com/ido.run.ubon/" target="_blank" rel="noopener">ผู้จัดงานอยากลงงานวิ่ง ทักเพจได้เลย</a></div>
@@ -289,6 +289,8 @@ const REGIONS=[
  ["inter","ต่างประเทศ",["ลาว","ญี่ปุ่น","จีน","มาเลเซีย","เวียดนาม","สิงคโปร์","เกาหลี","ไต้หวัน","อินโดนีเซีย","ต่างประเทศ","Selangor","Pulau Pinang","Kuala Lumpur","Bali"]]
 ];
 const REGLABEL={};REGIONS.forEach(r=>REGLABEL[r[0]]=r[1]);REGLABEL.other="อื่นๆ";
+// ค้นหาจังหวัดด้วยชื่ออังกฤษได้ (แปลงเป็นคำไทยก่อนเทียบ)
+const PROV_EN={"bangkok":"กรุงเทพ","chiang mai":"เชียงใหม่","chiangmai":"เชียงใหม่","chon buri":"ชลบุรี","chonburi":"ชลบุรี","phuket":"ภูเก็ต","khon kaen":"ขอนแก่น","khonkaen":"ขอนแก่น","udon thani":"อุดรธานี","udonthani":"อุดรธานี","udon":"อุดรธานี","songkhla":"สงขลา","hat yai":"หาดใหญ่","hatyai":"หาดใหญ่","chiang rai":"เชียงราย","chiangrai":"เชียงราย","nakhon ratchasima":"นครราชสีมา","korat":"นครราชสีมา","prachin buri":"ปราจีนบุรี","prachinburi":"ปราจีนบุรี","ubon":"อุบลราชธานี","ubon ratchathani":"อุบลราชธานี","rayong":"ระยอง","lampang":"ลำปาง","lamphun":"ลำพูน","krabi":"กระบี่","trang":"ตรัง","surat thani":"สุราษฎร์ธานี","samui":"สมุย","nakhon nayok":"นครนายก","saraburi":"สระบุรี","kanchanaburi":"กาญจนบุรี","phetchaburi":"เพชรบุรี","ayutthaya":"อยุธยา","nonthaburi":"นนทบุรี","pathum thani":"ปทุมธานี","buriram":"บุรีรัมย์","buri ram":"บุรีรัมย์","loei":"เลย","tak":"ตาก","phrae":"แพร่","nan":"น่าน","trat":"ตราด","sukhothai":"สุโขทัย","phang nga":"พังงา","phangnga":"พังงา","satun":"สตูล","chumphon":"ชุมพร","ranong":"ระนอง","yala":"ยะลา","pattani":"ปัตตานี","narathiwat":"นราธิวาส","nakhon si thammarat":"นครศรีธรรมราช","nakhon sawan":"นครสวรรค์","nakhon phanom":"นครพนม","nakhon pathom":"นครปฐม","phitsanulok":"พิษณุโลก","phetchabun":"เพชรบูรณ์","mae hong son":"แม่ฮ่องสอน","kalasin":"กาฬสินธุ์","sakon nakhon":"สกลนคร","nong khai":"หนองคาย","bueng kan":"บึงกาฬ","mukdahan":"มุกดาหาร","chaiyaphum":"ชัยภูมิ","sisaket":"ศรีสะเกษ","surin":"สุรินทร์","roi et":"ร้อยเอ็ด","maha sarakham":"มหาสารคาม","yasothon":"ยโสธร","chachoengsao":"ฉะเชิงเทรา","chanthaburi":"จันทบุรี","sa kaeo":"สระแก้ว","samut sakhon":"สมุทรสาคร","samut prakan":"สมุทรปราการ","samut songkhram":"สมุทรสงคราม","ratchaburi":"ราชบุรี","prachuap":"ประจวบ","hua hin":"หัวหิน","phatthalung":"พัทลุง","uthai thani":"อุทัยธานี","kamphaeng phet":"กำแพงเพชร","phichit":"พิจิตร","phayao":"พะเยา","uttaradit":"อุตรดิตถ์","sing buri":"สิงห์บุรี","ang thong":"อ่างทอง","lopburi":"ลพบุรี","lop buri":"ลพบุรี","suphan buri":"สุพรรณบุรี","chai nat":"ชัยนาท","nong bua lamphu":"หนองบัวลำภู","amnat charoen":"อำนาจเจริญ"};
 function regionOf(p){p=p||"";for(const r of REGIONS){if(r[2].some(w=>p.includes(w)))return r[0];}return "other";}
 function isClinic(n){return /workshop|clinic|คลินิก|ปรับท่า|อบรม|สัมมนา|เวิร์กช็อป|เวิร์คช็อป/i.test(n||"");}
 let UP=[];
@@ -297,14 +299,20 @@ const regsel=document.getElementById('region');
 const distsel=document.getElementById('dist');
 function inBucket(d,b){if(b==='fun')return d<4.5;if(b==='5k')return d>=4.5&&d<7.5;if(b==='10k')return d>=7.5&&d<15;if(b==='half')return d>=15&&d<30;if(b==='full')return d>=30&&d<50;if(b==='ultra')return d>=50;return true;}
 function distMatch(e,b){if(b==='all')return true;if(!e.dist||!e.dist.length)return false;return e.dist.some(d=>inBucket(d,b));}
+// ปุ่มทุกปุ่มเปิด Google ค้นหา "ชื่องาน + ปี + งานวิ่ง ผู้จัด สมัคร"
+// (URL ต้นทางยังเก็บอยู่ใน events.json ฟิลด์ link และ data-src ไว้ตรวจสอบข้อมูล ไม่ใช้เป็นปลายทางปุ่ม)
+function searchLink(e){
+  const q=e.n+(String(e.n).includes(String(e.y))?'':' '+e.y)+' งานวิ่ง ผู้จัด สมัคร';
+  return 'https://www.google.com/search?q='+encodeURIComponent(q);
+}
 function card(e){
   const multi=e.multi?'<span class="tag multi">หลายวัน</span>':'';
   let reg='';
   if(e.reg===true)reg='<span class="reg open"><span class="dot"></span>เปิดรับสมัคร</span>';
   else if(e.reg===false)reg='<span class="reg closed"><span class="dot"></span>ปิด/รอประกาศ</span>';
   else reg='<span></span>';
-  const link=e.link||('https://www.google.com/search?q='+encodeURIComponent(e.n+' วิ่ง สมัคร'));
-  const label=e.link?'ดูรายละเอียด →':'ค้นหา/สมัคร →';
+  const link=searchLink(e);
+  const srcAttr=e.link?' data-src="'+e.link+'"':'';
   const clinicTag=e.isClinic?'<span class="tag multi">คลินิก/เวิร์กช็อป</span>':'';
   const distTag=(e.dist&&e.dist.length)?'<span class="tag dist">'+e.dist.join('/')+' กม.</span>':'';
   const d0=new Date(e.y,e.mo,e.d),d1=new Date(e.y,e.mo,e.d+1);
@@ -313,8 +321,8 @@ function card(e){
     +'&text='+encodeURIComponent(e.n)
     +'&dates='+ymd(d0)+'/'+ymd(d1)
     +'&location='+encodeURIComponent(e.place||'')
-    +'&details='+encodeURIComponent((e.link?e.link+'\n':'')+'ข้อมูลจาก I Do Run — https://idorunubon.github.io/');
-  const lineShare='https://line.me/R/share?text='+encodeURIComponent(e.n+' | '+e.d+' '+TH[e.mo]+' '+e.y+(e.place?' | '+e.place:'')+' | '+link+' (จากเว็บ I Do Run https://idorunubon.github.io/)');
+    +'&details='+encodeURIComponent('ค้นหาข้อมูลงาน: '+link+'\nข้อมูลจาก I Do Run — https://idorunubon.github.io/');
+  const lineShare='https://line.me/R/share?text='+encodeURIComponent(e.n+' | '+e.d+' '+TH[e.mo]+' '+e.y+(e.place?' | '+e.place:'')+' | ค้นหาข้อมูลงาน: '+link+' (จากเว็บ I Do Run https://idorunubon.github.io/)');
   return '<div class="card"><div class="top"><div><h3>'+e.n+'</h3></div>'
     +'<div class="date-pill"><div class="d">'+e.d+'</div><div class="m">'+TH[e.mo]+'</div><div class="y">'+e.y+'</div></div></div>'
     +(e.place?'<div class="place"><span>📍</span><span>'+e.place+'</span></div>':'')
@@ -322,7 +330,7 @@ function card(e){
     +'<div class="foot">'+reg+'<div class="acts">'
     +'<a class="mini" href="'+gcal+'" target="_blank" rel="noopener" title="เพิ่มลง Google Calendar">+ ปฏิทิน</a>'
     +'<a class="mini" href="'+lineShare+'" target="_blank" rel="noopener" title="แชร์เข้า LINE">แชร์ LINE</a>'
-    +'<a href="'+link+'" target="_blank" rel="noopener">'+label+'</a></div></div></div>';
+    +'<a href="'+link+'"'+srcAttr+' target="_blank" rel="noopener">ค้นหาข้อมูลงาน →</a></div></div></div>';
 }
 const PAGE=24;let visCount=PAGE;
 function hasFilter(){
@@ -335,13 +343,14 @@ function render(keepPage){
   const f=document.querySelector('#chips .chip.on').dataset.f;
   const rg=regsel.value,mk=monsel.value;
   const q=document.getElementById('q').value.trim().toLowerCase();
+  const qth=PROV_EN[q]||null;
   const list=UP.filter(e=>{
     if(f==='all'){if(e.isClinic)return false;}
     else if(f==='clinic'){if(!e.isClinic)return false;}
     else {if(e.isClinic)return false;if(e.type!==f)return false;}
     if(rg!=='all'&&e.region!==rg)return false;
     if(mk!=='all'&&(e.y+'-'+e.mo)!==mk)return false;
-    if(q&&!((e.n+' '+(e.place||'')).toLowerCase().includes(q)))return false;
+    if(q){const hay=(e.n+' '+(e.place||'')).toLowerCase();if(!hay.includes(q)&&!(qth&&hay.includes(qth)))return false;}
     if(!distMatch(e,distsel.value))return false;
     return true;
   });
@@ -385,8 +394,18 @@ fetch('events.json?t='+Date.now()).then(r=>r.json()).then(data=>{
   regsel.innerHTML='<option value="all">ทุกภาค</option>'+rorder.map(k=>'<option value="'+k+'">'+REGLABEL[k]+'</option>').join('');
   const mkeys=[...new Set(UP.slice().sort((a,b)=>(a.y-b.y)||(a.mo-b.mo)).map(e=>e.y+'-'+e.mo))];
   monsel.innerHTML='<option value="all">ทุกเดือน</option>'+mkeys.map(k=>{const a=k.split('-');return '<option value="'+k+'">'+TH[a[1]]+' '+a[0]+'</option>';}).join('');
-  if(data.generatedAt){const d=new Date(data.generatedAt);document.getElementById('updated').textContent='อัปเดตข้อมูลล่าสุด: '+d.getDate()+' '+TH[d.getMonth()]+' '+d.getFullYear();}
-  // SEO: inject Event structured data (JSON-LD) for upcoming events with real links
+  // แยกวันตรวจสถานะรับสมัคร (statusCheckedAt) ออกจากวันที่รันระบบ (generatedAt)
+  const fmt=d=>d.getDate()+' '+TH[d.getMonth()]+' '+d.getFullYear();
+  const checkedIso=data.statusCheckedAt||data.generatedAt;
+  if(checkedIso){
+    const cd=new Date(checkedIso);
+    const ageDays=(Date.now()-cd.getTime())/86400000;
+    let txt='ตรวจสอบสถานะรับสมัครล่าสุด: '+fmt(cd)+' (อัปเดตทุกสัปดาห์)';
+    if(data.stale||ageDays>9)txt+=' · ข้อมูลรอบล่าสุดอาจไม่เป็นปัจจุบัน โปรดเช็กกับผู้จัดอีกครั้ง';
+    document.getElementById('updated').textContent=txt;
+    const ac=document.getElementById('admin-checked');if(ac)ac.textContent=fmt(cd)+(data.stale?' (ใช้ข้อมูลรอบก่อนหน้า)':'');
+  }
+  // SEO: inject Event structured data (JSON-LD) — url ใช้แหล่งต้นทางภายใน ไม่ใช่ปุ่มผู้ใช้
   try{
     const items=UP.filter(e=>e.link&&!e.isClinic).slice(0,30).map((e,i)=>({
       "@type":"ListItem","position":i+1,"item":{

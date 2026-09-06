@@ -30,6 +30,14 @@ const PROV = {
   'Nonthaburi':'นนทบุรี','Pathum Thani':'ปทุมธานี','Samut Sakhon':'สมุทรสาคร','Samut Prakarn':'สมุทรปราการ',
   'Kanchanaburi':'กาญจนบุรี','Chumphon':'ชุมพร','Trang':'ตรัง','Bueng Kan':'บึงกาฬ','Phrae':'แพร่',
   'Mukdahan':'มุกดาหาร','Kalasin':'กาฬสินธุ์','Sakon Nakhon':'สกลนคร','Nong Khai':'หนองคาย',
+  'Prachin Buri':'ปราจีนบุรี','Sa Kaeo':'สระแก้ว','Sisaket':'ศรีสะเกษ','Si Sa Ket':'ศรีสะเกษ',
+  'Surin':'สุรินทร์','Roi Et':'ร้อยเอ็ด','Maha Sarakham':'มหาสารคาม','Yasothon':'ยโสธร',
+  'Amnat Charoen':'อำนาจเจริญ','Nong Bua Lam Phu':'หนองบัวลำภู','Chai Nat':'ชัยนาท',
+  'Sing Buri':'สิงห์บุรี','Ang Thong':'อ่างทอง','Lopburi':'ลพบุรี','Lop Buri':'ลพบุรี',
+  'Suphan Buri':'สุพรรณบุรี','Phichit':'พิจิตร','Phitsanulok':'พิษณุโลก','Phetchabun':'เพชรบูรณ์',
+  'Uthai Thani':'อุทัยธานี','Kamphaeng Phet':'กำแพงเพชร','Ratchaburi':'ราชบุรี','Ranong':'ระนอง',
+  'Satun':'สตูล','Pattani':'ปัตตานี','Yala':'ยะลา','Narathiwat':'นราธิวาส','Nan':'น่าน',
+  'Samut Songkhram':'สมุทรสงคราม','Chanthaburi':'จันทบุรี','Chachoengsao':'ฉะเชิงเทรา',
   // ต่างประเทศ
   'Selangor':'Selangor มาเลเซีย','Pulau Pinang':'ปีนัง มาเลเซีย','Kuala Lumpur':'กัวลาลัมเปอร์ มาเลเซีย',
   'Putrajaya':'ปุตราจายา มาเลเซีย','Negeri Sembilan':'เนกรีเซมบีลัน มาเลเซีย','Bali':'บาหลี อินโดนีเซีย'
@@ -208,12 +216,18 @@ const MANUAL_DROP = new Set([
   '(เลื่อน)Bangkok Marathon 2026 ครั้งที่37',
   'Bangkok Marathon 2027 ครั้งที่ 37'   // ซ้ำกับ "กรุงเทพมาราธอน ครั้งที่ 37" (thai.run)
 ]);
-// ข้อมูลเสริมจากฐานที่อยากเก็บไว้แม้ตัวงานถูกยุบเข้ากับ thai.run
+// ข้อมูลเสริมที่แก้ด้วยมือ (manual override) — จะถูกใส่ทับทุกรอบ build อัตโนมัติ
+// กติกา: ทุกรายการต้องมีบันทึกแหล่งข้อมูล + วันที่ตรวจสอบ กำกับไว้
 const ENRICH = {
+  // แหล่ง: ฐาน wingnaidee (snapshot มิ.ย. 2026)
   '12 สิงหา ฮาล์ฟมาราธอน กรุงเทพฯ 2026 ครั้งที่ 31': { place:'ศูนย์สิริกิติ์ กรุงเทพมหานคร' },
   '“วิ่งด้วยกัน...Run กับหมอศิริราช - รามาธิบดี ประจำปี 2569” (SIRA RUN 2026)': { place:'ร.พ.รามาธิบดี กรุงเทพมหานคร' },
   'U-TAPAO RUN 2026 The Runway Adventure': { place:'ระยอง' },
-  'Songkhla Marathon 2026': { multi:true }
+  'Songkhla Marathon 2026': { multi:true },
+  // แหล่ง: onebangkok.com + Bangkok Post (ประกาศทางการ One Bangkok Park ถ.พระราม 4) ตรวจ 6 ก.ย. 2026
+  'ซานริโอ คาแรคเตอร์ ฮาล์ฟ มาราธอน': { place:'One Bangkok Park กรุงเทพมหานคร' }
+  // หมายเหตุ: Mekong Half Marathon 2026 — แพลตฟอร์มรวมงานระบุเวียงจันทน์ ลาว แต่ยังไม่พบประกาศ
+  // จากผู้จัดโดยตรง (ตรวจ 6 ก.ย. 2026) จึงยังไม่เติมสถานที่ ห้ามเดา
 };
 
 async function main(){
@@ -222,6 +236,23 @@ async function main(){
     .map(e => fixPlace({ ...e, type: typeOf(e.n, e.dist) }));
   const live = (await fetchThaiRun()).map(e => ENRICH[e.n] ? Object.assign(e, ENRICH[e.n]) : e);
   console.log('base:', base.length, '| thai.run:', live.length);
+
+  // ถ้าดึงระบบรับสมัครไม่ได้ อย่าตีความว่า "ปิดรับสมัคร" — คงข้อมูลรอบก่อนไว้ทั้งชุด
+  // และติดธง stale ให้หน้าเว็บแจ้งว่าข้อมูลอาจเก่า (statusCheckedAt คงเป็นวันที่ตรวจสำเร็จครั้งล่าสุด)
+  if (!live.length) {
+    try {
+      const prev = JSON.parse(fs.readFileSync('events.json', 'utf8'));
+      prev.stale = true;
+      prev.generatedAt = new Date().toISOString();          // วันที่พยายามอัปเดตล่าสุด
+      // prev.statusCheckedAt ไม่แตะ = วันที่เช็กสถานะสำเร็จจริงครั้งล่าสุด
+      fs.writeFileSync('events.json', JSON.stringify(prev));
+      console.log('thai.run unreachable — kept previous events.json, flagged stale');
+      return;
+    } catch (e) {
+      console.error('no previous events.json to fall back to:', e.message);
+      return; // อย่าเขียนไฟล์จากฐานอย่างเดียว เพราะจะทำให้สถานะรับสมัครหายทั้งหมด
+    }
+  }
 
   // 1) ยุบชื่อเกือบเหมือนภายในผลรวม (เช่น BANGSAEN42 หลายช่องทางสมัคร)
   const seen = new Set();
@@ -254,7 +285,9 @@ async function main(){
     .sort((a,b)=> (a.y-b.y)||(a.mo-b.mo)||(a.d-b.d));
 
   const out = {
-    generatedAt: new Date().toISOString(),
+    generatedAt: new Date().toISOString(),      // วันที่รันระบบ/แก้เนื้อหา
+    statusCheckedAt: new Date().toISOString(),  // วันที่ตรวจสถานะรับสมัครจากระบบผู้จัดสำเร็จ
+    stale: false,
     count: upcoming.length,
     fromThaiRun: live.length,
     events: upcoming
